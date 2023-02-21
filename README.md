@@ -1,38 +1,25 @@
-# create-svelte
+# Svelte Podcast
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+A collection of tools for building podcast websites and tools with Svelte or SvelteKit.
 
-## Creating a project
+|                                               Version                                               |                                               License                                               |                                                       Status                                                        |
+| :-------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: |
+| [![npm](https://img.shields.io/npm/v/svelte-podcast)](https://www.npmjs.com/package/svelte-podcast) | [![npm](https://img.shields.io/npm/l/svelte-podcast)](https://www.npmjs.com/package/svelte-podcast) | ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/olliejt/svelte-podcast/publish.yml) |
 
-If you're seeing this, you've probably already done this step. Congrats!
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## What's inside:
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+ - [ ] Podcast Player Component
+ - [ ] Utilities for parsing RSS feeds
+ - [ ] Utilities to play / pause / seek
+ - [ ] Utilities for generating artwork
+ - ...suggestions welcome!
 
-## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Docs
 
-```bash
-npm run dev
+Coming Soon...
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## Contributing
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Coming Soon...
