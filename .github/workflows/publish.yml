@@ -1,4 +1,4 @@
-name: 'CI'
+name: 'Publish to NPM'
 on:
   push:
     branches:
@@ -19,15 +19,10 @@ jobs:
         with:
           cmd: install --frozen-lockfile
 
-      - name: prettier lint
+      - name: yarn build
         uses: borales/actions-yarn@v4
         with:
-          cmd: lint
-
-      - name: svelte check
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: check
+          cmd: build --frozen-lockfile
 
       - uses: JS-DevTools/npm-publish@v1
         with:
