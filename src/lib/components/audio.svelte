@@ -67,4 +67,5 @@
 		on:emptied={(e) => console.log('emptied', e)}
 		on:load={(e) => console.log('load', e)}
 	/>
+	<slot {duration} />
 {/key}
