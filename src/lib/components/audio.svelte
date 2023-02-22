@@ -1,18 +1,18 @@
 <script lang="ts">
+	import AudioA11yProgress from '$lib/components/audio-a11y-progress.svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { usePlayer, type PlayerElement } from './audio';
-	import AudioA11yProgress from '$lib/components/audio-a11y-progress.svelte';
 
 	// TODO: Abstract to a store so we can add actions like reqind 20s
 
 	export let src: string;
 	export let autoplay: boolean;
 
-	export let currentTime: number = 0;
-	export let muted: boolean = false;
-	export let paused: boolean = true;
-	export let playbackRate: number = 1;
-	export let volume: number = 0;
+	export let currentTime = 0;
+	export let muted = false;
+	export let paused = true;
+	export let playbackRate = 1;
+	export let volume = 0;
 
 	let audioElement: PlayerElement;
 
@@ -27,7 +27,7 @@
 		rateChange: { playbackRate: number };
 	}>();
 
-	let duration: number = 0;
+	let duration = 0;
 </script>
 
 {#key src}
@@ -42,28 +42,23 @@
 		bind:volume
 		preload="metadata"
 		controls={false}
-		on:timeupdate={(e) => {
-			// @ts-expect-error
-			const timeNow = e.target?.currentTime;
-			if (typeof timeNow != 'number') return;
-			dispatch('progress', { currentTime: timeNow });
-		}}
-		on:playing={(e) => dispatch('playing')}
-		on:pause={(e) => dispatch('paused', { currentTime })}
-		on:ratechange={(e) => dispatch('rateChange', { playbackRate })}
-		on:ended={(e) => dispatch('finished')}
-		on:seeked={(e) => dispatch('seek', { currentTime })}
-		on:durationchange={(e) => console.log('durationchange')}
-		on:loadeddata={(e) => console.log('loaded data')}
-		on:loadedmetadata={(e) => console.log('loadedmetadata')}
-		on:loadstart={(e) => console.log('load start')}
-		on:seeking={(e) => console.log('seeking')}
-		on:suspend={(e) => console.log('suspend')}
-		on:volumechange={(e) => console.log('volumechange')}
-		on:play={(e) => console.log('play')}
-		on:canplay={(e) => console.log('canplay')}
-		on:canplaythrough={(e) => console.log('canplaythrough')}
-		on:waiting={(e) => console.log('waiting')}
+		on:timeupdate={() => dispatch('progress', { currentTime })}
+		on:playing={() => dispatch('playing')}
+		on:pause={() => dispatch('paused', { currentTime })}
+		on:ratechange={() => dispatch('rateChange', { playbackRate })}
+		on:ended={() => dispatch('finished')}
+		on:seeked={() => dispatch('seek', { currentTime })}
+		on:durationchange={() => console.log('durationchange')}
+		on:loadeddata={() => console.log('loaded data')}
+		on:loadedmetadata={() => console.log('loadedmetadata')}
+		on:loadstart={() => console.log('load start')}
+		on:seeking={() => console.log('seeking')}
+		on:suspend={() => console.log('suspend')}
+		on:volumechange={() => console.log('volumechange')}
+		on:play={() => console.log('play')}
+		on:canplay={() => console.log('canplay')}
+		on:canplaythrough={() => console.log('canplaythrough')}
+		on:waiting={() => console.log('waiting')}
 		on:stalled={(e) => console.log('stalled', e)}
 		on:emptied={(e) => console.log('emptied', e)}
 		on:load={(e) => console.log('load', e)}
