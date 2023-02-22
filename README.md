@@ -8,11 +8,16 @@ A collection of tools for building podcast websites and tools with Svelte or Sve
 
 ## What's inside:
 
+- [ ] Podcast Player Context
 - [ ] Podcast Player Component
+  - [ ] player with bookmarks
+  - [ ] player with theming
+- [ ] Audio clips
 - [ ] Utilities for parsing RSS feeds
 - [ ] Utilities to play / pause / seek
 - [ ] Utilities for generating artwork
-- ...suggestions welcome!
+
+...suggestions welcome!
 
 ## Docs
 
