@@ -1,80 +1,83 @@
 <script lang="ts">
-	import { usePlayer, type PlayerElement } from '$lib/components/audio/helper';
 	import {
-		_currentTime,
-		_duration,
-		_muted,
-		_paused,
-		_playbackRate,
-		_seek,
-		_src,
-		_volume,
-	} from '$lib/components/audio/state';
+		__internal_audio_current_time,
+		__internal_audio_element,
+		__internal_audio_metadata,
+		__internal_audio_src,
+	} from '$lib/components/audio/store';
+	import type { PlayerElement } from '$lib/components/audio/types';
 
-	export let autoplay: boolean;
-	let audioElement: PlayerElement;
-
+	let element: PlayerElement;
 	let currentTime = 0;
-	let paused = true;
-	let playbackRate = 1;
 	let muted = false;
-	let volume = 0;
-	let duration = 0;
 
-	$: usePlayer(audioElement, 'playbackRate', playbackRate);
-
-	function handleSeek(value: number) {
-		if (value < 0) return;
-		if (value > duration) return;
-		currentTime = value;
-	}
-
-	$: _currentTime.set(currentTime);
-	$: _duration.set(duration);
-	$: _paused.set(paused);
-
-	$: handleSeek($_seek);
-
-	$: volume = $_volume;
-	$: muted = $_muted;
-	$: playbackRate = $_playbackRate;
-	$: paused = $_paused;
+	$: src = $__internal_audio_src;
+	$: __internal_audio_element.set(element);
+	$: __internal_audio_current_time.set(currentTime);
+	$: __internal_audio_metadata.update((x) => ({ ...x, muted }));
 </script>
 
-{#key $_src}
-	{#if $_src}
-		<audio
-			bind:this={audioElement}
-			src={$_src}
-			{autoplay}
-			bind:currentTime
-			bind:duration
-			bind:paused
-			bind:muted
-			bind:volume
-			preload="metadata"
-			controls={false}
-			on:seeked={() => _seek.set(-1)}
-			on:timeupdate={() => console.log('progress', { currentTime })}
-			on:ratechange={() => console.log('rateChange', { playbackRate })}
-			on:ended={() => console.log('finished')}
-			on:playing={() => console.log('playing')}
-			on:pause={() => console.log('pause')}
-			on:durationchange={() => console.log('durationchange')}
-			on:loadeddata={() => console.log('loaded data')}
-			on:loadedmetadata={() => console.log('loadedmetadata')}
-			on:loadstart={() => console.log('load start')}
-			on:seeking={() => console.log('seeking')}
-			on:suspend={() => console.log('suspend')}
-			on:volumechange={() => console.log('volumechange')}
-			on:play={() => console.log('play')}
-			on:canplay={() => console.log('canplay')}
-			on:canplaythrough={() => console.log('canplaythrough')}
-			on:waiting={() => console.log('waiting')}
-			on:stalled={(e) => console.log('stalled', e)}
-			on:emptied={(e) => console.log('emptied', e)}
-			on:load={(e) => console.log('load', e)}
-		/>
-		<!-- <AudioA11yProgress {currentTime} {paused} {duration} /> -->
-	{/if}\
-{/key}
+{#if src}
+	<audio
+		bind:this={element}
+		{src}
+		autoplay={false}
+		bind:currentTime
+		bind:muted
+		preload="metadata"
+		controls={false}
+		on:canplay={(e) => false && console.log('canplay', e)}
+		on:canplaythrough={(e) => false && console.log('canplaythrough', e)}
+		on:timeupdate={(e) => false && console.log('progress', e)}
+		on:loadedmetadata={(e) => false && console.log('loadedmetadata', e)}
+		on:suspend={(e) => false && console.log('suspend', e)}
+		on:seeked={(e) => false && console.log('seeked', e)}
+		on:play={(e) => false && console.log('play', e)}
+		on:waiting={(e) => console.log('waiting', e)}
+		on:stalled={(e) => console.log('stalled', e)}
+		on:load={(e) => console.log('load', e)}
+		on:emptied={(e) => {
+			// TODO: reset player state
+			// console.log('emptied', e);
+		}}
+		aria-activedescendant="audio-progress"
+		aria-atomic="true"
+		aria-busy="false"
+		aria-controls="audio-progress"
+		on:loadeddata={() => {
+			__internal_audio_metadata.update((m) => ({ ...m, loading: false }));
+		}}
+		on:loadstart={() => {
+			__internal_audio_metadata.update((m) => ({ ...m, loading: true }));
+		}}
+		on:ratechange={(e) => {
+			// @ts-expect-error
+			const rate = e.target.playbackRate;
+			console.log('rateChange', rate);
+			if (typeof rate != 'number' || isNaN(rate)) return;
+			__internal_audio_metadata.update((m) => ({ ...m, playbackRate: rate }));
+		}}
+		on:playing={(e) => {
+			// @ts-expect-error
+			const is_paused = e.target.paused;
+			console.log('playing paused:', is_paused);
+			if (typeof is_paused != 'boolean') return;
+			__internal_audio_metadata.update((m) => ({ ...m, paused: is_paused }));
+		}}
+		on:pause={(e) => {
+			// @ts-expect-error
+			const is_paused = e.target.paused;
+			console.log('pause paused:', is_paused);
+			if (typeof is_paused != 'boolean') return;
+			__internal_audio_metadata.update((m) => ({ ...m, paused: is_paused }));
+		}}
+		on:durationchange={(e) => {
+			// @ts-expect-error
+			const dur = e.target?.duration;
+			console.log('durationchange', dur);
+			if (typeof dur != 'number' || isNaN(dur)) return;
+			__internal_audio_metadata.update((m) => ({ ...m, duration: dur }));
+		}}
+	/>
+	<!-- <AudioA11yProgress {currentTime} {paused} {duration} /> -->
+{/if}
