@@ -21,6 +21,8 @@
 	bind:currentTime
 	let:duration
 >
+	<progress data-paused={paused ? 'true' : 'false'} max={duration} value={currentTime} />
+
 	<h5>Custom audio controls</h5>
 
 	<h6>Audio Actions</h6>
