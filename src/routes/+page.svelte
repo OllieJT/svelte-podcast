@@ -1,11 +1,16 @@
-<script>
+<script lang="ts">
 	import Audio from '$lib/components/audio.svelte';
+
+	const sources = {
+		syntax: '/example-syntax.mp3',
+		knomii: '/example-knomii.mp3'
+	} as const;
 
 	let playbackRate = 1;
 	let volume = 0.5;
 	let paused = true;
-
 	let currentTime = 0;
+	let src = '';
 </script>
 
 <h1>Demo</h1>
@@ -13,7 +18,7 @@
 <h5>Native audio controls</h5>
 <Audio
 	on:progress={(e) => console.log(e.detail)}
-	src="/example.mp3"
+	{src}
 	autoplay={false}
 	{volume}
 	{playbackRate}
@@ -21,7 +26,17 @@
 	bind:currentTime
 	let:duration
 >
-	<progress data-paused={paused ? 'true' : 'false'} max={duration} value={currentTime} />
+	<progress
+		style="width: 800px; max-width:100%"
+		data-paused={paused ? 'true' : 'false'}
+		max={duration}
+		value={currentTime}
+	/>
+
+	<h5>Load Audio</h5>
+	<button type="button" on:click={() => (src = sources['syntax'])}>Syntax</button>
+	<button type="button" on:click={() => (src = sources['knomii'])}>Knomii</button>
+	<button type="button" on:click={() => (src = '')}>None</button>
 
 	<h5>Custom audio controls</h5>
 
