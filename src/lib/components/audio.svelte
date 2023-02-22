@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import { usePlayer, type PlayerElement } from './audio';
+	import AudioA11yProgress from '$lib/components/audio-a11y-progress.svelte';
 
 	// TODO: Abstract to a store so we can add actions like reqind 20s
 
@@ -67,5 +68,6 @@
 		on:emptied={(e) => console.log('emptied', e)}
 		on:load={(e) => console.log('load', e)}
 	/>
+	<AudioA11yProgress {currentTime} {paused} {duration} />
 	<slot {duration} />
 {/key}
