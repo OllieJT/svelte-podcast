@@ -4,15 +4,10 @@
 	export let duration: number;
 </script>
 
-<progress
-	class="svelte-podcast-a11y-hidden"
-	data-paused={paused ? 'true' : 'false'}
-	max={duration}
-	value={currentTime}
-/>
+<progress data-paused={paused ? 'true' : 'false'} max={duration} value={currentTime} />
 
 <style>
-	.svelte-podcast-a11y-hidden {
+	progress {
 		position: absolute;
 		width: 1px;
 		height: 1px;
