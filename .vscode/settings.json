@@ -1,0 +1,25 @@
+{
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnType": false,
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true,
+		"source.organizeImports": true
+	},
+	"eslint.packageManager": "yarn",
+	"files.exclude": {
+		"**/.DS_Store": true,
+		"**/*-lock.*": true,
+		"**/*.Identifier": true,
+		"**/.vercel": true,
+		"**/node_modules": true,
+		"**/tsconfig.tsbuildinfo": true,
+		"**/.npmrc": true
+	},
+	"files.watcherExclude": {
+		"**/node_modules": true,
+		"**/.svelte-kit": true
+	},
+	"problems.sortOrder": "severity",
+	"todo-tree.tree.scanMode": "workspace only"
+}
