@@ -36,6 +36,9 @@
 	"peerDependencies": {
 		"svelte": "^3.54.0"
 	},
+	"dependencies": {
+		"just-clamp": "^4.2.0"
+	},
 	"devDependencies": {
 		"@changesets/cli": "^2.26.0",
 		"@playwright/test": "^1.28.1",
@@ -47,7 +50,6 @@
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"eslint": "^8.28.0",
-		"just-clamp": "^4.2.0",
 		"prettier-plugin-svelte": "^2.8.1",
 		"prettier": "^2.8.0",
 		"publint": "^0.1.9",
@@ -59,6 +61,5 @@
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module",
-	"dependencies": {}
+	"type": "module"
 }
