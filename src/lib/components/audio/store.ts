@@ -1,7 +1,8 @@
 import { dev } from '$app/environment';
 import type { PlayerElement, PlayerMetadata } from '$lib/components/audio/types';
+import { secondsToTimestamp } from '$lib/helper/s-to-timestamp';
 import clamp from 'just-clamp';
-import { writable } from 'svelte/store';
+import { derived, writable } from 'svelte/store';
 
 function log(...val: (string | number | boolean)[]) {
 	if (!dev) return;
@@ -22,6 +23,17 @@ export const __internal_audio_metadata = writable<PlayerMetadata>({
 	playbackRate: 1,
 	loading: false,
 });
+
+const state = derived(
+	[__internal_audio_metadata, __internal_audio_current_time],
+	([$metadata, $current_time]) => {
+		return {
+			current_time: $current_time,
+			timestamp: secondsToTimestamp($current_time),
+			...$metadata,
+		};
+	},
+);
 
 type HandleType = 'toggle' | 'set';
 
@@ -118,7 +130,7 @@ function skip(seconds: number, type: 'forward' | 'backward' = 'forward') {
 }
 
 export const audio = {
-	subscribe: __internal_audio_metadata.subscribe,
+	subscribe: state.subscribe,
 	play,
 	pause,
 	mute,
