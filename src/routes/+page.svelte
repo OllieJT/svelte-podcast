@@ -1,23 +1,19 @@
 <script lang="ts">
-	import { audio, AudioManager } from '$lib/components/audio';
+	import { audio } from '$lib/components/audio';
 
 	const sources = {
 		syntax: '/example-syntax.mp3',
 		knomii: '/example-knomii.mp3',
 	} as const;
+
+	let current_time = 0;
+	$: current_time = $audio.current_time;
 </script>
 
 <pre>{JSON.stringify($audio, null, 3)}</pre>
 
 <h1>Demo</h1>
-
-<AudioManager on:progress={(e) => console.log(e.detail)} />
-<!-- <progress
-	style="width: 960px; max-width:100%"
-	data-paused={$_paused ? 'true' : 'false'}
-	max={$_duration}
-	value={$_currentTime}
-/> -->
+<a href="/another-page">Another Page</a>
 
 <h5>Load Audio</h5>
 <button type="button" on:click={() => audio.load(sources['syntax'])}>Syntax</button>
@@ -39,6 +35,15 @@
 <button type="button" on:click={() => audio.mute('toggle')}>Toggle</button>
 
 <h6>Seeking</h6>
+
+<input
+	type="range"
+	min={0}
+	max={$audio.duration}
+	style="width:100%"
+	bind:value={current_time}
+	on:change={(e) => audio.seek(parseInt(e.currentTarget.value))}
+/>
 
 <button type="button" on:click={() => audio.seek(30)}>Go to 30s from start </button>
 <button type="button" on:click={() => audio.seek(30, 'from-end')}>Go to 30s from end</button>
