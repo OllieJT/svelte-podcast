@@ -18,7 +18,7 @@
 	$: __internal_audio_metadata.update((x) => ({ ...x, muted }));
 </script>
 
-{#if src}
+{#key src}
 	<audio
 		bind:this={element}
 		{src}
@@ -73,4 +73,4 @@
 		}}
 	/>
 	<!-- <AudioA11yProgress {currentTime} {paused} {duration} /> -->
-{/if}
+{/key}

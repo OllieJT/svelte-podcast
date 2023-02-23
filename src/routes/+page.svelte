@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Audio from '$lib/components/audio/audio.svelte';
-	import { audio } from '$lib/components/audio/store';
+	import { audio, AudioManager } from '$lib/components/audio';
 
 	const sources = {
 		syntax: '/example-syntax.mp3',
@@ -12,7 +11,7 @@
 
 <h1>Demo</h1>
 
-<Audio on:progress={(e) => console.log(e.detail)} />
+<AudioManager on:progress={(e) => console.log(e.detail)} />
 <!-- <progress
 	style="width: 960px; max-width:100%"
 	data-paused={$_paused ? 'true' : 'false'}
