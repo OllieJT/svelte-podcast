@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - 'main'
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,13 +22,11 @@ jobs:
         with:
           cmd: install --frozen-lockfile
 
-      - name: yarn build
-        uses: borales/actions-yarn@v4
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: changesets/action@v1
         with:
-          cmd: build --frozen-lockfile
-
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          access: public
-          package: ./package.json
+          publish: yarn run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
