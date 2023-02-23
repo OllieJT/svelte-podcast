@@ -1,52 +1,57 @@
-<script>
-	import Audio from '$lib/components/audio.svelte';
+<script lang="ts">
+	import { audio } from '$lib/components/audio';
 
-	let playbackRate = 1;
-	let volume = 0.5;
-	let paused = true;
+	const sources = {
+		syntax: '/example-syntax.mp3',
+		knomii: '/example-knomii.mp3',
+	} as const;
 
-	let currentTime = 0;
+	let current_time = 0;
+	$: current_time = $audio.current_time;
 </script>
 
+<pre>{JSON.stringify($audio, null, 3)}</pre>
+
 <h1>Demo</h1>
+<a href="/another-page">Another Page</a>
 
-<h5>Native audio controls</h5>
-<Audio
-	on:progress={(e) => console.log(e.detail)}
-	src="/example.mp3"
-	autoplay={false}
-	{volume}
-	{playbackRate}
-	{paused}
-	bind:currentTime
-	let:duration
->
-	<progress data-paused={paused ? 'true' : 'false'} max={duration} value={currentTime} />
+<h5>Load Audio</h5>
+<button type="button" on:click={() => audio.load(sources['syntax'])}>Syntax</button>
+<button type="button" on:click={() => audio.load(sources['knomii'])}>Knomii</button>
+<button type="button" on:click={() => audio.unload()}>None</button>
 
-	<h5>Custom audio controls</h5>
+<h5>Custom audio controls</h5>
 
-	<h6>Audio Actions</h6>
+<h6>Play / Pause Actions</h6>
 
-	<button type="button" on:click={() => (paused = false)}>Play</button>
-	<button type="button" on:click={() => (paused = true)}>Pause</button>
-	<button type="button" on:click={() => (paused = !paused)}>Toggle</button>
+<button type="button" on:click={() => audio.play()}>Play</button>
+<button type="button" on:click={() => audio.pause()}>Pause</button>
+<button type="button" on:click={() => audio.pause('toggle')}>Toggle</button>
 
-	<h6>Seeking</h6>
+<h6>Audio Actions</h6>
 
-	<button type="button" on:click={() => (currentTime = currentTime + 5)}>Skip 5s</button>
-	<button type="button" on:click={() => (currentTime = currentTime - 5)}>Rewind 5s</button>
-	<button type="button" on:click={() => (currentTime = 30)}>Go to 30s</button>
-	<button type="button" on:click={() => (currentTime = duration - 30)}>Go to 30s before end</button>
+<button type="button" on:click={() => audio.mute()}>Mute</button>
+<button type="button" on:click={() => audio.unmute()}>Unmute</button>
+<button type="button" on:click={() => audio.mute('toggle')}>Toggle</button>
 
-	<h6>Playback Rate</h6>
+<h6>Seeking</h6>
 
-	{#each [0.5, 1, 2, 3] as rate}
-		<button type="button" on:click={() => (playbackRate = rate)}>{rate}x</button>
-	{/each}
+<input
+	type="range"
+	min={0}
+	max={$audio.duration}
+	style="width:100%"
+	bind:value={current_time}
+	on:change={(e) => audio.seek(parseInt(e.currentTarget.value))}
+/>
 
-	<h6>Volume</h6>
+<button type="button" on:click={() => audio.seek(30)}>Go to 30s from start </button>
+<button type="button" on:click={() => audio.seek(30, 'from-end')}>Go to 30s from end</button>
+<button type="button" on:click={() => audio.skip(10, 'forward')}>Skip 10s</button>
+<button type="button" on:click={() => audio.skip(10, 'backward')}>Rewind 10s</button>
 
-	{#each [0, 0.25, 0.5, 0.75, 1] as v}
-		<button type="button" on:click={() => (volume = v)}>{v * 100}%</button>
-	{/each}
-</Audio>
+<h6>Playback Rate</h6>
+
+{#each [0.5, 1, 2, 3] as rate}
+	<button type="button" on:click={() => audio.setPlaybackRate(rate)}>{rate}x</button>
+{/each}
