@@ -36,7 +36,7 @@
 		on:waiting={(e) => console.log('waiting', e)}
 		on:stalled={(e) => console.log('stalled', e)}
 		on:load={(e) => console.log('load', e)}
-		on:emptied={(e) => {
+		on:emptied={() => {
 			// TODO: reset player state
 			// console.log('emptied', e);
 		}}
@@ -51,28 +51,28 @@
 			__internal_audio_metadata.update((m) => ({ ...m, loading: true }));
 		}}
 		on:ratechange={(e) => {
-			// @ts-expect-error
+			// @ts-expect-error event is not fully typed
 			const rate = e.target.playbackRate;
 			console.log('rateChange', rate);
 			if (typeof rate != 'number' || isNaN(rate)) return;
 			__internal_audio_metadata.update((m) => ({ ...m, playbackRate: rate }));
 		}}
 		on:playing={(e) => {
-			// @ts-expect-error
+			// @ts-expect-error event is not fully typed
 			const is_paused = e.target.paused;
 			console.log('playing paused:', is_paused);
 			if (typeof is_paused != 'boolean') return;
 			__internal_audio_metadata.update((m) => ({ ...m, paused: is_paused }));
 		}}
 		on:pause={(e) => {
-			// @ts-expect-error
+			// @ts-expect-error event is not fully typed
 			const is_paused = e.target.paused;
 			console.log('pause paused:', is_paused);
 			if (typeof is_paused != 'boolean') return;
 			__internal_audio_metadata.update((m) => ({ ...m, paused: is_paused }));
 		}}
 		on:durationchange={(e) => {
-			// @ts-expect-error
+			// @ts-expect-error event is not fully typed
 			const dur = e.target?.duration;
 			console.log('durationchange', dur);
 			if (typeof dur != 'number' || isNaN(dur)) return;
