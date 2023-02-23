@@ -2,6 +2,15 @@
 	"name": "svelte-podcast",
 	"version": "0.1.0",
 	"license": "MIT",
+	"author": "Ollie Taylor",
+	"homepage": "https://github.com/OllieJT/svelte-podcast/blob/main/README.md",
+	"bugs": {
+		"url": "https://github.com/OllieJT/svelte-podcast/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/OllieJT/svelte-podcast/pulls"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
