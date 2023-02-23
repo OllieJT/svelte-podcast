@@ -1,5 +1,11 @@
 # svelte-podcast
 
+## 0.1.1
+
+### Patch Changes
+
+- 549d858: Fixes release build
+
 ## 0.1.0
 
 ### Minor Changes
