@@ -6,6 +6,7 @@
 		__internal_audio_src,
 	} from '$lib/components/audio/store';
 	import type { PlayerElement } from '$lib/components/audio/types';
+	import { isBoolean, isNumber } from '$lib/helper/check';
 
 	let element: PlayerElement;
 	let currentTime = 0;
@@ -40,43 +41,35 @@
 			// TODO: reset player state
 			// console.log('emptied', e);
 		}}
-		aria-activedescendant="audio-progress"
-		aria-atomic="true"
-		aria-busy="false"
-		aria-controls="audio-progress"
 		on:loadeddata={() => {
 			__internal_audio_metadata.update((m) => ({ ...m, loading: false }));
 		}}
 		on:loadstart={() => {
 			__internal_audio_metadata.update((m) => ({ ...m, loading: true }));
 		}}
-		on:ratechange={(e) => {
-			// @ts-expect-error event is not fully typed
-			const rate = e.target.playbackRate;
-			console.log('rateChange', rate);
-			if (typeof rate != 'number' || isNaN(rate)) return;
-			__internal_audio_metadata.update((m) => ({ ...m, playbackRate: rate }));
-		}}
 		on:playing={(e) => {
 			// @ts-expect-error event is not fully typed
 			const is_paused = e.target.paused;
-			console.log('playing paused:', is_paused);
-			if (typeof is_paused != 'boolean') return;
+			if (!isBoolean(is_paused)) return;
 			__internal_audio_metadata.update((m) => ({ ...m, paused: is_paused }));
 		}}
 		on:pause={(e) => {
 			// @ts-expect-error event is not fully typed
 			const is_paused = e.target.paused;
-			console.log('pause paused:', is_paused);
-			if (typeof is_paused != 'boolean') return;
+			if (!isBoolean(is_paused)) return;
 			__internal_audio_metadata.update((m) => ({ ...m, paused: is_paused }));
+		}}
+		on:ratechange={(e) => {
+			// @ts-expect-error event is not fully typed
+			const playbackRate = e.target.playbackRate;
+			if (!isNumber(playbackRate)) return;
+			__internal_audio_metadata.update((m) => ({ ...m, playbackRate }));
 		}}
 		on:durationchange={(e) => {
 			// @ts-expect-error event is not fully typed
-			const dur = e.target?.duration;
-			console.log('durationchange', dur);
-			if (typeof dur != 'number' || isNaN(dur)) return;
-			__internal_audio_metadata.update((m) => ({ ...m, duration: dur }));
+			const duration = e.target?.duration;
+			if (!isNumber(duration)) return;
+			__internal_audio_metadata.update((m) => ({ ...m, duration }));
 		}}
 	/>
 	<!-- <AudioA11yProgress {currentTime} {paused} {duration} /> -->
