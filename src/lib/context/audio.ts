@@ -12,6 +12,7 @@ import {
 	audio_start_at,
 	audio_volume,
 } from '$lib/context/audio-internals';
+import { audio_metadata, type AudioMetadata } from '$lib/context/audio-metadata';
 import { secondsToTimestamp } from '$lib/utility/seconds-to-timestamp';
 import { info, warn } from '$pkg/log';
 import clamp from 'just-clamp';
@@ -30,6 +31,7 @@ const audio_state = derived(
 		audio_playback_rate,
 		audio_src,
 		audio_volume,
+		audio_metadata,
 	],
 	([
 		$current_time,
@@ -43,6 +45,7 @@ const audio_state = derived(
 		$playback_rate,
 		$src,
 		$volume,
+		$metadata,
 	]) => {
 		return {
 			current_time: $current_time,
@@ -56,6 +59,7 @@ const audio_state = derived(
 			playback_rate: $playback_rate,
 			src: $src,
 			volume: $volume,
+			metadata: $metadata,
 			timestamp: secondsToTimestamp($current_time),
 		};
 	},

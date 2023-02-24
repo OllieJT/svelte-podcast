@@ -1,2 +1,2 @@
 export { default as AudioLoader } from '$lib/components/audio-loader.svelte';
-export { audio } from '$lib/context/audio';
+export { audio, type AudioLoadData, type AudioLoadOptions } from '$lib/context/audio';
