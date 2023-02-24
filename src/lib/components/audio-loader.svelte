@@ -1,10 +1,10 @@
 <script lang="ts">
 	import {
-		__internal_audio_current_time,
-		__internal_audio_element,
-		__internal_audio_metadata,
-		__internal_audio_src,
-	} from '$lib/context/audio';
+		audio_current_time,
+		audio_element,
+		audio_metadata,
+		audio_src,
+	} from '$lib/context/audio-internals';
 	import type { PlayerElement } from '$lib/types/types';
 	import { isBoolean, isNumber } from '$pkg/type-guards';
 
@@ -12,10 +12,10 @@
 	let currentTime = 0;
 	let muted = false;
 
-	$: src = $__internal_audio_src;
-	$: __internal_audio_element.set(element);
-	$: __internal_audio_current_time.set(currentTime);
-	$: __internal_audio_metadata.update((x) => ({ ...x, muted }));
+	$: src = $audio_src;
+	$: audio_element.set(element);
+	$: audio_current_time.set(currentTime);
+	$: audio_metadata.update((x) => ({ ...x, muted }));
 </script>
 
 {#key src}
@@ -42,34 +42,34 @@
 			// console.log('emptied', e);
 		}}
 		on:loadeddata={() => {
-			__internal_audio_metadata.update((m) => ({ ...m, loading: false }));
+			audio_metadata.update((m) => ({ ...m, loading: false }));
 		}}
 		on:loadstart={() => {
-			__internal_audio_metadata.update((m) => ({ ...m, loading: true }));
+			audio_metadata.update((m) => ({ ...m, loading: true }));
 		}}
 		on:playing={(e) => {
 			// @ts-expect-error event is not fully typed
 			const is_paused = e.target.paused;
 			if (!isBoolean(is_paused)) return;
-			__internal_audio_metadata.update((m) => ({ ...m, paused: is_paused }));
+			audio_metadata.update((m) => ({ ...m, paused: is_paused }));
 		}}
 		on:pause={(e) => {
 			// @ts-expect-error event is not fully typed
 			const is_paused = e.target.paused;
 			if (!isBoolean(is_paused)) return;
-			__internal_audio_metadata.update((m) => ({ ...m, paused: is_paused }));
+			audio_metadata.update((m) => ({ ...m, paused: is_paused }));
 		}}
 		on:ratechange={(e) => {
 			// @ts-expect-error event is not fully typed
 			const playbackRate = e.target.playbackRate;
 			if (!isNumber(playbackRate)) return;
-			__internal_audio_metadata.update((m) => ({ ...m, playbackRate }));
+			audio_metadata.update((m) => ({ ...m, playbackRate }));
 		}}
 		on:durationchange={(e) => {
 			// @ts-expect-error event is not fully typed
 			const duration = e.target?.duration;
 			if (!isNumber(duration)) return;
-			__internal_audio_metadata.update((m) => ({ ...m, duration }));
+			audio_metadata.update((m) => ({ ...m, duration }));
 		}}
 	/>
 {/key}
