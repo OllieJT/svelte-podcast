@@ -1,6 +1,11 @@
 <script lang="ts">
-	import { audio, type AudioLoadData } from '$lib';
-	import { episode_progress } from '$lib/context/progress';
+	import {
+		audio,
+		episode_progress,
+		save_podcast_state,
+		user_preferences,
+		type AudioLoadData,
+	} from '$lib';
 
 	const sources = {
 		syntax: {
@@ -23,7 +28,9 @@
 
 <h1>Demo</h1>
 <a href="/another-page">Another Page</a>
-<button type="button" on:click={episode_progress.save_all}>save</button>
+<button type="button" on:click={episode_progress.save_all}>Save progress</button>
+<button type="button" on:click={user_preferences.save}>Save preferences</button>
+<button type="button" on:click={save_podcast_state}>Save state (all)</button>
 
 <h5>Load Audio</h5>
 <button
@@ -68,5 +75,7 @@
 <h6>Playback Rate</h6>
 
 {#each [0.5, 1, 2, 3] as rate}
-	<button type="button" on:click={() => audio.setPlaybackRate(rate)}>{rate}x</button>
+	<button type="button" on:click={() => user_preferences.set({ playback_rate: rate })}
+		>{rate}x</button
+	>
 {/each}

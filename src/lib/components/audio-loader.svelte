@@ -8,13 +8,12 @@
 		audio_loading,
 		audio_muted,
 		audio_paused,
-		audio_playback_rate,
 		audio_src,
 		audio_start_at,
-		audio_volume,
 	} from '$lib/context/audio-internals';
-	import { episode_progress } from '$lib/context/progress';
+	import { user_preferences } from '$lib/context/user-preferences';
 	import type { PlayerElement } from '$lib/types/types';
+	import { load_podcast_state } from '$lib/utility/use-state';
 	import { onMount } from 'svelte';
 
 	// readonly values
@@ -25,9 +24,9 @@
 	let paused = false;
 
 	// handler values
-	let volume = $audio_volume;
+	let volume = $user_preferences.volume;
+	let playbackRate = $user_preferences.playback_rate;
 	let muted = false;
-	let playbackRate = 1;
 
 	// readonly - stores will update when bindings change
 	$: audio_element.set(element);
@@ -37,14 +36,12 @@
 	$: audio_paused.set(paused);
 
 	// handlers - when store value changes, the binding will update the audio element
-	$: volume = $audio_volume;
+	$: volume = $user_preferences.volume;
+	$: playbackRate = $user_preferences.playback_rate;
 	$: muted = $audio_muted;
-	$: playbackRate = $audio_playback_rate;
 	$: current_time = $audio_start_at;
 
-	onMount(() => {
-		episode_progress.load_all();
-	});
+	onMount(load_podcast_state);
 </script>
 
 <audio

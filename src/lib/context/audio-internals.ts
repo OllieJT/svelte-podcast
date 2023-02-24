@@ -13,6 +13,4 @@ export const audio_paused = writable<boolean>(true);
 export const audio_start_at = writable<number>(0);
 export const audio_autoplay = writable<boolean>(false);
 export const audio_muted = writable<boolean>(false);
-export const audio_playback_rate = writable<number>(1);
 export const audio_src = writable<string>('');
-export const audio_volume = writable<number>(1);
