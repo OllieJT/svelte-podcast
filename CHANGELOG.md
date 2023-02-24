@@ -1,5 +1,11 @@
 # svelte-podcast
 
+## 0.3.1
+
+### Patch Changes
+
+- 02598d4: fixes exported typings
+
 ## 0.3.0
 
 ### Minor Changes
