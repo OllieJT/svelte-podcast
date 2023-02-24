@@ -10,7 +10,7 @@ import {
 	audio_start_at,
 } from '$lib/context/audio-internals';
 import { user_preferences } from '$lib/context/user-preferences';
-import type { AudioMetadata } from '$lib/types';
+import type { AudioLoadData, AudioLoadOptions, AudioMetadata } from '$lib/types';
 import { secondsToTimestamp } from '$lib/utility/seconds-to-timestamp';
 import { derived, writable } from 'svelte/store';
 
@@ -22,15 +22,23 @@ export const time = derived([audio_current_time, audio_ended], ([$seconds, $ende
 
 export const metadata = writable<AudioMetadata | null>(null);
 
-export const data = derived([audio_src, metadata], ([$src, $metadata]) => ({
-	...$metadata,
-	src: $src,
-}));
+export const data = derived(
+	[audio_src, metadata],
+	([$src, $metadata]) =>
+		({
+			...$metadata,
+			src: $src,
+		} satisfies AudioLoadData),
+);
 
-export const options = derived([audio_start_at, audio_autoplay], ([$start_at, $autoplay]) => ({
-	start_at: $start_at,
-	autoplay: $autoplay,
-}));
+export const options = derived(
+	[audio_start_at, audio_autoplay],
+	([$start_at, $autoplay]) =>
+		({
+			start_at: $start_at,
+			autoplay: $autoplay,
+		} satisfies AudioLoadOptions),
+);
 
 export const duration = { subscribe: audio_duration.subscribe };
 export const loading = { subscribe: audio_loading.subscribe };
