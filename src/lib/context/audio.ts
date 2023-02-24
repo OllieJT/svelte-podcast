@@ -1,9 +1,12 @@
 import {
 	audio_autoplay,
 	audio_current_time,
+	audio_duration,
 	audio_element,
-	audio_metadata,
+	audio_ended,
+	audio_loading,
 	audio_muted,
+	audio_paused,
 	audio_playback_rate,
 	audio_src,
 	audio_start_at,
@@ -16,24 +19,44 @@ import { derived } from 'svelte/store';
 
 const audio_state = derived(
 	[
-		audio_metadata,
-		audio_autoplay,
 		audio_current_time,
+		audio_duration,
+		audio_ended,
+		audio_loading,
+		audio_paused,
+		audio_start_at,
+		audio_autoplay,
 		audio_muted,
 		audio_playback_rate,
 		audio_src,
 		audio_volume,
 	],
-	([$metadata, $autoplay, $current_time, $muted, $playback_rate, $src, $volume]) => {
+	([
+		$current_time,
+		$duration,
+		$ended,
+		$loading,
+		$paused,
+		$start_at,
+		$autoplay,
+		$muted,
+		$playback_rate,
+		$src,
+		$volume,
+	]) => {
 		return {
-			...$metadata,
-			autoplay: $autoplay,
 			current_time: $current_time,
-			timestamp: secondsToTimestamp($current_time),
+			duration: $duration,
+			ended: $ended,
+			loading: $loading,
+			paused: $paused,
+			start_at: $start_at,
+			autoplay: $autoplay,
 			muted: $muted,
 			playback_rate: $playback_rate,
 			src: $src,
 			volume: $volume,
+			timestamp: secondsToTimestamp($current_time),
 		};
 	},
 );
@@ -80,26 +103,31 @@ function unmute(type: HandleType = 'set') {
 	}
 }
 
-type LoadOptions = {
+export type AudioLoadData = AudioMetadata & { src: string };
+
+export type AudioLoadOptions = {
 	autoplay: boolean;
 	start_at?: number;
 };
 
-function load(src: string, opts: LoadOptions) {
+const load = (data: AudioLoadData, opts: AudioLoadOptions) => {
+	const { src, ...metadata } = data;
 	info('load: ', src);
 	audio_autoplay.set(opts.autoplay);
 	audio_volume.set(1);
 	audio_src.set(src);
+	audio_metadata.set(metadata);
 	audio_start_at.set(opts.start_at || 0);
 	// opts.current_time ? seek(opts.current_time) : null;
 	//opts.autoplay && play();
-}
+};
 function unload() {
 	info('unload: ');
 	pause();
 	audio_autoplay.set(false);
 	audio_volume.set(1);
 	audio_src.set('');
+	audio_metadata.set(null);
 	audio_start_at.set(0);
 }
 
