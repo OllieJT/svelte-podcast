@@ -13,6 +13,7 @@
 	} from '$lib/context/audio-internals';
 	import { user_preferences } from '$lib/context/user-preferences';
 	import type { PlayerElement } from '$lib/types/types';
+	import { load_podcast_state } from '$lib/utility/use-state';
 	import { onMount } from 'svelte';
 
 	// readonly values
@@ -40,10 +41,7 @@
 	$: muted = $audio_muted;
 	$: current_time = $audio_start_at;
 
-	onMount(() => {
-		episode_progress.load_all();
-		user_preferences.load();
-	});
+	onMount(load_podcast_state);
 </script>
 
 <audio
