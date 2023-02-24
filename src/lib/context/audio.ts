@@ -1,17 +1,8 @@
-import { dev } from '$app/environment';
 import type { PlayerElement, PlayerMetadata } from '$lib/types/types';
+import { info, warn } from '$lib/utility/package/log';
 import { secondsToTimestamp } from '$lib/utility/seconds-to-timestamp';
 import clamp from 'just-clamp';
 import { derived, writable } from 'svelte/store';
-
-function log(...val: (string | number | boolean)[]) {
-	if (!dev) return;
-	console.info('🎶 ', ...val);
-}
-function warn(...val: (string | number | boolean)[]) {
-	if (!dev) return;
-	console.warn('🎶 ', ...val);
-}
 
 export const __internal_audio_current_time = writable<number>(0);
 export const __internal_audio_src = writable<string | null>(null);
@@ -38,7 +29,7 @@ const state = derived(
 type HandleType = 'toggle' | 'set';
 
 function play(type: HandleType = 'set') {
-	log('play: ', type);
+	info('play: ', type);
 	return __internal_audio_element.subscribe((el) => {
 		if (!el) return warn('no audio element');
 		if (type === 'toggle') {
@@ -49,7 +40,7 @@ function play(type: HandleType = 'set') {
 	})();
 }
 function pause(type: HandleType = 'set') {
-	log('pause: ', type);
+	info('pause: ', type);
 	return __internal_audio_element.subscribe((el) => {
 		if (!el) return warn('no audio element');
 		if (type === 'toggle') {
@@ -61,7 +52,7 @@ function pause(type: HandleType = 'set') {
 }
 
 function mute(type: HandleType = 'set') {
-	log('mute: ', type);
+	info('mute: ', type);
 	return __internal_audio_element.subscribe((el) => {
 		if (!el) return warn('no audio element');
 		if (type === 'toggle') {
@@ -72,7 +63,7 @@ function mute(type: HandleType = 'set') {
 	})();
 }
 function unmute(type: HandleType = 'set') {
-	log('unmute: ', type);
+	info('unmute: ', type);
 	return __internal_audio_element.subscribe((el) => {
 		if (!el) return warn('no audio element');
 		if (type === 'toggle') {
@@ -84,7 +75,7 @@ function unmute(type: HandleType = 'set') {
 }
 
 function load(src: string) {
-	log('load: ', src);
+	info('load: ', src);
 	__internal_audio_src.set(src);
 	return __internal_audio_element.subscribe((el) => {
 		if (!el) return warn('no audio element');
@@ -93,12 +84,12 @@ function load(src: string) {
 	})();
 }
 function unload() {
-	log('unload: ');
+	info('unload: ');
 	__internal_audio_src.set(null);
 }
 
 function setPlaybackRate(rate: number) {
-	log('setPlaybackRate: ', rate);
+	info('setPlaybackRate: ', rate);
 	return __internal_audio_element.subscribe((el) => {
 		if (!el) return warn('no audio element');
 		el.playbackRate = clamp(0, 10, rate);
@@ -106,7 +97,7 @@ function setPlaybackRate(rate: number) {
 }
 
 function seek(seconds: number, from: 'from-start' | 'from-end' = 'from-start') {
-	log('seek: ', seconds, from);
+	info('seek: ', seconds, from);
 	return __internal_audio_element.subscribe((el) => {
 		if (!el) return warn('no audio element');
 		if (from === 'from-end') {
@@ -118,7 +109,7 @@ function seek(seconds: number, from: 'from-start' | 'from-end' = 'from-start') {
 }
 
 function skip(seconds: number, type: 'forward' | 'backward' = 'forward') {
-	log('skip: ', seconds, type);
+	info('skip: ', seconds, type);
 	return __internal_audio_element.subscribe((el) => {
 		if (!el) return warn('no audio element');
 		if (type === 'backward') {
