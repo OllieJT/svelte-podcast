@@ -14,6 +14,7 @@
 		audio_volume,
 	} from '$lib/context/audio-internals';
 	import { episode_progress } from '$lib/context/episode-progress';
+	import { user_preferences } from '$lib/context/user-preferences';
 	import type { PlayerElement } from '$lib/types/types';
 	import { onMount } from 'svelte';
 
@@ -44,6 +45,7 @@
 
 	onMount(() => {
 		episode_progress.load_all();
+		user_preferences.load();
 	});
 </script>
 
