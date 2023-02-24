@@ -5,8 +5,8 @@
 		__internal_audio_metadata,
 		__internal_audio_src,
 	} from '$lib/context/audio';
-	import { isBoolean, isNumber } from '$lib/types/type-guards';
 	import type { PlayerElement } from '$lib/types/types';
+	import { isBoolean, isNumber } from '$pkg/type-guards';
 
 	let element: PlayerElement;
 	let currentTime = 0;

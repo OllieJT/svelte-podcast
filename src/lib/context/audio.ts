@@ -1,6 +1,6 @@
 import type { PlayerElement, PlayerMetadata } from '$lib/types/types';
-import { info, warn } from '$lib/utility/package/log';
 import { secondsToTimestamp } from '$lib/utility/seconds-to-timestamp';
+import { info, warn } from '$pkg/log';
 import clamp from 'just-clamp';
 import { derived, writable } from 'svelte/store';
 
