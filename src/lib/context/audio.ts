@@ -7,13 +7,12 @@ import {
 	audio_loading,
 	audio_muted,
 	audio_paused,
-	audio_playback_rate,
 	audio_src,
 	audio_start_at,
-	audio_volume,
 } from '$lib/context/audio-internals';
 import { audio_metadata, type AudioMetadata } from '$lib/context/audio-metadata';
 import { episode_progress } from '$lib/context/episode-progress';
+import { user_preferences } from '$lib/context/user-preferences';
 import { secondsToTimestamp } from '$lib/utility/seconds-to-timestamp';
 import { info, warn } from '$pkg/log';
 import clamp from 'just-clamp';
@@ -29,10 +28,9 @@ const audio_state = derived(
 		audio_start_at,
 		audio_autoplay,
 		audio_muted,
-		audio_playback_rate,
 		audio_src,
-		audio_volume,
 		audio_metadata,
+		user_preferences,
 	],
 	([
 		$current_time,
@@ -43,10 +41,9 @@ const audio_state = derived(
 		$start_at,
 		$autoplay,
 		$muted,
-		$playback_rate,
 		$src,
-		$volume,
 		$metadata,
+		$user_preferences,
 	]) => {
 		return {
 			current_time: $current_time,
@@ -57,10 +54,10 @@ const audio_state = derived(
 			start_at: $start_at,
 			autoplay: $autoplay,
 			muted: $muted,
-			playback_rate: $playback_rate,
 			src: $src,
-			volume: $volume,
 			metadata: $metadata,
+			playback_rate: $user_preferences.playback_rate,
+			volume: $user_preferences.volume,
 			timestamp: secondsToTimestamp($current_time),
 		};
 	},
@@ -126,7 +123,6 @@ const load = (data: AudioLoadData, opts: AudioLoadOptions) => {
 
 	info('load: ', src);
 	audio_autoplay.set(opts.autoplay);
-	audio_volume.set(1);
 	audio_src.set(src);
 	audio_metadata.set(metadata);
 	audio_start_at.set(start_at);
@@ -138,15 +134,9 @@ function unload() {
 	info('unload: ');
 	pause();
 	audio_autoplay.set(false);
-	audio_volume.set(1);
 	audio_src.set('');
 	audio_metadata.set(null);
 	audio_start_at.set(0);
-}
-
-function setPlaybackRate(rate: number) {
-	info('setPlaybackRate: ', rate);
-	audio_playback_rate.set(clamp(0, 10, rate));
 }
 
 function seek(seconds: number, from: 'from-start' | 'from-end' = 'from-start') {
@@ -181,7 +171,6 @@ export const audio = {
 	unmute,
 	load,
 	unload,
-	setPlaybackRate,
 	seek,
 	skip,
 };
