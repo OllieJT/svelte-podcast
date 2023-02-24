@@ -6,7 +6,7 @@ const useLogger = {
 	warn: console.warn,
 };
 
-export type Logger = keyof typeof useLogger;
+type Logger = keyof typeof useLogger;
 
 export function log(type: Logger, ...content: unknown[]) {
 	const logger = useLogger[type];
