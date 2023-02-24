@@ -9,6 +9,10 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
+		alias: {
+			$lib: 'src/lib',
+			$pkg: 'src/lib/utility/package/',
+		},
 	},
 };
 

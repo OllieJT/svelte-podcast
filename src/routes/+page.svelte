@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { audio } from '$lib/components/audio';
+	import { audio } from '$lib';
 
 	const sources = {
 		syntax: '/example-syntax.mp3',
@@ -16,8 +16,13 @@
 <a href="/another-page">Another Page</a>
 
 <h5>Load Audio</h5>
-<button type="button" on:click={() => audio.load(sources['syntax'])}>Syntax</button>
-<button type="button" on:click={() => audio.load(sources['knomii'])}>Knomii</button>
+<button
+	type="button"
+	on:click={() => audio.load(sources['syntax'], { autoplay: true, start_at: 45 })}>Syntax</button
+>
+<button type="button" on:click={() => audio.load(sources['knomii'], { autoplay: false })}
+	>Knomii</button
+>
 <button type="button" on:click={() => audio.unload()}>None</button>
 
 <h5>Custom audio controls</h5>

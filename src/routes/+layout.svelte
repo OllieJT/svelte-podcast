@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { AudioManager } from '$lib/components/audio';
+	import { AudioLoader } from '$lib';
 </script>
 
-<AudioManager />
+<AudioLoader />
 
 <slot />

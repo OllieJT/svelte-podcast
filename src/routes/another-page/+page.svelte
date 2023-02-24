@@ -1,10 +1,5 @@
 <script lang="ts">
-	import { audio } from '$lib/components/audio';
-
-	const sources = {
-		syntax: '/example-syntax.mp3',
-		knomii: '/example-knomii.mp3',
-	} as const;
+	import { audio } from '$lib';
 
 	let current_time = 0;
 	$: current_time = $audio.current_time;
