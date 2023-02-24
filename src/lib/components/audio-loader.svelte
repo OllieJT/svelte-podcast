@@ -1,5 +1,6 @@
 <script lang="ts">
 	import {
+		audio_autoplay,
 		audio_current_time,
 		audio_element,
 		audio_metadata,
@@ -22,7 +23,7 @@
 	<audio
 		bind:this={element}
 		{src}
-		autoplay={false}
+		autoplay={$audio_autoplay}
 		bind:currentTime
 		bind:muted
 		preload="metadata"

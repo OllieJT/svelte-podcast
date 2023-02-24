@@ -1,4 +1,5 @@
 import {
+	audio_autoplay,
 	audio_current_time,
 	audio_element,
 	audio_metadata,
@@ -65,8 +66,13 @@ function unmute(type: HandleType = 'set') {
 	})();
 }
 
-function load(src: string) {
+type LoadOptions = {
+	autoplay: boolean;
+};
+
+function load(src: string, opts: LoadOptions) {
 	info('load: ', src);
+	audio_autoplay.set(opts.autoplay);
 	audio_src.set(src);
 	return audio_element.subscribe((el) => {
 		if (!el) return warn('no audio element');
