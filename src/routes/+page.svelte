@@ -1,10 +1,24 @@
 <script lang="ts">
-	import { audio } from '$lib';
+	import {
+		audio,
+		episode_progress,
+		save_podcast_state,
+		user_preferences,
+		type AudioLoadData,
+	} from '$lib';
 
 	const sources = {
-		syntax: '/example-syntax.mp3',
-		knomii: '/example-knomii.mp3',
-	} as const;
+		syntax: {
+			src: `/example-syntax.mp3`,
+			title: `Supper Club × Rich Harris, Author of Svelte`,
+			artwork: `https://ssl-static.libsyn.com/p/assets/b/3/c/d/b3cdf28da11ad39fe5bbc093207a2619/Syntax_-_499.jpg`,
+		},
+		knomii: {
+			src: `/example-knomii.mp3`,
+			title: `Empowerment starts with letting go of control`,
+			artwork: `https://ssl-static.libsyn.com/p/assets/f/a/8/d/fa8d56d5226884335f2e77a3093c12a1/ep-6.png`,
+		},
+	} satisfies Record<string, AudioLoadData>;
 
 	let current_time = 0;
 	$: current_time = $audio.current_time;
@@ -14,6 +28,9 @@
 
 <h1>Demo</h1>
 <a href="/another-page">Another Page</a>
+<button type="button" on:click={episode_progress.save_all}>Save progress</button>
+<button type="button" on:click={user_preferences.save}>Save preferences</button>
+<button type="button" on:click={save_podcast_state}>Save state (all)</button>
 
 <h5>Load Audio</h5>
 <button
@@ -58,5 +75,7 @@
 <h6>Playback Rate</h6>
 
 {#each [0.5, 1, 2, 3] as rate}
-	<button type="button" on:click={() => audio.setPlaybackRate(rate)}>{rate}x</button>
+	<button type="button" on:click={() => user_preferences.set({ playback_rate: rate })}
+		>{rate}x</button
+	>
 {/each}

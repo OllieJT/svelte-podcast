@@ -2,44 +2,53 @@
 	import {
 		audio_autoplay,
 		audio_current_time,
+		audio_duration,
 		audio_element,
-		audio_metadata,
+		audio_ended,
+		audio_loading,
 		audio_muted,
-		audio_playback_rate,
+		audio_paused,
 		audio_src,
 		audio_start_at,
-		audio_volume,
 	} from '$lib/context/audio-internals';
+	import { user_preferences } from '$lib/context/user-preferences';
 	import type { PlayerElement } from '$lib/types/types';
-	import { isBoolean, isNumber } from '$pkg/type-guards';
+	import { load_podcast_state } from '$lib/utility/use-state';
+	import { onMount } from 'svelte';
 
+	// readonly values
 	let element: PlayerElement;
-	let currentTime = $audio_start_at;
-	let volume = $audio_volume;
-
+	let current_time = $audio_start_at;
 	let duration = 0;
 	let ended = true;
-	let muted = false;
 	let paused = false;
-	let playbackRate = 1;
 
-	// Update stores based on bindings
+	// handler values
+	let volume = $user_preferences.volume;
+	let playbackRate = $user_preferences.playback_rate;
+	let muted = false;
+
+	// readonly - stores will update when bindings change
 	$: audio_element.set(element);
-	$: audio_current_time.set(currentTime);
-	$: audio_metadata.update((x) => ({ ...x, duration, ended, paused }));
+	$: audio_current_time.set(current_time);
+	$: audio_duration.set(duration);
+	$: audio_ended.set(ended);
+	$: audio_paused.set(paused);
 
-	// Update bindings based on stores
-	$: volume = $audio_volume;
+	// handlers - when store value changes, the binding will update the audio element
+	$: volume = $user_preferences.volume;
+	$: playbackRate = $user_preferences.playback_rate;
 	$: muted = $audio_muted;
-	$: playbackRate = $audio_playback_rate;
-	$: currentTime = $audio_start_at;
+	$: current_time = $audio_start_at;
+
+	onMount(load_podcast_state);
 </script>
 
 <audio
 	bind:this={element}
 	src={$audio_src}
 	autoplay={$audio_autoplay}
-	bind:currentTime
+	bind:currentTime={current_time}
 	bind:muted
 	bind:duration
 	bind:paused
@@ -62,34 +71,6 @@
 		// TODO: reset player state
 		// console.log('emptied', e);
 	}}
-	on:loadeddata={() => {
-		audio_metadata.update((m) => ({ ...m, loading: false }));
-	}}
-	on:loadstart={() => {
-		audio_metadata.update((m) => ({ ...m, loading: true }));
-	}}
-	on:playing={(e) => {
-		// @ts-expect-error event is not fully typed
-		const is_paused = e.target.paused;
-		if (!isBoolean(is_paused)) return;
-		audio_metadata.update((m) => ({ ...m, paused: is_paused }));
-	}}
-	on:pause={(e) => {
-		// @ts-expect-error event is not fully typed
-		const is_paused = e.target.paused;
-		if (!isBoolean(is_paused)) return;
-		audio_metadata.update((m) => ({ ...m, paused: is_paused }));
-	}}
-	on:ratechange={(e) => {
-		// @ts-expect-error event is not fully typed
-		const playbackRate = e.target.playbackRate;
-		if (!isNumber(playbackRate)) return;
-		audio_metadata.update((m) => ({ ...m, playbackRate }));
-	}}
-	on:durationchange={(e) => {
-		// @ts-expect-error event is not fully typed
-		const duration = e.target?.duration;
-		if (!isNumber(duration)) return;
-		audio_metadata.update((m) => ({ ...m, duration }));
-	}}
+	on:loadeddata={() => audio_loading.set(false)}
+	on:loadstart={() => audio_loading.set(true)}
 />

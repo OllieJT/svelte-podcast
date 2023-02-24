@@ -1,14 +1,18 @@
 import {
 	audio_autoplay,
 	audio_current_time,
+	audio_duration,
 	audio_element,
-	audio_metadata,
+	audio_ended,
+	audio_loading,
 	audio_muted,
-	audio_playback_rate,
+	audio_paused,
 	audio_src,
 	audio_start_at,
-	audio_volume,
 } from '$lib/context/audio-internals';
+import { audio_metadata, type AudioMetadata } from '$lib/context/audio-metadata';
+import { episode_progress } from '$lib/context/episode-progress';
+import { user_preferences } from '$lib/context/user-preferences';
 import { secondsToTimestamp } from '$lib/utility/seconds-to-timestamp';
 import { info, warn } from '$pkg/log';
 import clamp from 'just-clamp';
@@ -16,24 +20,45 @@ import { derived } from 'svelte/store';
 
 const audio_state = derived(
 	[
-		audio_metadata,
-		audio_autoplay,
 		audio_current_time,
+		audio_duration,
+		audio_ended,
+		audio_loading,
+		audio_paused,
+		audio_start_at,
+		audio_autoplay,
 		audio_muted,
-		audio_playback_rate,
 		audio_src,
-		audio_volume,
+		audio_metadata,
+		user_preferences,
 	],
-	([$metadata, $autoplay, $current_time, $muted, $playback_rate, $src, $volume]) => {
+	([
+		$current_time,
+		$duration,
+		$ended,
+		$loading,
+		$paused,
+		$start_at,
+		$autoplay,
+		$muted,
+		$src,
+		$metadata,
+		$user_preferences,
+	]) => {
 		return {
-			...$metadata,
-			autoplay: $autoplay,
 			current_time: $current_time,
-			timestamp: secondsToTimestamp($current_time),
+			duration: $duration,
+			ended: $ended,
+			loading: $loading,
+			paused: $paused,
+			start_at: $start_at,
+			autoplay: $autoplay,
 			muted: $muted,
-			playback_rate: $playback_rate,
 			src: $src,
-			volume: $volume,
+			metadata: $metadata,
+			playback_rate: $user_preferences.playback_rate,
+			volume: $user_preferences.volume,
+			timestamp: secondsToTimestamp($current_time),
 		};
 	},
 );
@@ -80,32 +105,38 @@ function unmute(type: HandleType = 'set') {
 	}
 }
 
-type LoadOptions = {
+export type AudioLoadData = AudioMetadata & { src: string };
+
+export type AudioLoadOptions = {
 	autoplay: boolean;
 	start_at?: number;
 };
 
-function load(src: string, opts: LoadOptions) {
+const load = (data: AudioLoadData, opts: AudioLoadOptions) => {
+	episode_progress.stash();
+
+	const { src, ...metadata } = data;
+	const progress = episode_progress.use(src);
+	const start_at = progress?.start_at || opts.start_at || 0;
+
+	console.log('progress', progress);
+
 	info('load: ', src);
 	audio_autoplay.set(opts.autoplay);
-	audio_volume.set(1);
 	audio_src.set(src);
-	audio_start_at.set(opts.start_at || 0);
+	audio_metadata.set(metadata);
+	audio_start_at.set(start_at);
 	// opts.current_time ? seek(opts.current_time) : null;
 	//opts.autoplay && play();
-}
+};
 function unload() {
+	episode_progress.stash();
 	info('unload: ');
 	pause();
 	audio_autoplay.set(false);
-	audio_volume.set(1);
 	audio_src.set('');
+	audio_metadata.set(null);
 	audio_start_at.set(0);
-}
-
-function setPlaybackRate(rate: number) {
-	info('setPlaybackRate: ', rate);
-	audio_playback_rate.set(clamp(0, 10, rate));
 }
 
 function seek(seconds: number, from: 'from-start' | 'from-end' = 'from-start') {
@@ -140,7 +171,6 @@ export const audio = {
 	unmute,
 	load,
 	unload,
-	setPlaybackRate,
 	seek,
 	skip,
 };
