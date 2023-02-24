@@ -1,5 +1,11 @@
 # svelte-podcast
 
+## 0.3.2
+
+### Patch Changes
+
+- 6c849b7: Fixes derived store causing exessive updates
+
 ## 0.3.1
 
 ### Patch Changes
