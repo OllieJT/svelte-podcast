@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import { info, warn } from '$lib/utility/package/log';
+import clamp from 'just-clamp';
 import { writable } from 'svelte/store';
 
 export type UserPreferences = {
@@ -14,8 +15,15 @@ const default_user_preferences = {
 
 const user_preference_store = writable<UserPreferences>(default_user_preferences);
 
+function clamp_preferences(prefs: UserPreferences) {
+	return {
+		playback_rate: clamp(prefs.playback_rate, 0.5, 5),
+		volume: clamp(prefs.volume, 0, 1),
+	};
+}
+
 function set_preference(prefs: Partial<UserPreferences>) {
-	user_preference_store.update((prev) => ({ ...prev, ...prefs }));
+	user_preference_store.update((prev) => clamp_preferences({ ...prev, ...prefs }));
 	save();
 }
 const USER_PREFERENCE_KEY = 'USER_PREFERENCE' as const;
@@ -38,14 +46,14 @@ function load() {
 	}
 	const data = localStorage.getItem(USER_PREFERENCE_KEY);
 
-	if (!data || typeof data !== 'object') {
+	if (!data) {
 		info('No saved user preferences found');
 		return;
 	}
 
 	const preferences = JSON.parse(data) as UserPreferences;
-	user_preference_store.update((prev) => ({ ...prev, ...preferences }));
-	info(`Loaded user preferences from localStorage`, data);
+	set_preference(preferences);
+	info(`Loaded user preferences from localStorage`, preferences);
 }
 
 function clear() {
