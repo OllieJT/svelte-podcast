@@ -1,10 +1,7 @@
 import { browser } from '$app/environment';
-import { audio, type AudioLoadOptions } from '$lib/context/audio';
+import { audio } from '$lib/context/audio';
+import type { AudioLoadOptions, EpisodeProgress } from '$lib/types';
 import { error, info, warn } from '$lib/utility/package/log';
-
-export type EpisodeProgress = {
-	current_time: number;
-};
 
 const episode_progress_map = new Map<string, EpisodeProgress>();
 
