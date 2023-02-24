@@ -13,7 +13,9 @@
 		audio_start_at,
 		audio_volume,
 	} from '$lib/context/audio-internals';
+	import { episode_progress } from '$lib/context/progress';
 	import type { PlayerElement } from '$lib/types/types';
+	import { onMount } from 'svelte';
 
 	// readonly values
 	let element: PlayerElement;
@@ -39,6 +41,10 @@
 	$: muted = $audio_muted;
 	$: playbackRate = $audio_playback_rate;
 	$: current_time = $audio_start_at;
+
+	onMount(() => {
+		episode_progress.load_all();
+	});
 </script>
 
 <audio

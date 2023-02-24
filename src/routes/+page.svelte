@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { audio, type AudioLoadData } from '$lib';
+	import { episode_progress } from '$lib/context/progress';
 
 	const sources = {
 		syntax: {
@@ -22,6 +23,7 @@
 
 <h1>Demo</h1>
 <a href="/another-page">Another Page</a>
+<button type="button" on:click={episode_progress.save_all}>save</button>
 
 <h5>Load Audio</h5>
 <button

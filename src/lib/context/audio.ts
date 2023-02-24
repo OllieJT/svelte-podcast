@@ -13,6 +13,7 @@ import {
 	audio_volume,
 } from '$lib/context/audio-internals';
 import { audio_metadata, type AudioMetadata } from '$lib/context/audio-metadata';
+import { episode_progress } from '$lib/context/progress';
 import { secondsToTimestamp } from '$lib/utility/seconds-to-timestamp';
 import { info, warn } from '$pkg/log';
 import clamp from 'just-clamp';
@@ -115,17 +116,25 @@ export type AudioLoadOptions = {
 };
 
 const load = (data: AudioLoadData, opts: AudioLoadOptions) => {
+	episode_progress.stash();
+
 	const { src, ...metadata } = data;
+	const progress = episode_progress.use(src);
+	const start_at = progress?.start_at || opts.start_at || 0;
+
+	console.log('progress', progress);
+
 	info('load: ', src);
 	audio_autoplay.set(opts.autoplay);
 	audio_volume.set(1);
 	audio_src.set(src);
 	audio_metadata.set(metadata);
-	audio_start_at.set(opts.start_at || 0);
+	audio_start_at.set(start_at);
 	// opts.current_time ? seek(opts.current_time) : null;
 	//opts.autoplay && play();
 };
 function unload() {
+	episode_progress.stash();
 	info('unload: ');
 	pause();
 	audio_autoplay.set(false);
