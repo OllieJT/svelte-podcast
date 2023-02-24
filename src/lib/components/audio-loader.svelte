@@ -12,12 +12,12 @@
 		audio_start_at,
 	} from '$lib/context/audio-internals';
 	import { user_preferences } from '$lib/context/user-preferences';
-	import type { PlayerElement } from '$lib/types/types';
+	import type { AudioPlayerElement } from '$lib/types';
 	import { load_podcast_state } from '$lib/utility/use-state';
 	import { onMount } from 'svelte';
 
 	// readonly values
-	let element: PlayerElement;
+	let element: AudioPlayerElement;
 	let current_time = $audio_start_at;
 	let duration = 0;
 	let ended = true;
