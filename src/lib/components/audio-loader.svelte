@@ -4,9 +4,9 @@
 		__internal_audio_element,
 		__internal_audio_metadata,
 		__internal_audio_src,
-	} from '$lib/components/audio/store';
-	import type { PlayerElement } from '$lib/components/audio/types';
-	import { isBoolean, isNumber } from '$lib/helper/check';
+	} from '$lib/context/audio';
+	import { isBoolean, isNumber } from '$lib/types/type-guards';
+	import type { PlayerElement } from '$lib/types/types';
 
 	let element: PlayerElement;
 	let currentTime = 0;
@@ -72,5 +72,4 @@
 			__internal_audio_metadata.update((m) => ({ ...m, duration }));
 		}}
 	/>
-	<!-- <AudioA11yProgress {currentTime} {paused} {duration} /> -->
 {/key}

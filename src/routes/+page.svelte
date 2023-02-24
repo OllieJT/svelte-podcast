@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { audio } from '$lib/components/audio';
+	import { audio } from '$lib';
 
 	const sources = {
 		syntax: '/example-syntax.mp3',

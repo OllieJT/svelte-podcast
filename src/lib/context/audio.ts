@@ -1,6 +1,6 @@
 import { dev } from '$app/environment';
-import type { PlayerElement, PlayerMetadata } from '$lib/components/audio/types';
-import { secondsToTimestamp } from '$lib/helper/seconds-to-timestamp';
+import type { PlayerElement, PlayerMetadata } from '$lib/types/types';
+import { secondsToTimestamp } from '$lib/utility/seconds-to-timestamp';
 import clamp from 'just-clamp';
 import { derived, writable } from 'svelte/store';
 
