@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { audio, type AudioLoadData } from '$lib';
-	import { episode_progress } from '$lib/context/progress';
+	import { audio, episode_progress, type AudioLoadData } from '$lib';
 
 	const sources = {
 		syntax: {

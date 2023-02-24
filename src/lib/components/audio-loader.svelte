@@ -13,7 +13,7 @@
 		audio_start_at,
 		audio_volume,
 	} from '$lib/context/audio-internals';
-	import { episode_progress } from '$lib/context/progress';
+	import { episode_progress } from '$lib/context/episode-progress';
 	import type { PlayerElement } from '$lib/types/types';
 	import { onMount } from 'svelte';
 

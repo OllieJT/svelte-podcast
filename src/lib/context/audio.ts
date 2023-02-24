@@ -13,7 +13,7 @@ import {
 	audio_volume,
 } from '$lib/context/audio-internals';
 import { audio_metadata, type AudioMetadata } from '$lib/context/audio-metadata';
-import { episode_progress } from '$lib/context/progress';
+import { episode_progress } from '$lib/context/episode-progress';
 import { secondsToTimestamp } from '$lib/utility/seconds-to-timestamp';
 import { info, warn } from '$pkg/log';
 import clamp from 'just-clamp';
