@@ -16,8 +16,9 @@
 <a href="/another-page">Another Page</a>
 
 <h5>Load Audio</h5>
-<button type="button" on:click={() => audio.load(sources['syntax'], { autoplay: true })}
-	>Syntax</button
+<button
+	type="button"
+	on:click={() => audio.load(sources['syntax'], { autoplay: true, start_at: 45 })}>Syntax</button
 >
 <button type="button" on:click={() => audio.load(sources['knomii'], { autoplay: false })}
 	>Knomii</button
