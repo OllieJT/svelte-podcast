@@ -1,11 +1,6 @@
 <script lang="ts">
-	import {
-		audio,
-		episode_progress,
-		save_podcast_state,
-		user_preferences,
-		type AudioLoadData,
-	} from '$lib';
+	import { audio, episode_progress, save_podcast_state, user_preferences } from '$lib';
+	import type { AudioLoadData } from '$lib/types';
 
 	const sources = {
 		syntax: {

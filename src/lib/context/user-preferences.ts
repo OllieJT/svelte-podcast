@@ -1,12 +1,8 @@
 import { browser } from '$app/environment';
+import type { UserPreferences } from '$lib/types';
 import { info, warn } from '$lib/utility/package/log';
 import clamp from 'just-clamp';
 import { writable } from 'svelte/store';
-
-export type UserPreferences = {
-	playback_rate: number;
-	volume: number;
-};
 
 const default_user_preferences = {
 	playback_rate: 1,

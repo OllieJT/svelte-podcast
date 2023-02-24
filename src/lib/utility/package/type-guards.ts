@@ -1,7 +1,7 @@
-export function isBoolean(value: any): value is boolean {
+export function isBoolean(value: unknown): value is boolean {
 	return typeof value === 'boolean';
 }
 
-export function isNumber(value: any): value is number {
+export function isNumber(value: unknown): value is number {
 	return typeof value === 'number' && !isNaN(value);
 }

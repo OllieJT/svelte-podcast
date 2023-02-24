@@ -1,5 +1,17 @@
 # svelte-podcast
 
+## 0.3.1
+
+### Patch Changes
+
+- 02598d4: fixes exported typings
+
+## 0.3.0
+
+### Minor Changes
+
+- 0b12aab: Adds mechanic for managing user preferences
+
 ## 0.2.0
 
 ### Minor Changes

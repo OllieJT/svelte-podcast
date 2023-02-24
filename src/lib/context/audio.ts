@@ -10,9 +10,10 @@ import {
 	audio_src,
 	audio_start_at,
 } from '$lib/context/audio-internals';
-import { audio_metadata, type AudioMetadata } from '$lib/context/audio-metadata';
+import { audio_metadata } from '$lib/context/audio-metadata';
 import { episode_progress } from '$lib/context/episode-progress';
 import { user_preferences } from '$lib/context/user-preferences';
+import type { AudioLoadData, AudioLoadOptions } from '$lib/types';
 import { secondsToTimestamp } from '$lib/utility/seconds-to-timestamp';
 import { info, warn } from '$pkg/log';
 import clamp from 'just-clamp';
@@ -104,13 +105,6 @@ function unmute(type: HandleType = 'set') {
 		audio_muted.set(false);
 	}
 }
-
-export type AudioLoadData = AudioMetadata & { src: string };
-
-export type AudioLoadOptions = {
-	autoplay: boolean;
-	start_at?: number;
-};
 
 const load = (data: AudioLoadData, opts: AudioLoadOptions) => {
 	episode_progress.stash();
