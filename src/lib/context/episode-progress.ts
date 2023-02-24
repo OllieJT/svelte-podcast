@@ -1,17 +1,17 @@
 import { browser } from '$app/environment';
-import { audio } from '$lib/context/audio';
+import { audio_current_time, audio_src } from '$lib/context/audio-internals';
 import type { AudioLoadOptions, EpisodeProgress } from '$lib/types';
 import { error, info, warn } from '$lib/utility/package/log';
+import { get } from 'svelte/store';
 
 const episode_progress_map = new Map<string, EpisodeProgress>();
 
 function stash_episode() {
-	return audio.subscribe((state) => {
-		info('saving progress: ', state.src);
-		if (!state.src) return;
-		episode_progress_map.set(state.src, { current_time: state.current_time });
-		save_all();
-	})();
+	const src = get(audio_src);
+	if (!src) return;
+	info('saving progress: ', src);
+	episode_progress_map.set(src, { current_time: get(audio_current_time) });
+	save_all();
 }
 
 function use_episode(src: string): Pick<AudioLoadOptions, 'start_at'> | null {
