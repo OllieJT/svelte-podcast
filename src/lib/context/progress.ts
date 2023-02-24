@@ -13,6 +13,7 @@ function stash_episode() {
 		info('saving progress: ', state.src);
 		if (!state.src) return;
 		episode_progress_map.set(state.src, { current_time: state.current_time });
+		save_all();
 	})();
 }
 
@@ -69,9 +70,21 @@ function load_all() {
 	}
 }
 
+function clear_all() {
+	episode_progress_map.clear();
+	save_all();
+}
+
 export const episode_progress = {
+	episodes: {
+		get: episode_progress_map.get,
+		includes: episode_progress_map.has,
+		forEach: episode_progress_map.forEach,
+		map: [...episode_progress_map].map,
+	},
 	stash: stash_episode,
 	use: use_episode,
 	save_all,
 	load_all,
+	clear_all,
 };
