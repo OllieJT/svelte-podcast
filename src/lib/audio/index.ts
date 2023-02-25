@@ -16,7 +16,7 @@ import type { AudioLoadData, AudioLoadOptions } from '$lib/types';
 import { secondsToTimestamp } from '$lib/utility/seconds-to-timestamp';
 import { info, warn } from '$pkg/log';
 import clamp from 'just-clamp';
-import { derived } from 'svelte/store';
+import { derived, type Readable } from 'svelte/store';
 export { default as AudioLoader } from '$lib/audio/audio-loader.svelte';
 
 export const podcast_time = derived([_current_time, _ended], ([$seconds, $ended]) => ({
@@ -25,22 +25,20 @@ export const podcast_time = derived([_current_time, _ended], ([$seconds, $ended]
 	ended: $ended,
 }));
 
-export const podcast_data = derived(
+export const podcast_data: Readable<AudioLoadData> = derived(
 	[_src, _metadata],
-	([$src, $metadata]) =>
-		({
-			...$metadata,
-			src: $src,
-		} satisfies AudioLoadData),
+	([$src, $metadata]) => ({
+		...$metadata,
+		src: $src,
+	}),
 );
 
-export const podcast_options = derived(
+export const podcast_options: Readable<AudioLoadOptions> = derived(
 	[_start_at, _autoplay],
-	([$start_at, $autoplay]) =>
-		({
-			start_at: $start_at,
-			autoplay: $autoplay,
-		} satisfies AudioLoadOptions),
+	([$start_at, $autoplay]) => ({
+		start_at: $start_at,
+		autoplay: $autoplay,
+	}),
 );
 
 export const podcast_duration = { subscribe: _duration.subscribe };
