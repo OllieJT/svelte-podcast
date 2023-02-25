@@ -1,8 +1,7 @@
 import { audio_element, type AudioElementStore } from '$lib/audio/audio-element';
+import type { EpisodeProgress } from '$lib/types';
 import { secondsToTimestamp } from '$lib/utility';
 import { derived } from 'svelte/store';
-
-type EpisodeProgress = { current_time: number; timestamp: string; has_ended: boolean };
 
 const default_episode_progress = {
 	current_time: 0,

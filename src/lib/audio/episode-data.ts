@@ -1,23 +1,12 @@
 import { audio_element, type AudioElementStore } from '$lib/audio/audio-element';
-import {
-	episode_details,
-	type EpisodeDetails,
-	type EpisodeDetailsStore,
-} from '$lib/audio/episode-details';
+import { episode_details, type EpisodeDetailsStore } from '$lib/audio/episode-details';
 import { podcast_preferences } from '$lib/preferences';
 import { podcast_progress } from '$lib/progress';
+import type { EpisodeAttributes, EpisodeDetails } from '$lib/types';
 import { warn } from '$lib/utility/package/log';
 import clamp from 'just-clamp';
 import { derived, get } from 'svelte/store';
 
-type EpisodeAttributes = {
-	will_autoplay: boolean;
-	is_muted: boolean;
-	duration: number;
-	src: string;
-	start_at: number;
-	details: EpisodeDetails;
-};
 const default_episode_attributes = {
 	will_autoplay: false,
 	is_muted: false,
