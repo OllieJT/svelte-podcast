@@ -1,5 +1,11 @@
 # svelte-podcast
 
+## 0.3.3
+
+### Patch Changes
+
+- 802c704: fixes dist exports
+
 ## 0.3.2
 
 ### Patch Changes
