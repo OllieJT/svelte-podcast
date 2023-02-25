@@ -1,5 +1,11 @@
 # svelte-podcast
 
+## 0.4.0
+
+### Minor Changes
+
+- ff6a6d9: refactored audio element bindings for better control over element
+
 ## 0.3.4
 
 ### Patch Changes
