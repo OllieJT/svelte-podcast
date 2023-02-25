@@ -1,9 +1,9 @@
 export type AudioPlayerElement = HTMLAudioElement | undefined;
 
-export type AudioMetadata = Partial<{
-	title: string;
-	artwork: string;
-}>;
+export interface AudioMetadata {
+	title?: string;
+	artwork?: string;
+}
 
 export interface AudioLoadData extends AudioMetadata {
 	src: string;
