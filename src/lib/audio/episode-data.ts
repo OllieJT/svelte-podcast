@@ -1,24 +1,22 @@
-import { audio_element, type AudioElementStore } from '$lib/audio/audio-element';
-import { episode_details, type EpisodeDetailsStore } from '$lib/audio/episode-details';
-import { user_preferences } from '$lib/preferences';
-import { podcast_progress } from '$lib/progress';
+import { audio_element } from '$lib/audio/audio-element';
+import { episode_details } from '$lib/audio/episode-details';
 import type { EpisodeAttributes, EpisodeDetails } from '$lib/types';
+import { user_preferences, user_progress } from '$lib/user';
 import { warn } from '$lib/utility/package/log';
 import clamp from 'just-clamp';
-import { derived, get } from 'svelte/store';
+import { derived, get, type Readable } from 'svelte/store';
 
 const default_episode_attributes = {
 	will_autoplay: false,
-	is_muted: false,
+	is_paused: true,
 	duration: 0,
 	start_at: 0,
 	details: null,
 } satisfies Omit<EpisodeAttributes, 'src'>;
 
-const episode_attributes = derived<
-	[AudioElementStore, EpisodeDetailsStore],
-	EpisodeAttributes | null
->([audio_element, episode_details], ([$audio, $details], set) => {
+type EpisodeAttributesStore = Readable<EpisodeAttributes | null>;
+
+const episode_attributes = derived([audio_element, episode_details], ([$audio, $details], set) => {
 	if (!$audio) return set(null);
 
 	function set_value() {
@@ -28,12 +26,22 @@ const episode_attributes = derived<
 			src: $audio.src,
 			duration: $audio.duration,
 			details: $details,
+			will_autoplay: $audio.autoplay,
+			is_paused: $audio.paused,
+			start_at: user_progress.get($audio.src) ?? 0,
 		});
 	}
 
-	$audio.addEventListener('loadeddata', () => set_value());
-	return () => $audio.removeEventListener('loadeddata', () => set_value());
-});
+	$audio.addEventListener('loadeddata', set_value);
+	$audio.addEventListener('pause', set_value);
+	$audio.addEventListener('playing', set_value);
+
+	return () => {
+		$audio.removeEventListener('loadeddata', set_value);
+		$audio.removeEventListener('pause', set_value);
+		$audio.removeEventListener('playing', set_value);
+	};
+}) satisfies EpisodeAttributesStore;
 
 type HandleType = 'toggle' | 'set';
 
@@ -42,13 +50,17 @@ const no_element = (action: string) => warn(`could not ${action} :: no audio ele
 export const episode_audio = {
 	subscribe: episode_attributes.subscribe,
 	load: (src: string, details: EpisodeDetails) => {
-		podcast_progress.stash_episode();
+		user_progress.save();
 		const el = get(audio_element);
 		if (!el) return no_element('load');
-		const progress = podcast_progress.get_episode(src);
 		el.src = src;
-		el.currentTime = progress?.start_at || 0;
+		el.muted = false;
 
+		// using user_progress
+		const start_at = user_progress.get(src) || 0;
+		el.currentTime = start_at;
+
+		// using user_preferences
 		const preferences = get(user_preferences);
 		el.playbackRate = preferences.playback_rate;
 		el.volume = preferences.volume;
@@ -56,7 +68,7 @@ export const episode_audio = {
 		episode_details.set(details);
 	},
 	unload: () => {
-		podcast_progress.stash_episode();
+		user_progress.save();
 		const el = get(audio_element);
 		if (!el) return no_element('unload');
 		el.src = '';
@@ -73,7 +85,7 @@ export const episode_audio = {
 		}
 	},
 	pause: (t?: HandleType) => {
-		podcast_progress.stash_episode();
+		user_progress.save();
 		const el = get(audio_element);
 		if (!el) return no_element('pause');
 

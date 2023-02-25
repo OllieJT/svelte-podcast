@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { podcast_progress, user_preferences } from '$lib';
-	import { episode_audio, episode_progress } from '$lib/audio';
+	import { episode_audio, episode_progress, user_preferences, user_progress } from '$lib';
 
 	const sources = {
 		syntax: {
@@ -31,7 +30,7 @@
 
 <h1>Demo</h1>
 <a href="/another-page">Another Page</a>
-<button type="button" on:click={podcast_progress.clear}>Clear progress for all episodes</button>
+<button type="button" on:click={user_progress.clear}>Clear progress for all episodes</button>
 <button type="button" on:click={user_preferences.clear}>Clear all preferences</button>
 
 <h5>Load Audio</h5>
@@ -77,7 +76,7 @@
 <h6>Playback Rate</h6>
 
 {#each [0.5, 1, 2, 3] as rate}
-	<button type="button" on:click={() => user_preferences.edit({ playback_rate: rate })}>
+	<button type="button" on:click={() => user_preferences.set.playback_rate(rate)}>
 		{rate}x
 	</button>
 {/each}

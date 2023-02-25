@@ -1,18 +1,27 @@
 import { browser } from '$app/environment';
+import { user_preferences } from '$lib/user';
 import { onMount } from 'svelte';
-import { readable } from 'svelte/store';
+import { get, readable } from 'svelte/store';
 
 export const audio_element = readable<HTMLAudioElement | null>(null, (set) => {
 	if (!browser) return;
 	const ID = 'svelte-podcast-generated-audio-element';
+
 	onMount(() => {
-		const el = document.createElement('audio');
+		const existing_element = document.getElementById(ID) as HTMLAudioElement | null;
+		const el = existing_element || document.createElement('audio');
+
 		el.id = ID;
 		el.setAttribute('preload', 'metadata');
 		el.muted = false;
 		el.autoplay = true;
-		el.controls = true;
-		document.body.appendChild(el);
+		el.controls = false;
+
+		const preferences = get(user_preferences);
+		el.playbackRate = preferences.playback_rate;
+		el.volume = preferences.volume;
+
+		if (!existing_element) document.body.appendChild(el);
 		set(el);
 	});
 
@@ -21,5 +30,3 @@ export const audio_element = readable<HTMLAudioElement | null>(null, (set) => {
 		element ? element.remove() : null;
 	};
 });
-
-export type AudioElementStore = typeof audio_element;
