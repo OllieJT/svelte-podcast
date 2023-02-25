@@ -12,6 +12,8 @@ export function save_all() {
 	}
 	const items = [..._episode_progress_map];
 
+	console.log('items', items);
+
 	const episodes = items.reduce((prev, [src, current_time]) => {
 		return [...prev, { src, current_time }];
 	}, [] as SavedEpisodeProgress[]);
