@@ -98,7 +98,7 @@
 <h6>Playback Rate</h6>
 
 {#each [0.5, 1, 2, 3] as rate}
-	<button type="button" on:click={() => podcast_preferences.set({ playback_rate: rate })}
-		>{rate}x</button
-	>
+	<button type="button" on:click={() => podcast_preferences.edit({ playback_rate: rate })}>
+		{rate}x
+	</button>
 {/each}
