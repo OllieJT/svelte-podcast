@@ -9,7 +9,7 @@ import { derived, get } from 'svelte/store';
 
 const default_episode_attributes = {
 	will_autoplay: false,
-	is_muted: false,
+	is_paused: true,
 	duration: 0,
 	start_at: 0,
 	details: null,
@@ -28,11 +28,20 @@ const episode_attributes = derived<
 			src: $audio.src,
 			duration: $audio.duration,
 			details: $details,
+			will_autoplay: $audio.autoplay,
+			is_paused: $audio.paused,
 		});
 	}
 
-	$audio.addEventListener('loadeddata', () => set_value());
-	return () => $audio.removeEventListener('loadeddata', () => set_value());
+	$audio.addEventListener('loadeddata', set_value);
+	$audio.addEventListener('pause', set_value);
+	$audio.addEventListener('playing', set_value);
+
+	return () => {
+		$audio.removeEventListener('loadeddata', set_value);
+		$audio.removeEventListener('pause', set_value);
+		$audio.removeEventListener('playing', set_value);
+	};
 });
 
 type HandleType = 'toggle' | 'set';
@@ -52,6 +61,7 @@ export const episode_audio = {
 		const preferences = get(user_preferences);
 		el.playbackRate = preferences.playback_rate;
 		el.volume = preferences.volume;
+		el.muted = false;
 
 		episode_details.set(details);
 	},

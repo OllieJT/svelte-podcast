@@ -6,7 +6,7 @@ export type EpisodeProgress = { current_time: number; timestamp: string; has_end
 
 export type EpisodeAttributes = {
 	will_autoplay: boolean;
-	is_muted: boolean;
+	is_paused: boolean;
 	duration: number;
 	src: string;
 	start_at: number;
