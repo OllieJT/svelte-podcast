@@ -1,8 +1,8 @@
 export type AudioPlayerElement = HTMLAudioElement | undefined;
 
 export interface AudioMetadata {
-	title: string;
-	artwork: string;
+	title?: string;
+	artwork?: string;
 }
 
 export interface AudioLoadData extends AudioMetadata {
@@ -12,10 +12,6 @@ export interface AudioLoadData extends AudioMetadata {
 export interface AudioLoadOptions {
 	autoplay: boolean;
 	start_at?: number;
-}
-
-export interface EpisodeProgress {
-	current_time: number;
 }
 
 export interface UserPreferences {

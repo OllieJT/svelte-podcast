@@ -1,5 +1,23 @@
 # svelte-podcast
 
+## 0.3.4
+
+### Patch Changes
+
+- ff5caf2: fix to allow override of internal types
+
+## 0.3.3
+
+### Patch Changes
+
+- 802c704: fixes dist exports
+
+## 0.3.2
+
+### Patch Changes
+
+- 6c849b7: Fixes derived store causing exessive updates
+
 ## 0.3.1
 
 ### Patch Changes

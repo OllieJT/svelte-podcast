@@ -1,5 +1,17 @@
 <script lang="ts">
-	import { audio, episode_progress, save_podcast_state, user_preferences } from '$lib';
+	import {
+		podcast_audio,
+		podcast_data,
+		podcast_duration,
+		podcast_loading,
+		podcast_muted,
+		podcast_options,
+		podcast_paused,
+		podcast_preferences,
+		podcast_progress,
+		podcast_time,
+		save_podcast_state,
+	} from '$lib';
 	import type { AudioLoadData } from '$lib/types';
 
 	const sources = {
@@ -16,61 +28,77 @@
 	} satisfies Record<string, AudioLoadData>;
 
 	let current_time = 0;
-	$: current_time = $audio.current_time;
+	$: current_time = $podcast_time.current_time;
 </script>
 
-<pre>{JSON.stringify($audio, null, 3)}</pre>
+<pre>{JSON.stringify(
+		{
+			podcast_time,
+			podcast_data,
+			podcast_options,
+			podcast_duration,
+			podcast_loading,
+			podcast_paused,
+			podcast_muted,
+			podcast_preferences,
+			podcast_progress,
+		},
+		null,
+		3,
+	)}</pre>
 
 <h1>Demo</h1>
 <a href="/another-page">Another Page</a>
-<button type="button" on:click={episode_progress.save_all}>Save progress</button>
-<button type="button" on:click={user_preferences.save}>Save preferences</button>
+<button type="button" on:click={podcast_progress.save_all}>Save progress</button>
+<button type="button" on:click={podcast_preferences.save}>Save preferences</button>
 <button type="button" on:click={save_podcast_state}>Save state (all)</button>
 
 <h5>Load Audio</h5>
 <button
 	type="button"
-	on:click={() => audio.load(sources['syntax'], { autoplay: true, start_at: 45 })}>Syntax</button
+	on:click={() => podcast_audio.load(sources['syntax'], { autoplay: true, start_at: 45 })}
+	>Syntax</button
 >
-<button type="button" on:click={() => audio.load(sources['knomii'], { autoplay: false })}
+<button type="button" on:click={() => podcast_audio.load(sources['knomii'], { autoplay: false })}
 	>Knomii</button
 >
-<button type="button" on:click={() => audio.unload()}>None</button>
+<button type="button" on:click={() => podcast_audio.unload()}>None</button>
 
 <h5>Custom audio controls</h5>
 
 <h6>Play / Pause Actions</h6>
 
-<button type="button" on:click={() => audio.play()}>Play</button>
-<button type="button" on:click={() => audio.pause()}>Pause</button>
-<button type="button" on:click={() => audio.pause('toggle')}>Toggle</button>
+<button type="button" on:click={() => podcast_audio.play()}>Play</button>
+<button type="button" on:click={() => podcast_audio.pause()}>Pause</button>
+<button type="button" on:click={() => podcast_audio.pause('toggle')}>Toggle</button>
 
 <h6>Audio Actions</h6>
 
-<button type="button" on:click={() => audio.mute()}>Mute</button>
-<button type="button" on:click={() => audio.unmute()}>Unmute</button>
-<button type="button" on:click={() => audio.mute('toggle')}>Toggle</button>
+<button type="button" on:click={() => podcast_audio.mute()}>Mute</button>
+<button type="button" on:click={() => podcast_audio.unmute()}>Unmute</button>
+<button type="button" on:click={() => podcast_audio.mute('toggle')}>Toggle</button>
 
 <h6>Seeking</h6>
 
 <input
 	type="range"
 	min={0}
-	max={$audio.duration}
+	max={$podcast_duration}
 	style="width:100%"
 	bind:value={current_time}
-	on:change={(e) => audio.seek(parseInt(e.currentTarget.value))}
+	on:change={(e) => podcast_audio.seek(parseInt(e.currentTarget.value))}
 />
 
-<button type="button" on:click={() => audio.seek(30)}>Go to 30s from start </button>
-<button type="button" on:click={() => audio.seek(30, 'from-end')}>Go to 30s from end</button>
-<button type="button" on:click={() => audio.skip(10, 'forward')}>Skip 10s</button>
-<button type="button" on:click={() => audio.skip(10, 'backward')}>Rewind 10s</button>
+<button type="button" on:click={() => podcast_audio.seek(30)}>Go to 30s from start </button>
+<button type="button" on:click={() => podcast_audio.seek(30, 'from-end')}>Go to 30s from end</button
+>
+<button type="button" on:click={() => podcast_audio.skip(10, 'forward')}>Skip 10s</button>
+<button type="button" on:click={() => podcast_audio.skip(10, 'backward')}>Rewind 10s</button>
 
 <h6>Playback Rate</h6>
 
 {#each [0.5, 1, 2, 3] as rate}
-	<button type="button" on:click={() => user_preferences.set({ playback_rate: rate })}
-		>{rate}x</button
-	>
+	<button type="button" on:click={() => podcast_preferences.edit({ playback_rate: rate })}>
+		{rate}x
+	</button>
 {/each}
