@@ -1,6 +1,4 @@
-export { default as AudioLoader } from '$lib/components/audio-loader.svelte';
-export * from '$lib/context/audio';
-export * from '$lib/context/episode-progress';
-export * from '$lib/context/user-preferences';
-export * from '$lib/stores';
+export * from '$lib/audio';
+export * from '$lib/preferences';
+export * from '$lib/progress';
 export * from '$lib/utility';
