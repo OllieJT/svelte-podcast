@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { episode_audio, episode_progress, user_preferences, user_progress } from '$lib';
+	import AudioProgress from '$lib/components/headless/progress/playhead.svelte';
+	import { PodcastPlayer } from '$lib/components/player';
+	import PlayerProgress from '$lib/components/player/player-timestamp.svelte';
 
 	const sources = {
 		syntax: {
@@ -17,6 +20,8 @@
 	let current_time = 0;
 	$: current_time = $episode_progress.current_time;
 </script>
+
+<PlayerProgress />
 
 <pre>{JSON.stringify(
 		{
@@ -58,14 +63,7 @@
 
 <h6>Seeking</h6>
 
-<input
-	type="range"
-	min={0}
-	max={$episode_audio?.duration}
-	style="width:100%"
-	bind:value={current_time}
-	on:change={(e) => episode_audio.seek(parseInt(e.currentTarget.value))}
-/>
+<AudioProgress />
 
 <button type="button" on:click={() => episode_audio.seek(30)}>Go to 30s from start </button>
 <button type="button" on:click={() => episode_audio.seek(30, 'from-end')}>Go to 30s from end</button
@@ -80,3 +78,7 @@
 		{rate}x
 	</button>
 {/each}
+
+<hr />
+
+<PodcastPlayer />
