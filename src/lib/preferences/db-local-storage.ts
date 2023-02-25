@@ -1,23 +1,24 @@
 import { browser } from '$app/environment';
-import { edit_preference } from '$lib/preferences/edit';
-import { _user_preferences } from '$lib/preferences/_private';
+import { user_preferences } from '$lib/preferences/db-state';
+
 import type { UserPreferences } from '$lib/types';
 import { info, warn } from '$lib/utility/package/log';
+import { get } from 'svelte/store';
 
 const USER_PREFERENCE_KEY = 'USER_PREFERENCE' as const;
 
-export function save() {
+export function save_preferences() {
 	if (!browser || !localStorage) {
 		warn('localStorage not available, skipping save');
 		return;
 	}
-	return _user_preferences.subscribe((prefs) => {
-		info(`Saving user preferences to localStorage`, prefs);
-		localStorage.setItem(USER_PREFERENCE_KEY, JSON.stringify(prefs));
-	})();
+
+	const preferences = get(user_preferences);
+	info(`Saving user preferences to localStorage`, preferences);
+	localStorage.setItem(USER_PREFERENCE_KEY, JSON.stringify(preferences));
 }
 
-export function load() {
+export function load_preferences() {
 	if (!browser || !localStorage) {
 		warn('localStorage not available, skipping load');
 		return;
@@ -30,7 +31,7 @@ export function load() {
 	}
 
 	const preferences = JSON.parse(data) as UserPreferences;
-	edit_preference(preferences);
+	user_preferences.edit(preferences);
 
 	info(`Loaded user preferences from localStorage`, preferences);
 }

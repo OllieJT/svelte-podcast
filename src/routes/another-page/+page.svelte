@@ -1,14 +1,5 @@
 <script lang="ts">
-	import {
-		podcast_data,
-		podcast_duration,
-		podcast_loading,
-		podcast_muted,
-		podcast_options,
-		podcast_paused,
-		podcast_preferences,
-		podcast_time,
-	} from '$lib';
+	import { episode_audio, episode_progress } from '$lib/audio';
 </script>
 
 <h1>Demo</h1>
@@ -17,14 +8,8 @@
 
 <pre>{JSON.stringify(
 		{
-			podcast_time,
-			podcast_data,
-			podcast_options,
-			podcast_duration,
-			podcast_loading,
-			podcast_paused,
-			podcast_muted,
-			podcast_preferences,
+			$episode_audio,
+			$episode_progress,
 		},
 		null,
 		3,
