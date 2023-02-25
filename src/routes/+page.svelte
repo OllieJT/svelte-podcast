@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { podcast_preferences, podcast_progress, save_podcast_state } from '$lib';
+	import { podcast_progress, user_preferences } from '$lib';
 	import { episode_audio, episode_progress } from '$lib/audio';
 
 	const sources = {
@@ -23,7 +23,7 @@
 		{
 			$episode_audio,
 			$episode_progress,
-			$podcast_preferences,
+			$user_preferences,
 		},
 		null,
 		3,
@@ -32,8 +32,6 @@
 <h1>Demo</h1>
 <a href="/another-page">Another Page</a>
 <button type="button" on:click={podcast_progress.save}>Save progress</button>
-<button type="button" on:click={podcast_preferences.save}>Save preferences</button>
-<button type="button" on:click={save_podcast_state}>Save state (all)</button>
 
 <h5>Load Audio</h5>
 <button type="button" on:click={() => episode_audio.load(sources['syntax'].src, sources['knomii'])}
@@ -78,7 +76,7 @@
 <h6>Playback Rate</h6>
 
 {#each [0.5, 1, 2, 3] as rate}
-	<button type="button" on:click={() => podcast_preferences.edit({ playback_rate: rate })}>
+	<button type="button" on:click={() => user_preferences.edit({ playback_rate: rate })}>
 		{rate}x
 	</button>
 {/each}

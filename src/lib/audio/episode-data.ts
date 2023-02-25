@@ -1,6 +1,6 @@
 import { audio_element, type AudioElementStore } from '$lib/audio/audio-element';
 import { episode_details, type EpisodeDetailsStore } from '$lib/audio/episode-details';
-import { podcast_preferences } from '$lib/preferences';
+import { user_preferences } from '$lib/preferences';
 import { podcast_progress } from '$lib/progress';
 import type { EpisodeAttributes, EpisodeDetails } from '$lib/types';
 import { warn } from '$lib/utility/package/log';
@@ -52,7 +52,7 @@ export const episode_audio = {
 		console.log('podcast_progress', podcast_progress.data);
 		el.currentTime = progress?.start_at || 0;
 
-		const preferences = get(podcast_preferences);
+		const preferences = get(user_preferences);
 		el.playbackRate = preferences.playback_rate;
 		el.volume = preferences.volume;
 
