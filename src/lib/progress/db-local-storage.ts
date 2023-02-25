@@ -5,12 +5,14 @@ import { error, info, warn } from '$lib/utility/package/log';
 type SavedEpisodeProgress = { src: string; current_time: number };
 const EPISODE_PROGRESS_KEY = 'EPISODE_PROGRESS' as const;
 
-export function save_all() {
+export function save_podcast_progress() {
 	if (!browser || !localStorage) {
 		warn('localStorage not available, skipping save');
 		return;
 	}
 	const items = [..._episode_progress_map];
+
+	console.log('items', items);
 
 	const episodes = items.reduce((prev, [src, current_time]) => {
 		return [...prev, { src, current_time }];
@@ -20,7 +22,7 @@ export function save_all() {
 	localStorage.setItem(EPISODE_PROGRESS_KEY, JSON.stringify(episodes));
 }
 
-export function load_all() {
+export function load_podcast_progress() {
 	if (!browser || !localStorage) {
 		warn('localStorage not available, skipping load');
 		return;

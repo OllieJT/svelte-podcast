@@ -1,18 +1,22 @@
-export type AudioPlayerElement = HTMLAudioElement | undefined;
-
-export interface AudioMetadata {
-	title?: string;
-	artwork?: string;
+export interface EpisodeDetails {
+	[key: string]: string | number | boolean;
 }
 
-export interface AudioLoadData extends AudioMetadata {
+export type EpisodeProgress = { current_time: number; timestamp: string; has_ended: boolean };
+
+export type EpisodeAttributes = {
+	will_autoplay: boolean;
+	is_muted: boolean;
+	duration: number;
 	src: string;
-}
+	start_at: number;
+	details: EpisodeDetails | null;
+};
 
-export interface AudioLoadOptions {
+export type AudioLoadOptions = {
 	autoplay: boolean;
 	start_at?: number;
-}
+};
 
 export interface UserPreferences {
 	playback_rate: number;
