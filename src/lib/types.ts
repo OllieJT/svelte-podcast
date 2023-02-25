@@ -14,10 +14,6 @@ export interface AudioLoadOptions {
 	start_at?: number;
 }
 
-export interface EpisodeProgress {
-	current_time: number;
-}
-
 export interface UserPreferences {
 	playback_rate: number;
 	volume: number;
