@@ -1,5 +1,11 @@
 # svelte-podcast
 
+## 0.3.4
+
+### Patch Changes
+
+- ff5caf2: fix to allow override of internal types
+
 ## 0.3.3
 
 ### Patch Changes
