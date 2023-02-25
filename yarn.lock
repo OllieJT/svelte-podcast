@@ -1910,6 +1910,21 @@ just-clamp@^4.2.0:
   resolved "https://registry.yarnpkg.com/just-clamp/-/just-clamp-4.2.0.tgz#4dafc300d2f44685082b686f13deaa84d1c53b21"
   integrity sha512-ssHiAxuN7R+VP7jS1XyUP7ju5YC4bTQwQdzYtuZkASTrKe9KsI/X0t+5BJeD6Un6z/dNMDFVNQpQEgUphpXa0w==
 
+just-filter-object@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/just-filter-object/-/just-filter-object-3.2.0.tgz#e8bc4d6d758595cdfad2fc5b4e4d3630792d755b"
+  integrity sha512-OeorYJxmp2zhy/0LxjS1UjbJ7XMY8M4gVa1RRKxnIVheCYmng2E2hE0lEbDGv4aRh/HI7FgNUXtOMnmNxpoXRQ==
+
+just-map-keys@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/just-map-keys/-/just-map-keys-2.3.0.tgz#8539e396160a0c54498dc7b76716b211e7b4a677"
+  integrity sha512-enWodahIp6kDnt+/dw5Ps1baTmuuc9AVFOuwwLhn3mufOyP4aWF3+4uF6oEFKVH15H0ymb7MjuO9W6j8HFQ8ng==
+
+just-map-values@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/just-map-values/-/just-map-values-3.2.0.tgz#5642366be1a79b1c35963846fada7d556c0d7c35"
+  integrity sha512-TyqCKtK3NxiUgOjRYMIKURvBTHesi3XzomDY0QVPZ3rYzLCF+nNq5rSi0B/L5aOd/WMTZo6ukzA4wih4HUbrDg==
+
 kind-of@^6.0.3:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
@@ -2798,6 +2813,11 @@ svelte-hmr@^0.15.1:
   version "0.15.1"
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.15.1.tgz#d11d878a0bbb12ec1cba030f580cd2049f4ec86b"
   integrity sha512-BiKB4RZ8YSwRKCNVdNxK/GfY+r4Kjgp9jCLEy0DuqAKfmQtpL38cQK3afdpjw4sqSs4PLi3jIPJIFp259NkZtA==
+
+svelte-local-storage-store@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/svelte-local-storage-store/-/svelte-local-storage-store-0.4.0.tgz#965e342582555b606102045e86662d6c5864e1e6"
+  integrity sha512-ctPykTt4S3BE5bF0mfV0jKiUR1qlmqLvnAkQvYHLeb9wRyO1MdIFDVI23X+TZEFleATHkTaOpYZswIvf3b2tWA==
 
 svelte-preprocess@^5.0.0:
   version "5.0.1"

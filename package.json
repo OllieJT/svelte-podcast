@@ -37,7 +37,11 @@
 		"svelte": "^3.54.0"
 	},
 	"dependencies": {
-		"just-clamp": "^4.2.0"
+		"just-clamp": "^4.2.0",
+		"just-filter-object": "^3.2.0",
+		"just-map-keys": "^2.3.0",
+		"just-map-values": "^3.2.0",
+		"svelte-local-storage-store": "^0.4.0"
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.26.0",
@@ -47,14 +51,14 @@
 		"@sveltejs/package": "^2.0.0",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
+		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^4.0.0",
-		"eslint": "^8.28.0",
-		"prettier-plugin-svelte": "^2.8.1",
 		"prettier": "^2.8.0",
+		"prettier-plugin-svelte": "^2.8.1",
 		"publint": "^0.1.9",
-		"svelte-check": "^3.0.1",
 		"svelte": "^3.54.0",
+		"svelte-check": "^3.0.1",
 		"tslib": "^2.4.1",
 		"typescript": "^4.9.3",
 		"vite": "^4.0.0"

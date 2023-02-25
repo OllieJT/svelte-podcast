@@ -22,3 +22,7 @@ export interface UserPreferences {
 	playback_rate: number;
 	volume: number;
 }
+
+export type UserProgress = {
+	[key: string]: number;
+};
