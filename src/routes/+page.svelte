@@ -31,7 +31,8 @@
 
 <h1>Demo</h1>
 <a href="/another-page">Another Page</a>
-<button type="button" on:click={podcast_progress.save}>Save progress</button>
+<button type="button" on:click={podcast_progress.clear}>Clear progress for all episodes</button>
+<button type="button" on:click={user_preferences.clear}>Clear all preferences</button>
 
 <h5>Load Audio</h5>
 <button type="button" on:click={() => episode_audio.load(sources['syntax'].src, sources['knomii'])}

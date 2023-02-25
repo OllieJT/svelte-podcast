@@ -3,24 +3,18 @@ import clamp from 'just-clamp';
 import { writable } from 'svelte/store';
 import { load_preferences, save_preferences } from './db-local-storage';
 
-const _default_user_preferences = {
-	playback_rate: 1,
-	volume: 1,
-} satisfies UserPreferences;
-
+const _default_user_preferences = { playback_rate: 1, volume: 1 } satisfies UserPreferences;
 const _user_preferences = writable<UserPreferences>(_default_user_preferences);
 
-function clamp_preferences(prefs: UserPreferences) {
-	return {
-		playback_rate: clamp(prefs.playback_rate, 0.5, 5),
-		volume: clamp(prefs.volume, 0, 1),
-	};
-}
+const clamp_preferences = (prefs: UserPreferences) => ({
+	playback_rate: clamp(prefs.playback_rate, 0.5, 5),
+	volume: clamp(prefs.volume, 0, 1),
+});
 
-function edit(prefs: Partial<UserPreferences>) {
+const edit = (prefs: Partial<UserPreferences>) => {
 	_user_preferences.update((prev) => clamp_preferences({ ...prev, ...prefs }));
 	save_preferences();
-}
+};
 
 const clear = () => {
 	_user_preferences.set(_default_user_preferences);

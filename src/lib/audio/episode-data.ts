@@ -42,14 +42,11 @@ const no_element = (action: string) => warn(`could not ${action} :: no audio ele
 export const episode_audio = {
 	subscribe: episode_attributes.subscribe,
 	load: (src: string, details: EpisodeDetails) => {
-		podcast_progress.stash();
+		podcast_progress.stash_episode();
 		const el = get(audio_element);
 		if (!el) return no_element('load');
-		const progress = podcast_progress.get(src);
+		const progress = podcast_progress.get_episode(src);
 		el.src = src;
-		console.log('progress', progress);
-		console.log('src', src);
-		console.log('podcast_progress', podcast_progress.data);
 		el.currentTime = progress?.start_at || 0;
 
 		const preferences = get(user_preferences);
@@ -59,7 +56,7 @@ export const episode_audio = {
 		episode_details.set(details);
 	},
 	unload: () => {
-		podcast_progress.stash();
+		podcast_progress.stash_episode();
 		const el = get(audio_element);
 		if (!el) return no_element('unload');
 		el.src = '';
@@ -76,7 +73,7 @@ export const episode_audio = {
 		}
 	},
 	pause: (t?: HandleType) => {
-		podcast_progress.stash();
+		podcast_progress.stash_episode();
 		const el = get(audio_element);
 		if (!el) return no_element('pause');
 
