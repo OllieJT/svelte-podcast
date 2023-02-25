@@ -21,11 +21,12 @@ const stash_episode_progress = () => {
 };
 
 const get_episode_progress = (src: string): Pick<AudioLoadOptions, 'start_at'> | null => {
-	const start_at = _episode_progress_map.get(src);
+	const pathname = get_src_pathname(src);
+	const start_at = _episode_progress_map.get(pathname);
 
 	if (!start_at) return null;
 
-	info('found saved progress: ', src, start_at);
+	info('found saved progress: ', pathname, start_at);
 
 	return { start_at: start_at };
 };

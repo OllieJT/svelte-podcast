@@ -30,6 +30,7 @@ const episode_attributes = derived<
 			details: $details,
 			will_autoplay: $audio.autoplay,
 			is_paused: $audio.paused,
+			start_at: podcast_progress.get_episode($audio.src)?.start_at ?? 0,
 		});
 	}
 
