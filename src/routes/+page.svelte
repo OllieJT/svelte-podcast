@@ -32,7 +32,7 @@
 			$user_preferences,
 		},
 		null,
-		3,
+		2,
 	)}</pre>
 
 <h1>Demo</h1>
