@@ -17,10 +17,10 @@
 		<PlayerControlPlay />
 		<PlayerControlSkip seconds={10} type="forward" />
 	</div>
-	<div class="podcast-player-episode-details">
+	<div class="svpod--episode-details">
 		{#if title}<span> {title} </span>{/if}
 		<PlayerProgress />
-		<div class="podcast-player-episode-metadata">
+		<div class="svpod--episode-metadata">
 			<PlayerPlaybackRate />
 			<PlayerTimestamp />
 		</div>
@@ -29,18 +29,24 @@
 
 <style>
 	article {
+		font-family: var(--svpod--font);
+		--player-bg: var(--svpod--bg-base);
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		background-color: var(--svpod--bg-base);
+		background-color: var(--player-bg);
 		color: var(--svpod--fg-base);
+		gap: 8px;
+		padding: 8px;
+		accent-color: var(--svpod--fg-accent);
 	}
 
-	.podcast-player-episode-details {
+	.svpod--episode-details {
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
 		flex-shrink: 1;
+		padding: 0 4px;
 	}
 
 	.svpod--player-controls {
@@ -48,6 +54,14 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
+		gap: 8px;
+	}
+
+	.svpod--episode-metadata {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
 		gap: 8px;
 	}
 </style>

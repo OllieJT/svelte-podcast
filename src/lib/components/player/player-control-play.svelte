@@ -2,7 +2,7 @@
 	import { episode_audio } from '$lib/audio';
 </script>
 
-<button on:click={() => episode_audio.play('toggle')} class="svpod--icon-button svpod--rounded">
+<button on:click={() => episode_audio.play('toggle')} class="svpod--icon-button">
 	{#if $episode_audio?.is_paused}
 		<span class="svpod--a11y-hidden">Play</span>
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">

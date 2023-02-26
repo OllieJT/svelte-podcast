@@ -7,10 +7,11 @@
 
 <input
 	class={$$props.class}
-	style="width:100%; height: 80px;"
+	style="display:block; width:100%;"
 	type="range"
 	data-paused={$episode_audio?.is_paused ? 'true' : 'false'}
 	min={0}
+	step={10}
 	max={$episode_audio?.duration}
 	value={$episode_progress.current_time}
 	on:change={(e) => episode_audio.seek(e.currentTarget.valueAsNumber)}
@@ -27,6 +28,6 @@
 	}}
 	on:focusout={() => {
 		console.log('focusout');
-		episode_audio.play();
+		// episode_audio.play();
 	}}
 />

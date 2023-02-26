@@ -7,7 +7,7 @@
 
 <button
 	on:click={() => episode_audio.skip(seconds, type)}
-	class="svpod--rounded svpod--icon-button"
+	class="svpod--icon-button"
 	class:forward={type === 'forward'}
 	class:backward={type === 'backward'}
 >

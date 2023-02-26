@@ -8,7 +8,7 @@
 </span>
 
 <style>
-	.svelte-podcast-audio-progress {
+	.svpod--audio-progress {
 		display: flex;
 		flex-direction: row;
 		align-items: center;

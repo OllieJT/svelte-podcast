@@ -26,6 +26,8 @@
 <svelte:head>
 	<style>
 		:root {
+			--svpod--font: sans-serif;
+
 			--svpod--bg-base: rgb(0, 0, 0);
 
 			--svpod--bg-surface: rgb(30, 30, 30);
@@ -34,8 +36,10 @@
 			--svpod--fg-base: rgb(200, 200, 200);
 			--svpod--fg-base-hover: rgb(255, 255, 255);
 
-			/* --svpod--fg-accent: rgb(0, 50, 200); */
-			/* --svpod--fg-accent-hover: rgb(0, 100, 255); */
+			--svpod--radius: 9999px;
+
+			--svpod--fg-accent: var(--svpod--fg-base);
+			--svpod--fg-accent-hover: var(--svpod--fg-base-hover);
 		}
 
 		.svpod--a11y-hidden {
@@ -50,9 +54,6 @@
 			border: 0;
 		}
 
-		.svpod--rounded {
-			border-radius: 9999px;
-		}
 		.svpod--icon-button {
 			--fg: var(--svpod--fg-base);
 			--bg: var(--svpod--bg-surface);
@@ -67,6 +68,7 @@
 			gap: 8px;
 			font-size: 16px;
 			border: 0px solid transparent;
+			border-radius: var(--svpod--radius);
 			background-color: var(--bg);
 			color: var(--fg);
 			cursor: pointer;
