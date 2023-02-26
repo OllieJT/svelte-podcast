@@ -12,7 +12,7 @@
 
 <article>
 	{#if artwork}<PlayerArtwork src={artwork} />{/if}
-	<div>
+	<div class="svpod--player-controls">
 		<PlayerControlSkip seconds={10} type="backward" />
 		<PlayerControlPlay />
 		<PlayerControlSkip seconds={10} type="forward" />
@@ -32,6 +32,8 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+		background-color: var(--svpod--bg-base);
+		color: var(--svpod--fg-base);
 	}
 
 	.podcast-player-episode-details {
@@ -39,5 +41,13 @@
 		flex-direction: column;
 		flex-grow: 1;
 		flex-shrink: 1;
+	}
+
+	.svpod--player-controls {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
 	}
 </style>

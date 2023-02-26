@@ -4,7 +4,7 @@
 
 <div class={$$props.class}>
 	{#each options as value}
-		{@const id = `svelte-podcast-speed-option-${value}`}
+		{@const id = `svpod--speed-option-${value}`}
 		<slot {id} {value} />
 	{/each}
 </div>

@@ -5,7 +5,7 @@ import { get, readable } from 'svelte/store';
 
 export const audio_element = readable<HTMLAudioElement | null>(null, (set) => {
 	if (!browser) return;
-	const ID = 'svelte-podcast-generated-audio-element';
+	const ID = 'svpod--generated-audio-element';
 
 	onMount(() => {
 		const existing_element = document.getElementById(ID) as HTMLAudioElement | null;
