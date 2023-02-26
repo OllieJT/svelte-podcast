@@ -14,9 +14,9 @@
 	}
 
 	.svpod--player-progress :global(input) {
-		height: 56px;
+		height: 48px;
 		-webkit-appearance: none;
-		margin: 10px 0;
+		margin: 0;
 		width: 100%;
 		background-color: transparent;
 	}

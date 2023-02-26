@@ -5,7 +5,7 @@
 	export let value: number;
 </script>
 
-<label class={$$props.class} for={id}>{value}x</label>
+<label data-content="playback_speed" class={$$props.class} for={id}>{value}x</label>
 <input
 	class="svpod--a11y-hidden"
 	type="radio"

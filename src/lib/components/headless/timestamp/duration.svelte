@@ -5,4 +5,4 @@
 	$: duration = secondsToTimestamp($episode_audio?.duration || 0);
 </script>
 
-<span class={$$props.class}>/{duration}</span>
+<span data-content="duration" class={$$props.class}>/{duration}</span>

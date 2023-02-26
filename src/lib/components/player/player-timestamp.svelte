@@ -8,10 +8,11 @@
 </span>
 
 <style>
-	.svpod--audio-progress {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		width: max-content;
+	span {
+		letter-spacing: 1px;
+	}
+
+	span :global([data-content='duration']) {
+		opacity: 0.75;
 	}
 </style>

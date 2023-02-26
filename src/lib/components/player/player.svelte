@@ -46,6 +46,7 @@
 		flex-direction: column;
 		flex-grow: 1;
 		flex-shrink: 1;
+		gap: 8px;
 		padding: 0 4px;
 	}
 

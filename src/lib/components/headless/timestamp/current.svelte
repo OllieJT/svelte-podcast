@@ -5,4 +5,4 @@
 	$: current_time = secondsToTimestamp($episode_progress?.current_time || 0);
 </script>
 
-<span class={$$props.class}>{current_time}</span>
+<span data-content="current_time" class={$$props.class}>{current_time}</span>

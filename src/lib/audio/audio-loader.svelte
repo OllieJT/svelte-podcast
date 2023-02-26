@@ -54,17 +54,15 @@
 			border: 0;
 		}
 
+		.svpod--button,
 		.svpod--icon-button {
 			--fg: var(--svpod--fg-base);
 			--bg: var(--svpod--bg-surface);
 			position: relative;
 			line-height: 1em;
-			padding: 8px;
-			display: flex;
+			display: inline-flex;
 			align-items: center;
 			justify-content: center;
-			min-width: 48px;
-			min-height: 48px;
 			gap: 8px;
 			font-size: 16px;
 			border: 0px solid transparent;
@@ -73,9 +71,20 @@
 			color: var(--fg);
 			cursor: pointer;
 		}
+		.svpod--button:hover,
 		.svpod--icon-button:hover {
 			--fg: var(--svpod--fg-base-hover);
 			--bg: var(--svpod--bg-surface-hover);
+		}
+
+		.svpod--button {
+			padding: 4px calc(1em);
+		}
+
+		.svpod--icon-button {
+			padding: 8px;
+			min-width: 48px;
+			min-height: 48px;
 		}
 	</style>
 </svelte:head>
