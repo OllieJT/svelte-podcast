@@ -13,16 +13,16 @@
 	},
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && npm run package",
+		"build": "vite build && pnpm package",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
-		"prepublishOnly": "npm run package",
 		"test": "playwright test",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write .",
-		"release": "yarn run build && changeset publish"
+		"lint": "prettier --check --plugin-search-dir=. .",
+		"format": "prettier --write --plugin-search-dir=. .",
+		"release": "pnpm package && changeset publish",
+		"ts": "tsc --pretty --noImplicitAny --noEmit"
 	},
 	"exports": {
 		".": {
@@ -62,5 +62,9 @@
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module"
+	"type": "module",
+	"packageManager": "pnpm@7.28.0",
+	"engines": {
+		"pnpm": "^7.0.0"
+	}
 }
