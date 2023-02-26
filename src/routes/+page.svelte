@@ -19,6 +19,8 @@
 
 	let current_time = 0;
 	$: current_time = $episode_progress.current_time;
+
+	$: console.log('details :: ', $episode_audio?.details);
 </script>
 
 <PlayerProgress />
@@ -39,7 +41,7 @@
 <button type="button" on:click={user_preferences.clear}>Clear all preferences</button>
 
 <h5>Load Audio</h5>
-<button type="button" on:click={() => episode_audio.load(sources['syntax'].src, sources['knomii'])}
+<button type="button" on:click={() => episode_audio.load(sources['syntax'].src, sources['syntax'])}
 	>Syntax</button
 >
 <button type="button" on:click={() => episode_audio.load(sources['knomii'].src, sources['knomii'])}
@@ -81,4 +83,4 @@
 
 <hr />
 
-<PodcastPlayer />
+<PodcastPlayer artwork={$episode_audio?.details?.artwork} title={$episode_audio?.details?.title} />

@@ -36,7 +36,7 @@
 		align-items: center;
 		background-color: var(--player-bg);
 		color: var(--svpod--fg-base);
-		gap: 8px;
+		gap: 12px;
 		padding: 8px;
 		accent-color: var(--svpod--fg-accent);
 	}
