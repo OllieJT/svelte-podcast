@@ -30,8 +30,8 @@
 
 			--svpod--bg-base: rgb(0, 0, 0);
 
-			--svpod--bg-surface: rgb(30, 30, 30);
-			--svpod--bg-surface-hover: rgb(50, 50, 50);
+			--svpod--bg-surface: rgb(40, 40, 40);
+			--svpod--bg-surface-hover: rgb(75, 75, 75);
 
 			--svpod--fg-base: rgb(200, 200, 200);
 			--svpod--fg-base-hover: rgb(255, 255, 255);
@@ -40,6 +40,32 @@
 
 			--svpod--fg-accent: var(--svpod--fg-base);
 			--svpod--fg-accent-hover: var(--svpod--fg-base-hover);
+
+			/* element : timeline */
+
+			--svpod--timeline-track--shape--height: 20px;
+			--svpod--timeline-track--shape--radius: 0;
+			--svpod--timeline-track--shape--border: 0;
+
+			--svpod--timeline-thumb--shape--width: 8px;
+			--svpod--timeline-thumb--shape--height: 32px;
+			--svpod--timeline-thumb--shape--radius: 6px;
+			--svpod--timeline-thumb--shape--border: 2px;
+
+			--svpod--timeline-track--bg: var(--svpod--bg-surface);
+			--svpod--timeline-track--border: var(--svpod--timeline-track--bg);
+			--svpod--timeline-thumb--bg: var(--svpod--fg-base-hover);
+			--svpod--timeline-thumb--border: var(--svpod--bg-base);
+		}
+
+		.svpod--reset {
+			text-transform: none;
+			font-style: normal;
+			text-indent: 0;
+			text-shadow: none;
+			text-align: left;
+			margin: 0;
+			padding: 0;
 		}
 
 		.svpod--a11y-hidden {
