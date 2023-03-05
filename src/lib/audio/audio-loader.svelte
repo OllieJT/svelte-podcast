@@ -28,18 +28,22 @@
 		:root {
 			--svpod--font: sans-serif;
 
-			--svpod--bg-base: rgb(0, 0, 0);
+			--svpod--surface--darker: rgb(0, 0, 0);
+			--svpod--surface--base: rgb(40, 40, 40);
+			--svpod--surface--lighter: rgb(60, 60, 60);
 
-			--svpod--bg-surface: rgb(40, 40, 40);
-			--svpod--bg-surface-hover: rgb(75, 75, 75);
+			--svpod--content--darker: rgb(150, 150, 150);
+			--svpod--content--base: rgb(200, 200, 200);
+			--svpod--content--lighter: rgb(255, 255, 255);
 
-			--svpod--fg-base: rgb(200, 200, 200);
-			--svpod--fg-base-hover: rgb(255, 255, 255);
+			--svpod--accent--darker: rgb(75, 15, 0);
+			--svpod--accent--base: rgb(180, 40, 0);
+			--svpod--accent--lighter: rgb(255, 55, 25);
 
-			--svpod--radius: 9999px;
+			--bg: var(--svpod--surface--darker);
+			--fg: var(--svpod--content--darker);
 
-			--svpod--fg-accent: var(--svpod--fg-base);
-			--svpod--fg-accent-hover: var(--svpod--fg-base-hover);
+			--svpod--radius--rounded: 9999px;
 
 			/* element : timeline */
 
@@ -51,11 +55,6 @@
 			--svpod--timeline-thumb--shape--height: 32px;
 			--svpod--timeline-thumb--shape--radius: 6px;
 			--svpod--timeline-thumb--shape--border: 2px;
-
-			--svpod--timeline-track--bg: var(--svpod--bg-surface);
-			--svpod--timeline-track--border: var(--svpod--timeline-track--bg);
-			--svpod--timeline-thumb--bg: var(--svpod--fg-base-hover);
-			--svpod--timeline-thumb--border: var(--svpod--bg-base);
 		}
 
 		.svpod--reset {
@@ -82,8 +81,8 @@
 
 		.svpod--button,
 		.svpod--icon-button {
-			--fg: var(--svpod--fg-base);
-			--bg: var(--svpod--bg-surface);
+			--fg: var(--svpod--content--base);
+			--bg: var(--svpod--surface--base);
 			position: relative;
 			line-height: 1em;
 			display: inline-flex;
@@ -92,15 +91,15 @@
 			gap: 8px;
 			font-size: 16px;
 			border: 0px solid transparent;
-			border-radius: var(--svpod--radius);
+			border-radius: var(--svpod--radius--rounded);
 			background-color: var(--bg);
 			color: var(--fg);
 			cursor: pointer;
 		}
 		.svpod--button:hover,
 		.svpod--icon-button:hover {
-			--fg: var(--svpod--fg-base-hover);
-			--bg: var(--svpod--bg-surface-hover);
+			--fg: var(--svpod--content--lighter);
+			--bg: var(--svpod--surface--lighter);
 		}
 
 		.svpod--button {

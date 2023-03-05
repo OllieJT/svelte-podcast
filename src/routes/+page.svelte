@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { episode_audio, episode_progress, user_preferences, user_progress } from '$lib';
-	import AudioProgress from '$lib/components/headless/progress/playhead.svelte';
+	import MiniPlayer from '$lib/components/mini-player.svelte';
 	import { PodcastPlayer } from '$lib/components/player';
 	import PlayerProgress from '$lib/components/player/player-timestamp.svelte';
 
@@ -65,8 +65,6 @@
 
 <h6>Seeking</h6>
 
-<AudioProgress />
-
 <button type="button" on:click={() => episode_audio.seek(30)}>Go to 30s from start </button>
 <button type="button" on:click={() => episode_audio.seek(30, 'from-end')}>Go to 30s from end</button
 >
@@ -83,4 +81,16 @@
 
 <hr />
 
-<PodcastPlayer artwork={$episode_audio?.details?.artwork} title={$episode_audio?.details?.title} />
+<PodcastPlayer
+	artwork={$episode_audio?.details?.artwork}
+	title={$episode_audio?.details?.title || 'Podcast Name'}
+/>
+
+<br />
+<MiniPlayer />
+<br />
+<br />
+<MiniPlayer include={{ playback_rate: true }} />
+<br />
+<br />
+<MiniPlayer include={{ current_time: true, playback_rate: true, duration: true }} />
