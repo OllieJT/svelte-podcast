@@ -21,7 +21,7 @@
 	on:dragstart={() => console.log('dragstart')}
 	on:focus={() => console.log('focus')}
 	on:blur={() => console.log('blur')}
-	on:focusin={(e) => {
+	on:focusin={() => {
 		console.log('focusin');
 		episode_audio.pause();
 		// e.currentTarget.blur();

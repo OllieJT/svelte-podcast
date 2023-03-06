@@ -1,10 +1,10 @@
-import { audio_element } from '$lib/audio/audio-element';
-import { episode_details } from '$lib/audio/episode-details';
-import type { EpisodeAttributes, EpisodeDetails } from '$lib/types';
-import { user_preferences, user_progress } from '$lib/user';
-import { warn } from '$lib/utility/package/log';
 import clamp from 'just-clamp';
 import { derived, get, type Readable } from 'svelte/store';
+import type { EpisodeAttributes, EpisodeDetails } from '../types';
+import { user_preferences, user_progress } from '../user';
+import { warn } from '../utility/package/log';
+import { audio_element } from './audio-element';
+import { episode_details } from './episode-details';
 
 const default_episode_attributes = {
 	will_autoplay: false,

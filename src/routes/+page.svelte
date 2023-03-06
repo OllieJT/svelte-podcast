@@ -1,8 +1,11 @@
 <script lang="ts">
-	import { episode_audio, episode_progress, user_preferences, user_progress } from '$lib';
-	import MiniPlayer from '$lib/components/mini-player.svelte';
-	import { PodcastPlayer } from '$lib/components/player';
-	import PlayerProgress from '$lib/components/player/player-timestamp.svelte';
+	import {
+		episode_audio,
+		episode_progress,
+		MiniPlayer,
+		user_preferences,
+		user_progress,
+	} from 'svelte-podcast';
 
 	const sources = {
 		syntax: {
@@ -22,8 +25,6 @@
 
 	$: console.log('details :: ', $episode_audio?.details);
 </script>
-
-<PlayerProgress />
 
 <pre>{JSON.stringify(
 		{
@@ -81,16 +82,19 @@
 
 <hr />
 
-<PodcastPlayer
+<!-- <PodcastPlayer
 	artwork={$episode_audio?.details?.artwork}
 	title={$episode_audio?.details?.title || 'Podcast Name'}
-/>
+/> -->
 
 <br />
 <MiniPlayer />
 <br />
 <br />
 <MiniPlayer include={{ playback_rate: true }} />
+<br />
+<br />
+<MiniPlayer include={{ skip_back: 10, skip_forward: 30 }} />
 <br />
 <br />
 <MiniPlayer include={{ current_time: true, playback_rate: true, duration: true }} />

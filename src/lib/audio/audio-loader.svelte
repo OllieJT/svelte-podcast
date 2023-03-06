@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { audio_element } from '$lib/audio/audio-element';
-	import { user_preferences } from '$lib/user';
-	import { info, warn } from '$lib/utility/package/log';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
+	import { user_preferences } from '../user';
+	import { info, warn } from '../utility/package/log';
+	import { audio_element } from './audio-element';
 
 	$: $audio_element;
 	/* onMount(() => {
