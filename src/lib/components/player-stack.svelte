@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { Pause, Play, SpeakerWave } from '@inqling/svelte-icons/heroicon-20-solid';
 	import { clsx } from 'clsx';
+	import { HeadlessTimeline } from '.';
 	import { episode_audio, episode_progress } from '../audio';
 	import { user_preferences } from '../user';
-	import { A11yIcon, HeadlessTimeline, Skip, Spinner, Timestamp } from './utility';
+	import { A11yIcon, Skip, Spinner, Timestamp } from './utility';
 
 	type WithElement = {
 		timestamps: boolean;

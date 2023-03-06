@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { episode_audio, episode_progress } from '../../audio';
-	import { info } from '../../utility/package/log';
+	import { episode_audio, episode_progress } from '../audio';
+	import { info } from '../utility/package/log';
 
 	export let step = 10;
 
