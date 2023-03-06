@@ -3,8 +3,7 @@
 	import { clsx } from 'clsx';
 	import { episode_audio, episode_progress } from '../audio';
 	import { user_preferences } from '../user';
-	import { A11yIcon, HeadlessTimeline, Skip, Spinner } from './utility';
-	import Timestamp from './utility/timestamp.svelte';
+	import { A11yIcon, HeadlessTimeline, Skip, Spinner, Timestamp } from './utility';
 
 	type WithElement = {
 		timestamps: boolean;

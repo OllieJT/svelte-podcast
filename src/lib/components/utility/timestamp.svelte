@@ -2,7 +2,7 @@
 	import { secondsToTimestamp } from '../../utility';
 
 	export let value: number;
-	export let force_hours: boolean = false;
+	export let force_hours = false;
 
 	$: timestamp = secondsToTimestamp(value, force_hours);
 </script>
