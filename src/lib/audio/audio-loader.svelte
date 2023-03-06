@@ -26,7 +26,9 @@
 <svelte:head>
 	<style>
 		:root {
-			--svpod--font: sans-serif;
+			--svpod--font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+				'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+				'Segoe UI Symbol', 'Noto Color Emoji';
 
 			--svpod--surface--darker: rgb(0, 0, 0);
 			--svpod--surface--base: rgb(40, 40, 40);

@@ -3,8 +3,8 @@
 	import { clsx } from 'clsx';
 	import { episode_audio, episode_progress } from '../audio';
 	import { user_preferences } from '../user';
-	import { secondsToTimestamp } from '../utility';
 	import { A11yIcon, HeadlessTimeline, Skip, Spinner } from './utility';
+	import Timestamp from './utility/timestamp.svelte';
 
 	type WithElement = {
 		duration: boolean;
@@ -29,6 +29,7 @@
 
 	$: current_time = options.current_time && ($episode_progress?.current_time || 0);
 	$: duration = options.duration && ($episode_audio?.duration || 0);
+	$: timestamp_hours = Boolean($episode_audio?.duration && $episode_audio.duration >= 3600);
 
 	export let playback_rate_values: number[] = [1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4];
 
@@ -79,7 +80,7 @@
 
 	{#if current_time !== false}
 		<div class="svpod--timestamp">
-			<span>{secondsToTimestamp(current_time)}</span>
+			<Timestamp value={current_time} force_hours={timestamp_hours} />
 		</div>
 	{/if}
 	<div class="svpod--timeline">
@@ -87,7 +88,7 @@
 	</div>
 	{#if duration !== false}
 		<div class="svpod--timestamp">
-			<span>{secondsToTimestamp(duration)}</span>
+			<Timestamp value={duration} />
 		</div>
 	{/if}
 	{#if options.playback_rate}
@@ -186,12 +187,8 @@
 		border-radius: var(--inner-radius);
 		width: max-content;
 		flex-grow: 0;
-	}
-	div.svpod--timestamp span {
-		letter-spacing: 0.5px;
-		font-size: 0.8em;
-		display: block;
-		width: 8ch;
+		text-align: center;
+		padding: 0 0.1em;
 	}
 
 	select.svpod--playback-rate {
