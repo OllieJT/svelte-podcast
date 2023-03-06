@@ -6,7 +6,8 @@ const config = {
 	theme: {
 		extend: {
 			colors: {
-				mono: colors.neutral,
+				mono: colors.slate,
+				primary: colors.orange,
 			},
 			transitionTimingFunction: {
 				smooth: 'cubic-bezier(0, 0, 0, 1.5)',
@@ -15,7 +16,7 @@ const config = {
 		},
 	},
 
-	plugins: [require('@tailwindcss/typography')],
+	plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
 };
 
 module.exports = config;
