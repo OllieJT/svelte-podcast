@@ -98,6 +98,7 @@
 <br />
 <br />
 <PlayerWidget
+	style="width: 100%;"
 	include={{
 		current_time: true,
 		playback_rate: true,
