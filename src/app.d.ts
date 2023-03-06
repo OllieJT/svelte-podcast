@@ -4,6 +4,7 @@
 declare module './lib/types' {
 	interface EpisodeDetails {
 		title: string;
+		artwork: string;
 	}
 }
 

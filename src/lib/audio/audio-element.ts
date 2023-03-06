@@ -1,11 +1,11 @@
 import { browser } from '$app/environment';
-import { user_preferences } from '$lib/user';
 import { onMount } from 'svelte';
 import { get, readable } from 'svelte/store';
+import { user_preferences } from '../user';
 
 export const audio_element = readable<HTMLAudioElement | null>(null, (set) => {
 	if (!browser) return;
-	const ID = 'svelte-podcast-generated-audio-element';
+	const ID = 'svpod--generated-audio-element';
 
 	onMount(() => {
 		const existing_element = document.getElementById(ID) as HTMLAudioElement | null;

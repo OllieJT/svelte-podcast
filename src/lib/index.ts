@@ -1,3 +1,4 @@
-export * from '$lib/audio';
-export * from '$lib/user';
-export * from '$lib/utility';
+export * from './audio';
+export * from './components';
+export * from './user';
+export * from './utility';

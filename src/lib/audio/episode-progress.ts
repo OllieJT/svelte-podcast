@@ -1,7 +1,7 @@
-import { audio_element } from '$lib/audio/audio-element';
-import type { EpisodeProgress } from '$lib/types';
-import { secondsToTimestamp } from '$lib/utility';
 import { derived, type Readable } from 'svelte/store';
+import type { EpisodeProgress } from '../types';
+import { secondsToTimestamp } from '../utility';
+import { audio_element } from './audio-element';
 
 const default_episode_progress = {
 	current_time: 0,
