@@ -1,8 +1,8 @@
 import { dev } from '$app/environment';
 
 const useLogger = {
-	error: console.error,
 	info: console.info,
+	error: console.error,
 	warn: console.warn,
 };
 
@@ -13,7 +13,11 @@ export function log(type: Logger, ...content: unknown[]) {
 
 	if (type === 'info' && !dev) return;
 
-	logger('🔊 svelte-podcast: ', ...content);
+	logger(
+		'%c🔊 svelte-podcast:',
+		'color: #FF3E00; background-color: rgba(255, 62, 0, 0.15); padding: 4px 8px; border-radius:4px;',
+		...content,
+	);
 }
 
 export const info = (...content: unknown[]) => log('info', ...content);

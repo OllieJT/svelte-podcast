@@ -1,6 +1,12 @@
 <script lang="ts">
-	import { podcast_progress, user_preferences } from '$lib';
-	import { episode_audio, episode_progress } from '$lib/audio';
+	import {
+		episode_audio,
+		episode_progress,
+		PlayerStack,
+		PlayerWidget,
+		user_preferences,
+		user_progress,
+	} from 'svelte-podcast';
 
 	const sources = {
 		syntax: {
@@ -17,6 +23,8 @@
 
 	let current_time = 0;
 	$: current_time = $episode_progress.current_time;
+
+	$: console.log('details :: ', $episode_audio?.details);
 </script>
 
 <pre>{JSON.stringify(
@@ -26,16 +34,16 @@
 			$user_preferences,
 		},
 		null,
-		3,
+		2,
 	)}</pre>
 
 <h1>Demo</h1>
 <a href="/another-page">Another Page</a>
-<button type="button" on:click={podcast_progress.clear}>Clear progress for all episodes</button>
+<button type="button" on:click={user_progress.clear}>Clear progress for all episodes</button>
 <button type="button" on:click={user_preferences.clear}>Clear all preferences</button>
 
 <h5>Load Audio</h5>
-<button type="button" on:click={() => episode_audio.load(sources['syntax'].src, sources['knomii'])}
+<button type="button" on:click={() => episode_audio.load(sources['syntax'].src, sources['syntax'])}
 	>Syntax</button
 >
 <button type="button" on:click={() => episode_audio.load(sources['knomii'].src, sources['knomii'])}
@@ -59,15 +67,6 @@
 
 <h6>Seeking</h6>
 
-<input
-	type="range"
-	min={0}
-	max={$episode_audio?.duration}
-	style="width:100%"
-	bind:value={current_time}
-	on:change={(e) => episode_audio.seek(parseInt(e.currentTarget.value))}
-/>
-
 <button type="button" on:click={() => episode_audio.seek(30)}>Go to 30s from start </button>
 <button type="button" on:click={() => episode_audio.seek(30, 'from-end')}>Go to 30s from end</button
 >
@@ -77,7 +76,55 @@
 <h6>Playback Rate</h6>
 
 {#each [0.5, 1, 2, 3] as rate}
-	<button type="button" on:click={() => user_preferences.edit({ playback_rate: rate })}>
+	<button type="button" on:click={() => user_preferences.set.playback_rate(rate)}>
 		{rate}x
 	</button>
 {/each}
+
+<hr />
+
+<!-- <PodcastPlayer
+	artwork={$episode_audio?.details?.artwork}
+	title={$episode_audio?.details?.title || 'Podcast Name'}
+/> -->
+
+<br />
+<PlayerWidget />
+<br />
+<br />
+<PlayerWidget include={{ playback_rate: true }} />
+<br />
+<br />
+<PlayerWidget include={{ skip_back: 10, skip_forward: 30 }} />
+<br />
+<br />
+<PlayerWidget
+	style="width: 100%;"
+	include={{
+		current_time: true,
+		playback_rate: true,
+		duration: true,
+		skip_back: 10,
+		skip_forward: 30,
+	}}
+/>
+
+<br />
+<br />
+<PlayerStack style="width:400px;" />
+<br />
+<br />
+<PlayerStack include={{ playback_rate: true }} />
+<br />
+<br />
+<PlayerStack include={{ skip_back: 10, skip_forward: 30, timestamps: true }} />
+<br />
+<br />
+<PlayerStack
+	include={{
+		playback_rate: true,
+		timestamps: true,
+		skip_back: 10,
+		skip_forward: 30,
+	}}
+/>

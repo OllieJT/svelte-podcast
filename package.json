@@ -1,6 +1,6 @@
 {
 	"name": "svelte-podcast",
-	"version": "0.4.0",
+	"version": "0.5.0",
 	"license": "MIT",
 	"author": "Ollie Taylor",
 	"homepage": "https://github.com/OllieJT/svelte-podcast/blob/main/README.md",
@@ -13,16 +13,18 @@
 	},
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && npm run package",
+		"build": "vite build && pnpm package",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
-		"prepublishOnly": "npm run package",
 		"test": "playwright test",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write .",
-		"release": "yarn run build && changeset publish"
+		"lint:prettier": "prettier --check --plugin-search-dir=. .",
+		"lint:eslint": "TIMING=1 eslint . --ext .ts,.tsx,.svelte --cache",
+		"lint": "pnpm lint:prettier && pnpm lint:eslint",
+		"format": "prettier --write --plugin-search-dir=. .",
+		"release": "pnpm package && changeset publish",
+		"ts": "tsc --pretty --noImplicitAny --noEmit"
 	},
 	"exports": {
 		".": {
@@ -34,32 +36,39 @@
 		"dist"
 	],
 	"peerDependencies": {
-		"svelte": "^3.54.0"
+		"svelte": "^3.55.1"
 	},
 	"dependencies": {
-		"just-clamp": "^4.2.0"
+		"@inqling/svelte-icons": "^3.0.2",
+		"clsx": "^1.2.1",
+		"just-clamp": "^4.2.0",
+		"svelte-local-storage-store": "^0.4.0"
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.26.0",
-		"@playwright/test": "^1.28.1",
+		"@playwright/test": "^1.31.2",
 		"@sveltejs/adapter-auto": "^2.0.0",
-		"@sveltejs/kit": "^1.5.0",
-		"@sveltejs/package": "^2.0.0",
-		"@typescript-eslint/eslint-plugin": "^5.45.0",
-		"@typescript-eslint/parser": "^5.45.0",
-		"eslint-config-prettier": "^8.5.0",
+		"@sveltejs/kit": "^1.10.0",
+		"@sveltejs/package": "^2.0.2",
+		"@typescript-eslint/eslint-plugin": "^5.54.0",
+		"@typescript-eslint/parser": "^5.54.0",
+		"eslint": "^8.35.0",
+		"eslint-config-prettier": "^8.6.0",
 		"eslint-plugin-svelte3": "^4.0.0",
-		"eslint": "^8.28.0",
-		"prettier-plugin-svelte": "^2.8.1",
-		"prettier": "^2.8.0",
-		"publint": "^0.1.9",
-		"svelte-check": "^3.0.1",
-		"svelte": "^3.54.0",
-		"tslib": "^2.4.1",
-		"typescript": "^4.9.3",
-		"vite": "^4.0.0"
+		"prettier": "^2.8.4",
+		"prettier-plugin-svelte": "^2.9.0",
+		"publint": "^0.1.10",
+		"svelte": "^3.55.1",
+		"svelte-check": "^3.0.4",
+		"tslib": "^2.5.0",
+		"typescript": "^4.9.5",
+		"vite": "^4.1.4"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module"
+	"type": "module",
+	"packageManager": "pnpm@7.28.0",
+	"engines": {
+		"pnpm": "^7.0.0"
+	}
 }

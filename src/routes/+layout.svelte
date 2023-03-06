@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { AudioLoader } from '$lib/audio';
+	import { AudioLoader } from 'svelte-podcast';
 </script>
 
 <AudioLoader />

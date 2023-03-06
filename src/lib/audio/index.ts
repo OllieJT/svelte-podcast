@@ -1,4 +1,4 @@
-export { default as AudioLoader } from '$lib/audio/audio-loader.svelte';
-export * from '$lib/audio/episode-data';
-export * from '$lib/audio/episode-details';
-export * from '$lib/audio/episode-progress';
+export { default as AudioLoader } from './audio-loader.svelte';
+export * from './episode-data';
+export * from './episode-details';
+export * from './episode-progress';

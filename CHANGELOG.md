@@ -1,5 +1,15 @@
 # svelte-podcast
 
+## 0.5.0
+
+### Minor Changes
+
+- feba0d4: Improvements to audio stores:
+
+  - Adds missing `is_paused` value.
+  - Fixes to `start_at` value
+  - Refactors localStorage stores & user preferences
+
 ## 0.4.0
 
 ### Minor Changes
