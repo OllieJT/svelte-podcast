@@ -2,6 +2,7 @@
 	import {
 		episode_audio,
 		episode_progress,
+		PlayerStack,
 		PlayerWidget,
 		user_preferences,
 		user_progress,
@@ -103,6 +104,26 @@
 		current_time: true,
 		playback_rate: true,
 		duration: true,
+		skip_back: 10,
+		skip_forward: 30,
+	}}
+/>
+
+<br />
+<br />
+<PlayerStack style="width:400px;" />
+<br />
+<br />
+<PlayerStack include={{ playback_rate: true }} />
+<br />
+<br />
+<PlayerStack include={{ skip_back: 10, skip_forward: 30, timestamps: true }} />
+<br />
+<br />
+<PlayerStack
+	include={{
+		playback_rate: true,
+		timestamps: true,
 		skip_back: 10,
 		skip_forward: 30,
 	}}
