@@ -17,4 +17,7 @@ module.exports = {
 		es2017: true,
 		node: true,
 	},
+	rules: {
+		'no-restricted-imports': ['error', { patterns: ['$lib', '$lib/*'] }],
+	},
 };

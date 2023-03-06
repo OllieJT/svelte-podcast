@@ -7,6 +7,7 @@
 		"source.organizeImports": true
 	},
 	"eslint.packageManager": "pnpm",
+	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "svelte"],
 	"files.exclude": {
 		"**/.DS_Store": true,
 		"**/*-lock.*": true,

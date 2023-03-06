@@ -19,7 +19,9 @@
 		"test": "playwright test",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --check --plugin-search-dir=. .",
+		"lint:prettier": "prettier --check --plugin-search-dir=. .",
+		"lint:eslint": "TIMING=1 eslint . --ext .ts,.tsx,.svelte --cache",
+		"lint": "pnpm lint:prettier",
 		"format": "prettier --write --plugin-search-dir=. .",
 		"release": "pnpm package && changeset publish",
 		"ts": "tsc --pretty --noImplicitAny --noEmit"
