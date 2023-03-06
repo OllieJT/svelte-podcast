@@ -10,7 +10,6 @@
 		duration: boolean;
 		current_time: boolean;
 		playback_rate: boolean;
-		timeline: boolean;
 		skip_back: number | null;
 		skip_forward: number | null;
 	};
@@ -19,7 +18,6 @@
 		duration: false,
 		current_time: false,
 		playback_rate: false,
-		timeline: false,
 		skip_back: null,
 		skip_forward: null,
 	} satisfies WithElement;

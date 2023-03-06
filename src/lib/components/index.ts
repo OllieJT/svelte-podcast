@@ -1,2 +1,2 @@
-export { default as MiniPlayer } from './mini-player.svelte';
+export { default as PlayerWidget } from './player-widget.svelte';
 export * from './utility';

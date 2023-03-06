@@ -2,7 +2,7 @@
 	import {
 		episode_audio,
 		episode_progress,
-		MiniPlayer,
+		PlayerWidget,
 		user_preferences,
 		user_progress,
 	} from 'svelte-podcast';
@@ -88,13 +88,21 @@
 /> -->
 
 <br />
-<MiniPlayer />
+<PlayerWidget />
 <br />
 <br />
-<MiniPlayer include={{ playback_rate: true }} />
+<PlayerWidget include={{ playback_rate: true }} />
 <br />
 <br />
-<MiniPlayer include={{ skip_back: 10, skip_forward: 30 }} />
+<PlayerWidget include={{ skip_back: 10, skip_forward: 30 }} />
 <br />
 <br />
-<MiniPlayer include={{ current_time: true, playback_rate: true, duration: true }} />
+<PlayerWidget
+	include={{
+		current_time: true,
+		playback_rate: true,
+		duration: true,
+		skip_back: 10,
+		skip_forward: 30,
+	}}
+/>
