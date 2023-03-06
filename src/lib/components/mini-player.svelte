@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { episode_audio, episode_progress } from '$lib/audio';
-	import { A11yIcon, HeadlessTimeline } from '$lib/components/utility';
+	import { A11yIcon, HeadlessTimeline, Spinner } from '$lib/components/utility';
+	import Skip from '$lib/components/utility/skip.svelte';
 	import { user_preferences } from '$lib/user';
 	import { secondsToTimestamp } from '$lib/utility';
 	import { Pause, Play } from '@inqling/svelte-icons/heroicon-20-solid';
@@ -11,6 +12,8 @@
 		current_time: boolean;
 		playback_rate: boolean;
 		timeline: boolean;
+		skip_back: number | null;
+		skip_forward: number | null;
 	};
 
 	const default_options = {
@@ -18,6 +21,8 @@
 		current_time: false,
 		playback_rate: false,
 		timeline: false,
+		skip_back: null,
+		skip_forward: null,
 	} satisfies WithElement;
 
 	export let include: Partial<WithElement> = {};
@@ -30,18 +35,50 @@
 
 	export let playback_rate_values: number[] = [1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4];
 
+	$: is_loaded = Boolean($episode_audio?.src);
+
 	const { class: ClassName, ...rest } = $$restProps;
 </script>
 
-<div class={clsx('svpod--container svpod--reset', ClassName)} {...rest}>
+<div
+	class={clsx('svpod--container svpod--reset', ClassName)}
+	data-loaded={is_loaded ? 'true' : 'false'}
+	{...rest}
+>
+	{#if options.skip_back}
+		<button
+			on:click={() => options.skip_back && episode_audio.skip(options.skip_back, 'backward')}
+			class="svpod--reset svpod--toggle-pause"
+			type="button"
+		>
+			<Skip value={options.skip_back} type="backward" />
+		</button>
+	{/if}
+
 	<!-- toggle play -->
-	<button
-		on:click={() => episode_audio.play('toggle')}
-		class="svpod--reset svpod--toggle-pause"
-		type="button"
-	>
-		<A11yIcon icon={is_playing ? Pause : Play} label={is_playing ? 'Pause' : 'Play'} />
-	</button>
+	{#if is_loaded}
+		<button
+			on:click={() => is_loaded && episode_audio.play('toggle')}
+			class="svpod--reset svpod--toggle-pause"
+			type="button"
+		>
+			<A11yIcon icon={is_playing ? Pause : Play} label={is_playing ? 'Pause' : 'Play'} />
+		</button>
+	{:else}
+		<div class="svpod--reset svpod--toggle-pause">
+			<A11yIcon icon={Spinner} label="Waiting for audio..." />
+		</div>
+	{/if}
+
+	{#if options.skip_forward}
+		<button
+			on:click={() => options.skip_forward && episode_audio.skip(options.skip_forward, 'forward')}
+			class="svpod--reset svpod--toggle-pause"
+			type="button"
+		>
+			<Skip value={options.skip_forward} type="forward" />
+		</button>
+	{/if}
 
 	{#if current_time !== false}
 		<div class="svpod--timestamp">
@@ -121,7 +158,7 @@
 		background: none;
 	}
 
-	button.svpod--toggle-pause {
+	.svpod--toggle-pause {
 		align-items: center;
 		border: none;
 		display: flex;
@@ -129,10 +166,12 @@
 		height: 3em;
 		justify-content: center;
 		width: 3em;
-		cursor: pointer;
 		border-radius: var(--inner-radius);
 	}
-	button.svpod--toggle-pause :global(svg) {
+	button.svpod--toggle-pause {
+		cursor: pointer;
+	}
+	.svpod--toggle-pause :global(svg) {
 		width: 1.5em;
 		height: 1.5em;
 	}
