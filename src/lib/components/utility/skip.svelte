@@ -4,6 +4,62 @@
 	export let type: 'forward' | 'backward';
 </script>
 
+<style>
+	div.svpod--skip-container {
+		display: inline-flex;
+		position: relative;
+		align-items: center;
+		justify-content: center;
+		width: 1.5em;
+		height: 1.5em;
+	}
+
+	div.svpod--skip-icon,
+	span.svpod--skip-mask {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	span.svpod--skip-mask {
+		z-index: 1;
+		background: linear-gradient(0deg, var(--bg), transparent);
+		opacity: 0.5;
+	}
+
+	div.svpod--skip-icon {
+		z-index: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--svpod--content--base);
+	}
+
+	span.svpod--skip-label {
+		position: relative;
+		z-index: 2;
+		font-size: 0.5em;
+		line-height: 1em;
+		color: var(--svpod--content--lighter);
+	}
+
+	@keyframes Spin {
+		0%,
+		100% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+
+	svg {
+		/* animation: Spin 1s cubic-bezier(0.5, 0.1, 0.1, 0.8) infinite; */
+	}
+</style>
+
 <div class="svpod--skip-container" style="font-size:{size}px">
 	<span class="svpod--skip-label">
 		<span class="svpod--a11y-hidden">skip {type}</span>
@@ -97,59 +153,3 @@
 		{/if}
 	</div>
 </div>
-
-<style>
-	div.svpod--skip-container {
-		display: inline-flex;
-		position: relative;
-		align-items: center;
-		justify-content: center;
-		width: 1.5em;
-		height: 1.5em;
-	}
-
-	div.svpod--skip-icon,
-	span.svpod--skip-mask {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-	}
-
-	span.svpod--skip-mask {
-		z-index: 1;
-		background: linear-gradient(0deg, var(--bg), transparent);
-		opacity: 0.5;
-	}
-
-	div.svpod--skip-icon {
-		z-index: 0;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		color: var(--svpod--content--base);
-	}
-
-	span.svpod--skip-label {
-		position: relative;
-		z-index: 2;
-		font-size: 0.5em;
-		line-height: 1em;
-		color: var(--svpod--content--lighter);
-	}
-
-	@keyframes Spin {
-		0%,
-		100% {
-			transform: rotate(0deg);
-		}
-		100% {
-			transform: rotate(360deg);
-		}
-	}
-
-	svg {
-		/* animation: Spin 1s cubic-bezier(0.5, 0.1, 0.1, 0.8) infinite; */
-	}
-</style>

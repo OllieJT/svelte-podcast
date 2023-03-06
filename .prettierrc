@@ -4,6 +4,9 @@
 	"trailingComma": "all",
 	"printWidth": 100,
 	"plugins": ["prettier-plugin-svelte"],
+	"svelteSortOrder": "options-scripts-styles-markup",
+	"svelteBracketNewLine": true,
+	"svelteIndentScriptAndStyle": true,
 	"pluginSearchDirs": ["."],
 	"overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
 }
