@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { episode_audio, episode_progress } from '$lib/audio';
-	import { A11yIcon, HeadlessTimeline, Spinner } from '$lib/components/utility';
-	import Skip from '$lib/components/utility/skip.svelte';
-	import { user_preferences } from '$lib/user';
-	import { secondsToTimestamp } from '$lib/utility';
 	import { Pause, Play } from '@inqling/svelte-icons/heroicon-20-solid';
 	import { clsx } from 'clsx';
+	import { episode_audio, episode_progress } from '../audio';
+	import { user_preferences } from '../user';
+	import { secondsToTimestamp } from '../utility';
+	import { A11yIcon, HeadlessTimeline, Skip, Spinner } from './utility';
 
 	type WithElement = {
 		duration: boolean;

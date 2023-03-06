@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { episode_audio, episode_progress } from '$lib';
+	import { episode_audio, episode_progress } from '../../audio';
 
 	let current_time = 0;
 	$: current_time = $episode_progress.current_time;

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { user_preferences } from '$lib/user';
+	import { user_preferences } from '../../user';
 
 	export let options: number[] = [1, 1.25, 1.5, 1.75, 2];
 </script>

@@ -1,9 +1,9 @@
-import { episode_audio, episode_progress } from '$lib/audio';
-import type { UserProgress } from '$lib/types';
-import { get_pathname_from_url } from '$lib/utility/get-pathname-from-url';
-import { info } from '$lib/utility/package/log';
 import { persisted } from 'svelte-local-storage-store';
 import { get } from 'svelte/store';
+import { episode_audio, episode_progress } from '../audio';
+import type { UserProgress } from '../types';
+import { get_pathname_from_url } from '../utility';
+import { info } from '../utility/package/log';
 
 const _default_user_progress = {} satisfies UserProgress;
 const _user_progress = persisted<UserProgress>('USER_PROGRESS', _default_user_progress);

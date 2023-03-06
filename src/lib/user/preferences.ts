@@ -1,6 +1,6 @@
-import type { UserPreferences } from '$lib/types';
 import clamp from 'just-clamp';
 import { persisted } from 'svelte-local-storage-store';
+import type { UserPreferences } from '../types';
 
 const _default_user_preferences = { playback_rate: 1, volume: 1 } satisfies UserPreferences;
 const _user_preferences = persisted<UserPreferences>('USER_PREFERENCE', _default_user_preferences);
