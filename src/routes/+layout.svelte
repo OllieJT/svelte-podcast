@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { MagnifyingGlass } from '@inqling/svelte-icons/heroicon-20-solid';
 	import { Github, Npm } from '@inqling/svelte-icons/simple-icons';
+	// import 'highlight.js/styles/base16/dracula.css';
 	import { AudioLoader } from 'svelte-podcast';
 	import '../app.postcss';
 </script>

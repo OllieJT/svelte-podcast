@@ -16,6 +16,7 @@ specifiers:
   eslint: ^8.35.0
   eslint-config-prettier: ^8.6.0
   eslint-plugin-svelte3: ^4.0.0
+  highlight.js: ^11.7.0
   just-clamp: ^4.2.0
   postcss: ^8.4.14
   postcss-load-config: ^4.0.1
@@ -27,6 +28,7 @@ specifiers:
   svelte-check: ^3.0.4
   svelte-local-storage-store: ^0.4.0
   svelte-preprocess: ^4.10.7
+  svhighlight: ^0.7.1
   tailwindcss: ^3.1.5
   tslib: ^2.5.0
   typescript: ^4.9.5
@@ -52,6 +54,7 @@ devDependencies:
   eslint: 8.35.0
   eslint-config-prettier: 8.6.0_eslint@8.35.0
   eslint-plugin-svelte3: 4.0.0_n4ieifq2d7jq3sqoe474cgqlim
+  highlight.js: 11.7.0
   postcss: 8.4.21
   postcss-load-config: 4.0.1_postcss@8.4.21
   prettier: 2.8.4
@@ -61,6 +64,7 @@ devDependencies:
   svelte: 3.55.1
   svelte-check: 3.0.4_gqx7lw3sljhsd4bstor5m2aa2u
   svelte-preprocess: 4.10.7_b25a55hc532q56kmuqlrolam2i
+  svhighlight: 0.7.1
   tailwindcss: 3.2.7_postcss@8.4.21
   tslib: 2.5.0
   typescript: 4.9.5
@@ -1189,6 +1193,10 @@ packages:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
     dev: true
 
+  /compute-scroll-into-view/3.0.0:
+    resolution: {integrity: sha512-Yk1An4qzo5++Cu6peT9PsmRKIU8tALpmdoE09n//AfGQFcPfx21/tMGMsmKYmLJWaBJrGOJ5Jz5hoU+7cZZUWQ==}
+    dev: true
+
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
@@ -1926,6 +1934,11 @@ packages:
     engines: {node: '>= 0.4.0'}
     dependencies:
       function-bind: 1.1.1
+    dev: true
+
+  /highlight.js/11.7.0:
+    resolution: {integrity: sha512-1rRqesRFhMO/PRF+G86evnyJkCgaZFOI+Z6kdj15TA18funfoqJXvgPCLSf0SWq3SRfg1j3HlDs8o4s3EGq1oQ==}
+    engines: {node: '>=12.0.0'}
     dev: true
 
   /hosted-git-info/2.8.9:
@@ -3042,6 +3055,12 @@ packages:
       rimraf: 2.7.1
     dev: true
 
+  /scroll-into-view-if-needed/3.0.6:
+    resolution: {integrity: sha512-x+CW0kOzlFNOnseF0DBr0AJ5m+TgGmSOdEZwyiZW0gV87XBvxQKw5A8DvFFgabznA68XqLgVX+PwPX8OzsFvRA==}
+    dependencies:
+      compute-scroll-into-view: 3.0.0
+    dev: true
+
   /semver/5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
     hasBin: true
@@ -3430,6 +3449,13 @@ packages:
       pascal-case: 3.1.2
       svelte: 3.55.1
       typescript: 4.9.5
+    dev: true
+
+  /svhighlight/0.7.1:
+    resolution: {integrity: sha512-I2Pwkcl1Nw5cRrzdIua7OgwKr+tx5wv1P1sN7jz+4zO8dkUIfvZzF5hUoJJPx2kPyyS+27h6k4suNzNLLGw4+g==}
+    dependencies:
+      highlight.js: 11.7.0
+      scroll-into-view-if-needed: 3.0.6
     dev: true
 
   /tailwindcss/3.2.7_postcss@8.4.21:

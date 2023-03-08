@@ -1,7 +1,7 @@
 const colors = require('tailwindcss/colors');
 
 const config = {
-	content: ['./src/**/*.{html,js,md,mdx,svelte,ts}'],
+	content: ['./src/**/*.{html,js,md,mdx,svelte,ts}', './node_modules/svhighlight/**/*.svelte'],
 
 	theme: {
 		extend: {
