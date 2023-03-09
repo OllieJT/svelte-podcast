@@ -9,7 +9,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/OllieJT/svelte-podcast/pulls"
+		"url": "https://github.com/OllieJT/svelte-podcast.git"
 	},
 	"scripts": {
 		"dev": "vite dev",
