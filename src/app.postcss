@@ -2,3 +2,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	article.section-content p {
+		@apply my-2 text-lg leading-normal;
+	}
+	article.section-content li p {
+		@apply my-0;
+	}
+	article.section-content mark {
+		@apply bg-primary-100 text-primary-900;
+	}
+}

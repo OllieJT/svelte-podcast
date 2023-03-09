@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { Github } from '@inqling/svelte-icons/simple-icons';
 	import clsx from 'clsx';
+	import 'highlight.js/styles/github-dark.css';
 	import { AudioLoader } from 'svelte-podcast';
 	import '../app.postcss';
 

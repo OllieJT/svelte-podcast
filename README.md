@@ -39,13 +39,13 @@ In no particular order, here are some of the things I'm confident will be added 
 
 ```bash
 # with npm
-npm install svelte-podcast
+npm install svelte-podcast@latest
 
 # with yarn
-yarn add svelte-podcast
+yarn add svelte-podcast@latest
 
 # with pnpm
-pnpm add svelte-podcast
+pnpm add svelte-podcast@latest
 ```
 
 You must add one instance of the `<AudioLoader />` to your app. This should be places as high as possible, ideally in your root `+layout,svelte` file.
