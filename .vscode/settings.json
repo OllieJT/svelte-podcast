@@ -24,5 +24,6 @@
 	"problems.sortOrder": "severity",
 	"todo-tree.tree.scanMode": "workspace only",
 	"javascript.preferences.importModuleSpecifier": "relative",
-	"typescript.preferences.importModuleSpecifier": "relative"
+	"typescript.preferences.importModuleSpecifier": "relative",
+	"files.associations": { ".env*": "dotenv", "*.svx": "mdx" }
 }
