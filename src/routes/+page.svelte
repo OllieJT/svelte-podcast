@@ -222,29 +222,23 @@
 	<SectionTitle title="Prebuilt Components" />
 
 	<Content>
-		<ContentTitle title="Use a prebuilt player" />
-		<div class="prose">
-			<p>Place one of the components on any page in your app</p>
-
-			<code class="block bg-mono-100">
-				# /routes/+page.svelte<br />
-			</code>
-		</div>
-	</Content>
-
-	<Content>
-		<ContentTitle title="Headless components" />
+		<ContentTitle title="<PlayerWidget/>" />
 		<p>Coming soon...</p>
 	</Content>
 
 	<Content>
-		<ContentTitle title="Gotchas" />
+		<ContentTitle title="<PlayerStack/>" />
+		<p>Coming soon...</p>
+	</Content>
+
+	<Content>
+		<ContentTitle title="<HeadlessTimeline/>" />
 		<p>Coming soon...</p>
 	</Content>
 </Section>
 
 <Section>
-	<SectionTitle title="Utilities" />
+	<SectionTitle title="Library Exports" />
 
 	<Content>
 		<ContentTitle title="Debug Mode" />
@@ -252,7 +246,27 @@
 	</Content>
 
 	<Content>
-		<ContentTitle title="User Preferences" />
+		<ContentTitle title="audio" />
+		<p>Coming soon...</p>
+	</Content>
+
+	<Content>
+		<ContentTitle title="episode_progress" />
+		<p>Coming soon...</p>
+	</Content>
+
+	<Content>
+		<ContentTitle title="episode_details" />
+		<p>Coming soon...</p>
+	</Content>
+
+	<Content>
+		<ContentTitle title="user_progress & user_preferences" />
+		<p>Coming soon...</p>
+	</Content>
+
+	<Content>
+		<ContentTitle title="save_podcast_state" />
 		<p>Coming soon...</p>
 	</Content>
 
