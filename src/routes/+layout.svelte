@@ -20,7 +20,13 @@
 		<div class="relative grid grid-cols-12 gap-1 text-base md:gap-3">
 			<div class="col-span-2 flex items-center justify-start leading-none">
 				<a href="/#navigation" class="flex-shrink-0 py-1">
-					<img class="block h-8 w-auto" width={60} height={32} src="/logo.png" alt="Your Company" />
+					<img
+						class="block h-8 w-auto"
+						width={60}
+						height={32}
+						src="/logo.png"
+						alt="Svelte-Podcast"
+					/>
 				</a>
 			</div>
 			<div class="col-span-8 flex items-center justify-center leading-none sm:gap-1">
