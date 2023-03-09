@@ -14,3 +14,262 @@
 		@apply bg-primary-100 text-primary-900;
 	}
 }
+
+@layer components {
+	.prose code {
+		@apply inline rounded bg-primary-100 py-1 px-2 font-mono leading-none text-primary-800;
+		overflow-wrap: anywhere;
+	}
+	.prose code::before,
+	.prose code::after {
+		content: '';
+	}
+	h1.anchor,
+	h2.anchor,
+	h3.anchor,
+	h4.anchor,
+	h5.anchor,
+	h6.anchor {
+		@apply m-0 text-3xl font-semibold leading-10 text-mono-900;
+	}
+
+	.prose h1 a,
+	.prose h2 a,
+	.prose h3 a,
+	.prose h4 a,
+	.prose h5 a,
+	.prose h6 a,
+	h1.anchor a,
+	h2.anchor a,
+	h3.anchor a,
+	h4.anchor a,
+	h5.anchor a,
+	h6.anchor a {
+		@apply relative font-medium underline decoration-transparent decoration-solid decoration-2 underline-offset-2;
+		&::before {
+			@apply absolute -left-[1.25ch] inline-block font-light leading-normal text-mono-400;
+			content: '#';
+		}
+		&:hover::before {
+			@apply text-primary-500;
+		}
+		&:hover {
+			@apply decoration-primary-500;
+		}
+	}
+
+	.prose h3 a {
+		@apply text-primary-600;
+	}
+
+	.prose #table-of-contents + ol {
+		list-style: decimal-leading-zero;
+	}
+	.prose #table-of-contents + ol,
+	.prose #table-of-contents + ul {
+		ul,
+		ol,
+		li {
+			@apply my-0.5;
+		}
+
+		ol {
+			list-style: lower-alpha;
+			ol {
+				list-style: disc;
+				ol {
+					list-style: circle;
+				}
+			}
+		}
+	}
+
+	.prose #features + table td:first-child > * {
+		@apply sm:block sm:w-max;
+	}
+}
+
+/***** prism-theme	*****/
+/*
+ * Laserwave Theme originally by Jared Jones for Visual Studio Code
+ * https://github.com/Jaredk3nt/laserwave
+ *
+ * Ported for PrismJS by Simon Jespersen [https://github.com/simjes]
+ */
+
+code[class*='language-'],
+pre[class*='language-'] {
+	background: #27212e;
+	color: #ffffff;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; /* this is the default */
+	/* The following properties are standard, please leave them as they are */
+	font-size: 1em;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	line-height: 1.5;
+	-moz-tab-size: 2;
+	-o-tab-size: 2;
+	tab-size: 2;
+	/* The following properties are also standard */
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+code[class*='language-']::-moz-selection,
+code[class*='language-'] ::-moz-selection,
+pre[class*='language-']::-moz-selection,
+pre[class*='language-'] ::-moz-selection {
+	background: #eb64b927;
+	color: inherit;
+}
+
+code[class*='language-']::selection,
+code[class*='language-'] ::selection,
+pre[class*='language-']::selection,
+pre[class*='language-'] ::selection {
+	background: #eb64b927;
+	color: inherit;
+}
+
+/* Properties specific to code blocks */
+pre[class*='language-'] {
+	padding: 1em; /* this is standard */
+	margin: 0.5em 0; /* this is the default */
+	overflow: auto; /* this is standard */
+	border-radius: 0.5em;
+}
+
+/* Properties specific to inline code */
+:not(pre) > code[class*='language-'] {
+	padding: 0.2em 0.3em;
+	border-radius: 0.5rem;
+	white-space: normal; /* this is standard */
+}
+
+.token.comment,
+.token.prolog,
+.token.cdata {
+	color: #91889b;
+}
+
+.token.punctuation {
+	color: #7b6995;
+}
+
+.token.builtin,
+.token.constant,
+.token.boolean {
+	color: #ffe261;
+}
+
+.token.number {
+	color: #b381c5;
+}
+
+.token.important,
+.token.atrule,
+.token.property,
+.token.keyword {
+	color: #40b4c4;
+}
+
+.token.doctype,
+.token.operator,
+.token.inserted,
+.token.tag,
+.token.class-name,
+.token.symbol {
+	color: #74dfc4;
+}
+
+.token.attr-name,
+.token.function,
+.token.deleted,
+.token.selector {
+	color: #eb64b9;
+}
+
+.token.attr-value,
+.token.regex,
+.token.char,
+.token.string {
+	color: #b4dce7;
+}
+
+.token.entity,
+.token.url,
+.token.variable {
+	color: #ffffff;
+}
+
+/* The following rules are pretty similar across themes, but feel free to adjust them */
+.token.bold {
+	font-weight: bold;
+}
+
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+.token.namespace {
+	opacity: 0.7;
+}
+
+/***** prism-config	*****/
+
+pre {
+	overflow-x: auto;
+}
+
+/**
+   * Inspired by gatsby remark prism - https://www.gatsbyjs.com/plugins/gatsby-remark-prismjs/
+   * 1. Make the element just wide enough to fit its content.
+   * 2. Always fill the visible space in .code-highlight.
+   */
+.code-highlight {
+	float: left; /* 1 */
+	min-width: 100%; /* 2 */
+}
+
+.code-line {
+	display: block;
+	padding-left: 16px;
+	padding-right: 16px;
+	margin-left: -16px;
+	margin-right: -16px;
+	border-left: 4px solid rgba(0, 0, 0, 0); /* Set placeholder for highlight accent border color to transparent */
+}
+
+.code-line.inserted {
+	background-color: rgba(16, 185, 129, 0.2); /* Set inserted line (+) color */
+}
+
+.code-line.deleted {
+	background-color: rgba(239, 68, 68, 0.2); /* Set deleted line (-) color */
+}
+
+.highlight-line {
+	margin-left: -16px;
+	margin-right: -16px;
+	background-color: rgba(55, 65, 81, 0.5); /* Set highlight bg color */
+	border-left: 4px solid rgb(59, 130, 246); /* Set highlight accent border color */
+}
+
+.line-number::before {
+	display: inline-block;
+	width: 1rem;
+	text-align: right;
+	margin-right: 16px;
+	margin-left: -8px;
+	color: rgb(156, 163, 175); /* Line number color */
+	content: attr(line);
+}

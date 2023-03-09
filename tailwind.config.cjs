@@ -1,7 +1,7 @@
 const colors = require('tailwindcss/colors');
 
 const config = {
-	content: ['./src/**/*.{html,js,md,mdx,svelte,ts}', './node_modules/svhighlight/**/*.svelte'],
+	content: ['./src/**/*.{html,js,md,mdx,svx,svelte,ts}', './node_modules/svhighlight/**/*.svelte'],
 
 	theme: {
 		extend: {
@@ -16,7 +16,11 @@ const config = {
 		},
 	},
 
-	plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
+	plugins: [
+		require('@tailwindcss/typography'),
+		require('@tailwindcss/forms'),
+		require('@tailwindcss/line-clamp'),
+	],
 };
 
 module.exports = config;
