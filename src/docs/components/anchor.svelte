@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { topics } from '$docs/utility/anchor-registry';
 	import { Hashtag } from '@inqling/svelte-icons/heroicon-24-outline';
-	import { topics } from './registry';
 
 	export let value: string;
 	$: id = topics.slugify(value || '');

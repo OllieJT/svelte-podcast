@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Anchor from '../anchor.svelte';
+	import Anchor from './anchor.svelte';
 
 	export let title: string;
 	export let anchor: boolean = false;
