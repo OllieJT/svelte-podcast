@@ -2,6 +2,7 @@
 	import {
 		episode_audio,
 		episode_progress,
+		PlayerStack,
 		PlayerWidget,
 		user_preferences,
 		user_progress,
@@ -36,10 +37,14 @@
 		2,
 	)}</pre>
 
+<hr />
+
 <h1>Demo</h1>
 <a href="/another-page">Another Page</a>
 <button type="button" on:click={user_progress.clear}>Clear progress for all episodes</button>
 <button type="button" on:click={user_preferences.clear}>Clear all preferences</button>
+
+<hr />
 
 <h5>Load Audio</h5>
 <button type="button" on:click={() => episode_audio.load(sources['syntax'].src, sources['syntax'])}
@@ -50,6 +55,8 @@
 >
 <button type="button" on:click={() => episode_audio.unload()}>None</button>
 
+<hr />
+
 <h5>Custom audio controls</h5>
 
 <h6>Play / Pause Actions</h6>
@@ -58,11 +65,15 @@
 <button type="button" on:click={() => episode_audio.pause()}>Pause</button>
 <button type="button" on:click={() => episode_audio.pause('toggle')}>Toggle</button>
 
+<hr />
+
 <h6>Audio Actions</h6>
 
 <button type="button" on:click={() => episode_audio.mute()}>Mute</button>
 <button type="button" on:click={() => episode_audio.unmute()}>Unmute</button>
 <button type="button" on:click={() => episode_audio.mute('toggle')}>Toggle</button>
+
+<hr />
 
 <h6>Seeking</h6>
 
@@ -71,6 +82,8 @@
 >
 <button type="button" on:click={() => episode_audio.skip(10, 'forward')}>Skip 10s</button>
 <button type="button" on:click={() => episode_audio.skip(10, 'backward')}>Rewind 10s</button>
+
+<hr />
 
 <h6>Playback Rate</h6>
 
@@ -98,10 +111,31 @@
 <br />
 <br />
 <PlayerWidget
+	style="width: 100%;"
 	include={{
 		current_time: true,
 		playback_rate: true,
 		duration: true,
+		skip_back: 10,
+		skip_forward: 30,
+	}}
+/>
+
+<br />
+<br />
+<PlayerStack style="width:400px;" />
+<br />
+<br />
+<PlayerStack include={{ playback_rate: true }} />
+<br />
+<br />
+<PlayerStack include={{ skip_back: 10, skip_forward: 30, timestamps: true }} />
+<br />
+<br />
+<PlayerStack
+	include={{
+		playback_rate: true,
+		timestamps: true,
 		skip_back: 10,
 		skip_forward: 30,
 	}}
