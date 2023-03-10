@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { assets, base } from '$app/paths';
 	import { page } from '$app/stores';
 	import { Github } from '@inqling/svelte-icons/simple-icons';
 	import clsx from 'clsx';
@@ -19,12 +20,12 @@
 	<div class="mx-auto max-w-prose px-4 py-1 sm:py-2 sm:px-6 lg:px-8">
 		<div class="relative grid grid-cols-12 gap-1 text-base md:gap-3">
 			<div class="col-span-2 flex items-center justify-start leading-none">
-				<a href="/#navigation" class="flex-shrink-0 py-1">
+				<a href="{base}/#navigation" class="flex-shrink-0 py-1">
 					<img
 						class="block h-8 w-auto"
 						width={60}
 						height={32}
-						src="/logo.png"
+						src="{assets}/logo.png"
 						alt="Svelte-Podcast"
 					/>
 				</a>
@@ -34,7 +35,7 @@
 					{@const is_homepage = link.href === '/' && $page.url.pathname === link.href}
 					{@const is_match = link.href !== '/' && $page.url.pathname.startsWith(link.href)}
 					<a
-						href={link.href}
+						href={base + link.href}
 						class={clsx(
 							'flex items-center justify-center rounded-md px-3 py-2 text-sm font-medium leading-none ring-inset focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500 focus:ring-offset-2 sm:px-4 sm:text-base',
 							is_homepage || is_match
