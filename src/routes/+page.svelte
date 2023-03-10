@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { Section } from '$content/components';
-	import Docs from '$content/docs.svx';
 	import { episodes } from '$content/episodes';
 	import { onMount } from 'svelte';
 	import { episode_audio, PlayerWidget } from 'svelte-podcast';
+	import type { PageServerData } from './$types';
+
+	export let data: PageServerData;
 
 	onMount(() => {
 		// load the episode on mount without any metadata
@@ -99,6 +101,6 @@
 
 <Section>
 	<div class="prose prose-lg prose-slate">
-		<Docs />
+		{@html data.html}
 	</div>
 </Section>

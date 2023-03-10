@@ -1,13 +1,3 @@
-<script>
-	import {
-		AdjustmentsHorizontal,
-		BookmarkSquare,
-		CommandLine,
-		PuzzlePiece,
-		Sparkles,
-	} from '@inqling/svelte-icons/heroicon-24-outline';
-</script>
-
 ## Table of contents
 
 ## What is svelte-podcast?

@@ -40,7 +40,6 @@
 <hr />
 
 <h1>Demo</h1>
-<a href="/another-page">Another Page</a>
 <button type="button" on:click={user_progress.clear}>Clear progress for all episodes</button>
 <button type="button" on:click={user_preferences.clear}>Clear all preferences</button>
 

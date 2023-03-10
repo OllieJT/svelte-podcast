@@ -3,6 +3,6 @@
 
 // import type { ComponentType, SvelteComponentTyped } from 'svelte';
 
-declare module '*.svx' {
+declare module '*.md' {
 	export default ComponentType<SvelteComponentTyped>;
 }
