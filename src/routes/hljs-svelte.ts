@@ -40,11 +40,14 @@ export function hljsDefineSvelte(hljs: HLJSApi) {
 				subLanguage: 'javascript',
 				contains: [
 					{
+						// eslint-disable-next-line no-useless-escape
 						begin: /[\{]/,
+						// eslint-disable-next-line no-useless-escape
 						end: /[\}]/,
 						skip: true,
 					},
 					{
+						// eslint-disable-next-line no-useless-escape
 						begin: /([#:\/@])(if|else|each|await|then|catch|debug|html)/gm,
 						className: 'keyword',
 						relevance: 10,

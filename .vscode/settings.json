@@ -1,18 +1,31 @@
 {
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"editor.formatOnType": false,
-	"editor.formatOnSave": true,
-	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": true,
-		"source.organizeImports": true
+	"[svelte]": {
+		"editor.defaultFormatter": "svelte.svelte-vscode",
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": true
+		}
 	},
-	"eslint.packageManager": "pnpm",
-	"eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "svelte"],
+	"[typescript]": {
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": true
+		}
+	},
+	"eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"editor.formatOnType": false,
 	"files.exclude": {
+		"**/.cache": true,
 		"**/.DS_Store": true,
+		"**/.gitattributes": true,
+		"**/.svelte-kit": true,
 		"**/*-lock.*": true,
 		"**/*.Identifier": true,
+		"**/*.map": true,
+		"**/.turbo": true,
 		"**/.vercel": true,
+		"**/dist": true,
 		"**/node_modules": true,
 		"**/tsconfig.tsbuildinfo": true,
 		"**/.npmrc": true
@@ -21,9 +34,5 @@
 		"**/node_modules": true,
 		"**/.svelte-kit": true
 	},
-	"problems.sortOrder": "severity",
-	"todo-tree.tree.scanMode": "workspace only",
-	"javascript.preferences.importModuleSpecifier": "relative",
-	"typescript.preferences.importModuleSpecifier": "relative",
-	"files.associations": { ".env*": "dotenv", "*.svx": "mdx", "*.md": "mdx" }
+	"problems.sortOrder": "severity"
 }

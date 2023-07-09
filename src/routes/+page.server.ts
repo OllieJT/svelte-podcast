@@ -1,4 +1,4 @@
-import content from '$content/docs.md?raw';
+import content from '$src/content/docs.md?raw';
 import type { PageServerLoad } from './$types';
 import { use_markdown } from './use-markdown';
 

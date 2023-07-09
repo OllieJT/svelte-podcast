@@ -34,6 +34,99 @@
 	const { class: ClassName, ...rest } = $$restProps;
 </script>
 
+<div
+	class={clsx('svpod--container svpod--reset', ClassName)}
+	data-loaded={is_loaded ? 'true' : 'false'}
+	{...rest}
+>
+	<div class="svpod--container--row svpod--row--controls">
+		<button
+			on:click={() => options.skip_back && episode_audio.skip(options.skip_back, 'backward')}
+			class="svpod--reset svpod--toggle-pause"
+			type="button"
+		>
+			<Skip value={options.skip_back} type="backward" />
+		</button>
+
+		<!-- toggle play -->
+		{#if is_loaded}
+			<button
+				on:click={() => is_loaded && episode_audio.play('toggle')}
+				class="svpod--reset svpod--toggle-pause"
+				type="button"
+			>
+				<A11yIcon icon={is_playing ? Pause : Play} label={is_playing ? 'Pause' : 'Play'} />
+			</button>
+		{:else}
+			<div class="svpod--reset svpod--toggle-pause">
+				<A11yIcon icon={Spinner} label="Waiting for audio..." />
+			</div>
+		{/if}
+
+		<button
+			on:click={() =>
+				options.skip_forward && episode_audio.skip(options.skip_forward, 'forward')}
+			class="svpod--reset svpod--toggle-pause"
+			type="button"
+		>
+			<Skip value={options.skip_forward} type="forward" />
+		</button>
+	</div>
+
+	<div class="svpod--artwork svpod--row--artwork">
+		<span class="svpod--aspect--square" />
+		<slot>
+			<div class="svpod--artwork--placeholder">
+				<span><SpeakerWave style="width:1em; height: 1em;" /></span>
+			</div>
+		</slot>
+	</div>
+
+	<div class="svpod--timeline svpod--row--timeline">
+		<HeadlessTimeline />
+	</div>
+
+	{#if options.timestamps || options.playback_rate}
+		<div class="svpod--container--row svpod--row--timestamps">
+			{#if options.timestamps}
+				<div class="svpod--timestamp">
+					<Timestamp
+						value={$episode_progress?.current_time || 0}
+						force_hours={timestamp_hours}
+					/>
+				</div>
+
+				<div style="flex-grow: 1" />
+
+				<div class="svpod--timestamp">
+					<Timestamp value={$episode_audio?.duration || 0} />
+				</div>
+			{/if}
+
+			{#if options.playback_rate}
+				<select
+					class="svpod--playback-rate"
+					value={$user_preferences.playback_rate}
+					on:change={(e) => {
+						const value = parseFloat(e.currentTarget.value);
+						user_preferences.set.playback_rate(value);
+					}}
+				>
+					{#each playback_rate_values as value}
+						<option {value}>
+							{#if Number.isInteger(value)}
+								{value}.0
+							{:else}
+								{value}
+							{/if}
+						</option>
+					{/each}
+				</select>
+			{/if}
+		</div>
+	{/if}
+</div>
+
 <style>
 	.svpod--container {
 		--fg: var(--svpod--content--base);
@@ -227,92 +320,3 @@
 		padding-bottom: 100%;
 	}
 </style>
-
-<div
-	class={clsx('svpod--container svpod--reset', ClassName)}
-	data-loaded={is_loaded ? 'true' : 'false'}
-	{...rest}
->
-	<div class="svpod--container--row svpod--row--controls">
-		<button
-			on:click={() => options.skip_back && episode_audio.skip(options.skip_back, 'backward')}
-			class="svpod--reset svpod--toggle-pause"
-			type="button"
-		>
-			<Skip value={options.skip_back} type="backward" />
-		</button>
-
-		<!-- toggle play -->
-		{#if is_loaded}
-			<button
-				on:click={() => is_loaded && episode_audio.play('toggle')}
-				class="svpod--reset svpod--toggle-pause"
-				type="button"
-			>
-				<A11yIcon icon={is_playing ? Pause : Play} label={is_playing ? 'Pause' : 'Play'} />
-			</button>
-		{:else}
-			<div class="svpod--reset svpod--toggle-pause">
-				<A11yIcon icon={Spinner} label="Waiting for audio..." />
-			</div>
-		{/if}
-
-		<button
-			on:click={() => options.skip_forward && episode_audio.skip(options.skip_forward, 'forward')}
-			class="svpod--reset svpod--toggle-pause"
-			type="button"
-		>
-			<Skip value={options.skip_forward} type="forward" />
-		</button>
-	</div>
-
-	<div class="svpod--artwork svpod--row--artwork">
-		<span class="svpod--aspect--square" />
-		<slot>
-			<div class="svpod--artwork--placeholder">
-				<span><SpeakerWave style="width:1em; height: 1em;" /></span>
-			</div>
-		</slot>
-	</div>
-
-	<div class="svpod--timeline svpod--row--timeline">
-		<HeadlessTimeline />
-	</div>
-
-	{#if options.timestamps || options.playback_rate}
-		<div class="svpod--container--row svpod--row--timestamps">
-			{#if options.timestamps}
-				<div class="svpod--timestamp">
-					<Timestamp value={$episode_progress?.current_time || 0} force_hours={timestamp_hours} />
-				</div>
-
-				<div style="flex-grow: 1" />
-
-				<div class="svpod--timestamp">
-					<Timestamp value={$episode_audio?.duration || 0} />
-				</div>
-			{/if}
-
-			{#if options.playback_rate}
-				<select
-					class="svpod--playback-rate"
-					value={$user_preferences.playback_rate}
-					on:change={(e) => {
-						const value = parseFloat(e.currentTarget.value);
-						user_preferences.set.playback_rate(value);
-					}}
-				>
-					{#each playback_rate_values as value}
-						<option {value}>
-							{#if Number.isInteger(value)}
-								{value}.0
-							{:else}
-								{value}
-							{/if}
-						</option>
-					{/each}
-				</select>
-			{/if}
-		</div>
-	{/if}
-</div>

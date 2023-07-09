@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import { Section } from '$content/components';
-	// import Docs from '$content/docs.md';
-	import { episodes } from '$content/episodes';
+	import { Section } from '$src/content/components';
+	// import Docs from '$src/content/docs.md';
+	import { episodes } from '$src/content/episodes';
 	import { onMount } from 'svelte';
 	import { episode_audio, PlayerWidget } from 'svelte-podcast';
 	import type { PageServerData } from './$types';
@@ -54,15 +54,16 @@
 						</span>
 					</h1>
 					<p class="mt-6 text-xl leading-8 text-mono-600">
-						A suite of tools and components to build your own podcast players, and work with RSS
-						podcast data in SvelteKit.
+						A suite of tools and components to build your own podcast players, and work with
+						RSS podcast data in SvelteKit.
 						<span class="mt-3 block text-base leading-none text-primary-800">
 							<span
 								class="inline-block rounded-full bg-primary-50 px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-primary-600"
 							>
 								Coming Soon<span class="sr-only">:</span>
 							</span>
-							<span class="tracking-wide">SSR utilities for consuming RSS podcast feeds</span>
+							<span class="tracking-wide">SSR utilities for consuming RSS podcast feeds</span
+							>
 						</span>
 					</p>
 					<div class="mt-10 flex items-center justify-center gap-x-3">

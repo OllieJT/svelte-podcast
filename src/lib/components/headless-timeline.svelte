@@ -19,6 +19,22 @@
 	}
 </script>
 
+<input
+	class={$$props.class}
+	style="display:block; width:100%;"
+	type="range"
+	data-paused={$episode_audio?.is_paused ? 'true' : 'false'}
+	min={0}
+	{step}
+	max={$episode_audio?.duration || step}
+	value={$episode_progress.current_time}
+	on:change={(e) => episode_audio.seek(e.currentTarget.valueAsNumber)}
+	on:touchstart={() => handle_drag_start('touchstart')}
+	on:mousedown={() => handle_drag_start('mousedown')}
+	on:touchend={() => handle_drag_end('touchend')}
+	on:mouseup={() => handle_drag_end('mouseup')}
+/>
+
 <style>
 	input[type='range'] {
 		--track--shape--height: calc(var(--svpod--timeline-track--shape--height));
@@ -127,19 +143,3 @@
 		background: var(--svpod--timeline-track--bg);
 	}
 </style>
-
-<input
-	class={$$props.class}
-	style="display:block; width:100%;"
-	type="range"
-	data-paused={$episode_audio?.is_paused ? 'true' : 'false'}
-	min={0}
-	{step}
-	max={$episode_audio?.duration || step}
-	value={$episode_progress.current_time}
-	on:change={(e) => episode_audio.seek(e.currentTarget.valueAsNumber)}
-	on:touchstart={() => handle_drag_start('touchstart')}
-	on:mousedown={() => handle_drag_start('mousedown')}
-	on:touchend={() => handle_drag_end('touchend')}
-	on:mouseup={() => handle_drag_end('mouseup')}
-/>

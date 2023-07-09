@@ -1,42 +1,87 @@
 name: 'Publish to NPM'
 on:
-  push:
-    branches:
-      - 'main'
+   push:
+      branches:
+         - 'main'
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  release:
-    # prevents this action from running on forks
-    if: github.repository == 'OllieJT/svelte-podcast'
-    permissions:
-      contents: write # to create release (changesets/action)
-      pull-requests: write # to create pull request (changesets/action)
-    name: Release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-        with:
-          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
-          fetch-depth: 0
-      - uses: pnpm/action-setup@v2.2.4
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-          cache: pnpm
+   setup:
+      name: Setup Enviroment
+      timeout-minutes: 4
+      runs-on: ubuntu-latest
+      outputs:
+         cache_name: ${{ steps.cache.outputs.name }}
+      steps:
+         - name: Checkout code
+           uses: actions/checkout@v3
 
-      - run: pnpm install --frozen-lockfile
+         - name: Set Node to v18.13.0
+           uses: actions/setup-node@v3
+           with:
+              node-version: v18.13.0
 
-      - name: Create Release Pull Request or Publish to npm
-        id: changesets
-        uses: changesets/action@v1
-        with:
-          # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: pnpm release
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          UPDATE_TEMPLATE_SSH_KEY: ${{ secrets.UPDATE_TEMPLATE_SSH_KEY }}
+         - name: Get Node version
+           id: node
+           run: echo "version=$(node -v)" >> $GITHUB_OUTPUT
+           #run: echo "::set-output name=version::$(node --v)"
+
+         - name: Get Cache Name
+           id: cache
+           run: echo "name=${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}" >> $GITHUB_OUTPUT
+
+         - name: Get node_modules cache
+           uses: actions/cache@v3
+           id: node_modules
+           with:
+              path: |
+                 **/node_modules
+                 **/.svelte-kit
+
+              key: ${{ steps.cache.outputs.name }}
+
+         - name: Install dependencies
+           run: yarn install  --frozen-lockfile
+
+         - name: Sync generated typings
+           run: yarn run sync
+   release:
+      if: github.repository == 'OllieJT/svelte-podcast'
+      name: Release
+      needs: setup
+      timeout-minutes: 5
+      runs-on: ubuntu-latest
+      # prevents this action from running on forks
+      permissions:
+         contents: write # to create release (changesets/action)
+         pull-requests: write # to create pull request (changesets/action)
+      steps:
+         - name: Checkout code
+           uses: actions/checkout@v3
+           with:
+              # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+              fetch-depth: 0
+
+         - name: Get node_modules cache
+           uses: actions/cache/restore@v3
+           id: cache
+           with:
+              path: |
+                 **/node_modules
+                 **/.svelte-kit
+              key: ${{ needs.setup.outputs.cache_name }}
+
+         - name: Install dependencies
+           run: yarn install  --frozen-lockfile
+
+         - name: Create Release Pull Request or Publish to npm
+           id: changesets
+           uses: changesets/action@v1
+           with:
+              # This expects you to have a script called release which does a build for your packages and calls changeset publish
+              publish: yarn release
+           env:
+              GITHUB_TOKEN: ${{ secrets.TOKEN }}
+              NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+              UPDATE_TEMPLATE_SSH_KEY: ${{ secrets.UPDATE_TEMPLATE_SSH_KEY }}
