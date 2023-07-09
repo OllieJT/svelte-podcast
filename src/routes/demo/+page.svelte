@@ -1,4 +1,7 @@
 <script lang="ts">
+	import PreviewComponent from '$src/components/preview-component.svelte';
+	import PreviewDataCode from '$src/components/preview-data-code.svelte';
+	import PreviewData from '$src/components/preview-data.svelte';
 	import { Section } from '$src/content/components';
 	import {
 		episode_audio,
@@ -8,9 +11,6 @@
 		user_preferences,
 		user_progress,
 	} from 'svelte-podcast';
-	import PreviewComponent from './preview-component.svelte';
-	import PreviewDataCode from './preview-data-code.svelte';
-	import PreviewData from './preview-data.svelte';
 
 	const sources = {
 		syntax: {
