@@ -62,7 +62,11 @@
 			</div>
 			<div>
 				<label for="pw_playback_rate">playback_rate</label>
-				<input id="pw_playback_rate" type="checkbox" bind:checked={player_widget.playback_rate} />
+				<input
+					id="pw_playback_rate"
+					type="checkbox"
+					bind:checked={player_widget.playback_rate}
+				/>
 			</div>
 			<div>
 				<label for="pw_duration">duration</label>
@@ -87,7 +91,11 @@
 		<svelte:fragment slot="options">
 			<div>
 				<label for="pw_playback_rate">playback_rate</label>
-				<input id="pw_playback_rate" type="checkbox" bind:checked={player_stack.playback_rate} />
+				<input
+					id="pw_playback_rate"
+					type="checkbox"
+					bind:checked={player_stack.playback_rate}
+				/>
 			</div>
 			<div>
 				<label for="pw_timestamps">timestamps</label>

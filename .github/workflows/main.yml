@@ -1,32 +1,32 @@
 name: 'CI'
 on:
-  push:
-    branches:
-      - main
-  pull_request:
+   push:
+      branches:
+         - main
+   pull_request:
 
 env:
-  # we call `pnpm playwright install` instead
-  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+   # we call `pnpm playwright install` instead
+   PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
 
 # cancel in-progress runs on new commits to same PR (gitub.event.number)
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
-  cancel-in-progress: true
+   group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
+   cancel-in-progress: true
 
 permissions:
-  contents: read # to fetch code (actions/checkout)
+   contents: read # to fetch code (actions/checkout)
 
 jobs:
-  Lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2.2.4
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16.x'
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run lint
-      - run: pnpm run check
+   Lint:
+      runs-on: ubuntu-latest
+      steps:
+         - uses: actions/checkout@v3
+         - uses: pnpm/action-setup@v2.2.4
+         - uses: actions/setup-node@v3
+           with:
+              node-version: '16.x'
+              cache: pnpm
+         - run: pnpm install --frozen-lockfile
+         - run: pnpm run lint
+         - run: pnpm run check
