@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Section } from '$content/components';
+	import { Section } from '$src/content/components';
 	import {
 		episode_audio,
 		episode_progress,

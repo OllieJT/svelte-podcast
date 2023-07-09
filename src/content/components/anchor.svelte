@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { topics } from '$content/utility/anchor-registry';
+	import { topics } from '$src/content/utility/anchor-registry';
 	import { Hashtag } from '@inqling/svelte-icons/heroicon-24-outline';
 
 	export let value: string;

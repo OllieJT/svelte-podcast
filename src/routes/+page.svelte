@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import { Section } from '$content/components';
-	// import Docs from '$content/docs.md';
-	import { episodes } from '$content/episodes';
+	import { Section } from '$src/content/components';
+	// import Docs from '$src/content/docs.md';
+	import { episodes } from '$src/content/episodes';
 	import { onMount } from 'svelte';
 	import { episode_audio, PlayerWidget } from 'svelte-podcast';
 	import type { PageServerData } from './$types';
