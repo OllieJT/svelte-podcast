@@ -18,7 +18,7 @@
 			<dt class="inline font-semibold text-mono-900">
 				<svelte:component
 					this={feature.icon}
-					class="absolute top-1 left-1 h-5 w-5 text-primary-600"
+					class="absolute left-1 top-1 h-5 w-5 text-primary-600"
 				/>
 
 				{feature.title}
