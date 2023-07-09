@@ -1,8 +1,10 @@
 // See https://kit.svelte.dev/docs/types#app
 
-declare module './lib/types' {
-	interface EpisodeDetails {}
-}
+/*
+	declare module './lib/types' {
+		interface EpisodeDetails {}
+	}
+*/
 
 declare global {
 	namespace App {

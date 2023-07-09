@@ -16,7 +16,7 @@ function add(value: Topic) {
 
 function slugify(value: string) {
 	// replace all apaces with dashes
-	let slug = value
+	const slug = value
 		.replace(/\s+/g, '-')
 		.toLowerCase()
 		.trim()

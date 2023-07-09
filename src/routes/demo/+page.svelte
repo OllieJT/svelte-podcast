@@ -25,8 +25,8 @@
 		},
 	} as const;
 
-	let current_time = 0;
-	$: current_time = $episode_progress.current_time;
+	// let current_time = 0;
+	// $: current_time = $episode_progress.current_time;
 
 	$: console.log('details :: ', $episode_audio?.details);
 
