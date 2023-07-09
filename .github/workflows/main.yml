@@ -5,10 +5,6 @@ on:
          - main
    pull_request:
 
-env:
-   # we call `pnpm playwright install` instead
-   PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
-
 # cancel in-progress runs on new commits to same PR (gitub.event.number)
 concurrency:
    group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
@@ -18,15 +14,116 @@ permissions:
    contents: read # to fetch code (actions/checkout)
 
 jobs:
-   Lint:
+   setup:
+      name: Setup Enviroment
+      timeout-minutes: 4
+      runs-on: ubuntu-latest
+      outputs:
+         cache_name: ${{ steps.cache.outputs.name }}
+      steps:
+         - name: Checkout code
+           uses: actions/checkout@v3
+
+         - name: Set Node to v18.13.0
+           uses: actions/setup-node@v3
+           with:
+              node-version: v18.13.0
+
+         - name: Get Node version
+           id: node
+           run: echo "version=$(node -v)" >> $GITHUB_OUTPUT
+           #run: echo "::set-output name=version::$(node --v)"
+
+         - name: Get Cache Name
+           id: cache
+           run: echo "name=${{ runner.os }}-node_modules-${{ hashFiles('**/yarn.lock') }}-${{ steps.node.outputs.version }}" >> $GITHUB_OUTPUT
+
+         - name: Get node_modules cache
+           uses: actions/cache@v3
+           id: node_modules
+           with:
+              path: |
+                 **/node_modules
+                 **/.svelte-kit
+
+              key: ${{ steps.cache.outputs.name }}
+
+         - name: Install dependencies
+           run: yarn install  --frozen-lockfile
+
+         - name: Sync generated typings
+           run: yarn run sync
+
+   linting:
+      name: Linting Checks
+      needs: setup
+      timeout-minutes: 4
       runs-on: ubuntu-latest
       steps:
-         - uses: actions/checkout@v3
-         - uses: pnpm/action-setup@v2.2.4
-         - uses: actions/setup-node@v3
+         - name: Checkout code
+           uses: actions/checkout@v3
+
+         - name: Get node_modules cache
+           uses: actions/cache/restore@v3
+           id: cache
            with:
-              node-version: '16.x'
-              cache: pnpm
-         - run: pnpm install --frozen-lockfile
-         - run: pnpm run lint
-         - run: pnpm run check
+              path: |
+                 **/node_modules
+                 **/.svelte-kit
+              key: ${{ needs.setup.outputs.cache_name }}
+
+         - name: Install dependencies
+           run: yarn install  --frozen-lockfile
+
+         - name: Lint prettier
+           run: yarn run lint:prettier
+
+         - name: Lint eslint
+           run: yarn run lint:eslint
+
+   type_check:
+      name: Typescript Checks
+      needs: setup
+      timeout-minutes: 4
+      runs-on: ubuntu-latest
+      steps:
+         - name: Checkout code
+           uses: actions/checkout@v3
+
+         - name: Get node_modules cache
+           uses: actions/cache/restore@v3
+           id: cache
+           with:
+              path: |
+                 **/node_modules
+                 **/.svelte-kit
+              key: ${{ needs.setup.outputs.cache_name }}
+
+         - name: Install dependencies
+           run: yarn install  --frozen-lockfile
+
+         - name: Check for type errors
+           run: yarn run ts
+#   svelte_check:
+#      name: Svelte Checks
+#      needs: setup
+#      timeout-minutes: 4
+#      runs-on: ubuntu-latest
+#      steps:
+#         - name: Checkout code
+#           uses: actions/checkout@v3
+#
+#         - name: Get node_modules cache
+#           uses: actions/cache/restore@v3
+#           id: cache
+#           with:
+#               path: |
+#                  **/node_modules
+#                  **/.svelte-kit
+#               key: ${{ needs.setup.outputs.cache_name }}
+#
+#         - name: Install dependencies
+#             run: yarn install  --frozen-lockfile
+#
+#         - name: Check for best practices
+#           run: yarn run check
