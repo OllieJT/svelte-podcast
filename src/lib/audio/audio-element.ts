@@ -14,7 +14,7 @@ export const audio_element = readable<HTMLAudioElement | null>(null, (set) => {
 		el.id = ID;
 		el.setAttribute('preload', 'metadata');
 		el.muted = false;
-		el.autoplay = true;
+		el.autoplay = false;
 		el.controls = false;
 
 		const preferences = get(user_preferences);
