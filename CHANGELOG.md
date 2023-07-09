@@ -1,5 +1,19 @@
 # svelte-podcast
 
+## 0.6.0
+
+### Minor Changes
+
+-  1a95ddd: Updates dependencies
+-  9232f4d: Improves theming with css variables
+   Improves developer logs
+   Fixes various package export issues
+   Adds player components:
+
+   -  Player: `<PlayerStack />`
+   -  Player: `<PlayerWidget />`
+   -  Utility: `<HeadlessTimeline />`
+
 ## 0.5.0
 
 ### Minor Changes
