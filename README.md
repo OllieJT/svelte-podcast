@@ -8,27 +8,27 @@ A collection of tools for building podcast websites and tools with Svelte or Sve
 
 ## What's inside?
 
-- 🔊 Load and play audio files via URL or local files
-- 🔃 Navigate via client-side routing while audio continues to play
-- 🎛️ Simpler control over audio playback:
-  - Seek to a specific time
-  - skip forward ﹢ backward
-  - play ﹢ pause
-  - mute ﹢ unmute
-- 🛟 Save and load a users progress for each episode in localStorage
-- 💾 Save and load a users preferences (like playback speed) in localStorage
-  - ﹢ volume
-  - ﹢ playback speed
-- 🖼️ Inject episode metadata into the audio store for ea
+-  🔊 Load and play audio files via URL or local files
+-  🔃 Navigate via client-side routing while audio continues to play
+-  🎛️ Simpler control over audio playback:
+   -  Seek to a specific time
+   -  skip forward ﹢ backward
+   -  play ﹢ pause
+   -  mute ﹢ unmute
+-  🛟 Save and load a users progress for each episode in localStorage
+-  💾 Save and load a users preferences (like playback speed) in localStorage
+   -  ﹢ volume
+   -  ﹢ playback speed
+-  🖼️ Inject episode metadata into the audio store for ea
 
 **Roadmap**
 In no particular order, here are some of the things I'm confident will be added to this library:
 
-- ☐ Podcast player component utilities
-- ☐ Pre-built player component
-- ☐ RSS Feed parsing
-- ☐ Looping segments of an episode
-- [And more ideas being discussed](https://github.com/OllieJT/svelte-podcast/labels/feature)
+-  ☐ Podcast player component utilities
+-  ☐ Pre-built player component
+-  ☐ RSS Feed parsing
+-  ☐ Looping segments of an episode
+-  [And more ideas being discussed](https://github.com/OllieJT/svelte-podcast/labels/feature)
 
 ## Docs
 

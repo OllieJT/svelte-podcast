@@ -7,6 +7,6 @@ Improves developer logs
 Fixes various package export issues
 Adds player components:
 
-- Player: `<PlayerStack />`
-- Player: `<PlayerWidget />`
-- Utility: `<HeadlessTimeline />`
+-  Player: `<PlayerStack />`
+-  Player: `<PlayerWidget />`
+-  Utility: `<HeadlessTimeline />`

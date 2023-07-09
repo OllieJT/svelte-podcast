@@ -14,3 +14,7 @@ package-lock.json
 yarn.lock
 
 **/components/_*
+
+*.config.ts
+*.config.js
+*.config.cjs

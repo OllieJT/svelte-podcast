@@ -14,7 +14,7 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			'svelte-podcast': 'src/lib',
-			$content: 'src/content/',
+			$src: 'src',
 		},
 
 		paths: {

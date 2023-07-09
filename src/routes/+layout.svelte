@@ -17,7 +17,7 @@
 	class="sticky top-0 z-50 border-b border-mono-100 bg-white text-lg leading-none lg:overflow-y-visible"
 	id="navigation"
 >
-	<div class="mx-auto max-w-prose px-4 py-1 sm:py-2 sm:px-6 lg:px-8">
+	<div class="mx-auto max-w-prose px-4 py-1 sm:px-6 sm:py-2 lg:px-8">
 		<div class="relative grid grid-cols-12 gap-1 text-base md:gap-3">
 			<div class="col-span-2 flex items-center justify-start leading-none">
 				<a href="{base}/#navigation" class="flex-shrink-0 py-1">
