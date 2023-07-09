@@ -2,7 +2,7 @@ import clamp from 'just-clamp';
 import { derived, get, type Readable } from 'svelte/store';
 import type { EpisodeAttributes, EpisodeDetails } from '../types';
 import { user_preferences, user_progress } from '../user';
-import { warn } from '../utility/package/log';
+import { announce } from '../utility';
 import { audio_element } from './audio-element';
 import { episode_details } from './episode-details';
 
@@ -45,7 +45,8 @@ const episode_attributes = derived([audio_element, episode_details], ([$audio, $
 
 type HandleType = 'toggle' | 'set';
 
-const no_element = (action: string) => warn(`could not ${action} :: no audio element exists yet`);
+const no_element = (action: string) =>
+	announce.warn(`could not ${action} :: no audio element exists yet`);
 
 export const episode_audio = {
 	subscribe: episode_attributes.subscribe,

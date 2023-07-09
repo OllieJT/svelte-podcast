@@ -1,6 +1,6 @@
 import { derived, type Readable } from 'svelte/store';
 import type { EpisodeProgress } from '../types';
-import { secondsToTimestamp } from '../utility';
+import { seconds_to_timestamp } from '../utility';
 import { audio_element } from './audio-element';
 
 const default_episode_progress = {
@@ -18,7 +18,7 @@ export const episode_progress = derived(audio_element, ($audio, set) => {
 		if (!$audio) return;
 		set({
 			current_time: $audio.currentTime,
-			timestamp: secondsToTimestamp($audio.currentTime),
+			timestamp: seconds_to_timestamp($audio.currentTime),
 			has_ended: $audio.ended,
 		});
 	}

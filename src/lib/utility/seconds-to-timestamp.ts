@@ -1,18 +1,31 @@
-function section(t: number) {
-	if (t < 10) return `0${t}`;
-	return t;
+/**
+ * Returns a string timestamp in the format of "hh:mm:ss" from a given number of seconds.
+ * @param seconds - The number of seconds to convert to a timestamp.
+ * @param force_hours - Whether to always include hours in the timestamp, even if it's 0.
+ * @returns A string timestamp in the format of "hh:mm:ss".
+ */
+export function seconds_to_timestamp(seconds: number, force_hours = false) {
+	const hours = Math.floor(seconds / 3600);
+	const hours_remainder = seconds % 3600;
+
+	const minutes = Math.floor(hours_remainder / 60);
+	const minutes_remainder = hours_remainder % 60;
+
+	const secs = Math.floor(minutes_remainder);
+
+	const hours_str = force_hours || hours > 0 ? `${section(hours)}:` : '';
+	const minutes_str = minutes ? `${section(minutes)}:` : '00:';
+	const seconds_str = secs ? `${section(secs)}` : '00';
+
+	return `${hours_str}${minutes_str}${seconds_str}`;
 }
 
-export function secondsToTimestamp(seconds: number, force_hours = false) {
-	const hh = Math.floor(seconds / 3600);
-	const hh_remainder = seconds % 3600;
-	const mm = Math.floor(hh_remainder / 60);
-	const mm_remainder = hh_remainder % 60;
-	const ss = Math.floor(mm_remainder);
-
-	const hrs = force_hours || hh > 0 ? `${section(hh)}:` : '';
-	const mins = mm ? `${section(mm)}:` : '00:';
-	const secs = ss ? `${section(ss)}` : '00';
-
-	return `${hrs}${mins}${secs}`;
+/**
+ * Returns a string representation of a number with a leading 0 if it's less than 10.
+ * @param num - The number to format.
+ * @returns A string representation of the number with a leading 0 if it's less than 10.
+ */
+function section(num: number) {
+	if (num < 10) return `0${num}`;
+	return num.toString();
 }
