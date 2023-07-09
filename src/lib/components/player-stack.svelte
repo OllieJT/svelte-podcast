@@ -109,7 +109,7 @@
 					value={$user_preferences.playback_rate}
 					on:change={(e) => {
 						const value = parseFloat(e.currentTarget.value);
-						user_preferences.set.playback_rate(value);
+						user_preferences.set_playback_rate(value);
 					}}
 				>
 					{#each playback_rate_values as value}

@@ -1,2 +1,2 @@
-export * from './preferences';
-export * from './progress';
+export * from './user-preferences';
+export * from './user-progress';
