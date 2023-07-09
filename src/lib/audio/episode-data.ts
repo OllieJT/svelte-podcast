@@ -74,7 +74,7 @@ export const episode_audio = {
 		el.src = '';
 		episode_details.set(null);
 	},
-	play: (t?: HandleType) => {
+	play: (t: HandleType = 'set') => {
 		const el = get(audio_element);
 		if (!el) return no_element('play');
 
@@ -84,7 +84,7 @@ export const episode_audio = {
 			el.play();
 		}
 	},
-	pause: (t?: HandleType) => {
+	pause: (t: HandleType = 'set') => {
 		user_progress.save();
 		const el = get(audio_element);
 		if (!el) return no_element('pause');
@@ -95,7 +95,7 @@ export const episode_audio = {
 			el.pause();
 		}
 	},
-	mute: (t?: HandleType) => {
+	mute: (t: HandleType = 'set') => {
 		const el = get(audio_element);
 		if (!el) return no_element('mute');
 
@@ -105,7 +105,7 @@ export const episode_audio = {
 			el.muted = true;
 		}
 	},
-	unmute: (t?: HandleType) => {
+	unmute: (t: HandleType = 'set') => {
 		const el = get(audio_element);
 		if (!el) return no_element('unmute');
 

@@ -1,130 +1,108 @@
 <script lang="ts">
-	import {
-		episode_audio,
-		episode_progress,
-		PlayerStack,
-		PlayerWidget,
-		user_preferences,
-		user_progress,
-	} from 'svelte-podcast';
+	import { base } from '$app/paths';
+	import { Section } from '$content/components';
+	// import Docs from '$content/docs.md';
+	import { episodes } from '$content/episodes';
+	import { onMount } from 'svelte';
+	import { episode_audio, PlayerWidget } from 'svelte-podcast';
+	import type { PageServerData } from './$types';
 
-	const sources = {
-		syntax: {
-			src: `/example-syntax.mp3`,
-			title: `Supper Club × Rich Harris, Author of Svelte`,
-			artwork: `https://ssl-static.libsyn.com/p/assets/b/3/c/d/b3cdf28da11ad39fe5bbc093207a2619/Syntax_-_499.jpg`,
-		},
-		knomii: {
-			src: `/example-knomii.mp3`,
-			title: `Empowerment starts with letting go of control`,
-			artwork: `https://ssl-static.libsyn.com/p/assets/f/a/8/d/fa8d56d5226884335f2e77a3093c12a1/ep-6.png`,
-		},
-	} as const;
+	export let data: PageServerData;
 
-	let current_time = 0;
-	$: current_time = $episode_progress.current_time;
-
-	$: console.log('details :: ', $episode_audio?.details);
+	onMount(() => {
+		// load the episode on mount without any metadata
+		episode_audio.load(episodes.knomii.src, {
+			/* optional metadata */
+		});
+	});
 </script>
 
-<pre>{JSON.stringify(
-		{
-			$episode_audio,
-			$episode_progress,
-			$user_preferences,
-		},
-		null,
-		2,
-	)}</pre>
+<div class="relative isolate bg-white">
+	<svg
+		class="absolute inset-0 -z-10 h-full w-full stroke-mono-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+		aria-hidden="true"
+	>
+		<defs>
+			<pattern
+				id="0787a7c5-978c-4f66-83c7-11c213f99cb7"
+				width="200"
+				height="200"
+				x="50%"
+				y="-1"
+				patternUnits="userSpaceOnUse"
+			>
+				<path d="M.5 200V.5H200" fill="none" />
+			</pattern>
+		</defs>
+		<rect
+			width="100%"
+			height="100%"
+			stroke-width="0"
+			fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"
+		/>
+	</svg>
+	<main>
+		<div class="relative py-24 sm:py-32 lg:pb-40">
+			<div class="mx-auto max-w-7xl px-6 lg:px-8">
+				<div class="mx-auto max-w-2xl text-center">
+					<h1>
+						<span class="block text-xl font-medium text-primary-600">
+							svelte-podcast<span class="sr-only">: </span>
+						</span>
+						<span class="text-4xl font-bold tracking-tight text-mono-900 sm:text-6xl">
+							The fastest way to build a podcast site with Svelte.
+						</span>
+					</h1>
+					<p class="mt-6 text-xl leading-8 text-mono-600">
+						A suite of tools and components to build your own podcast players, and work with RSS
+						podcast data in SvelteKit.
+						<span class="mt-3 block text-base leading-none text-primary-800">
+							<span
+								class="inline-block rounded-full bg-primary-50 px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-primary-600"
+							>
+								Coming Soon<span class="sr-only">:</span>
+							</span>
+							<span class="tracking-wide">SSR utilities for consuming RSS podcast feeds</span>
+						</span>
+					</p>
+					<div class="mt-10 flex items-center justify-center gap-x-3">
+						<a
+							href="{base}/#get-started"
+							class="rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+						>
+							Get started
+						</a>
+						<a
+							href="{base}/demo"
+							class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-mono-600 hover:bg-primary-50 hover:text-primary-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+						>
+							Examples <span aria-hidden="true">→</span>
+						</a>
+					</div>
+				</div>
+				<div class="mt-16 flow-root sm:mt-24">
+					<div
+						class="-m-2 rounded-xl border border-mono-100 bg-white p-1 shadow-2xl shadow-mono-200 sm:p-2 lg:-m-4 lg:rounded-2xl lg:p-4"
+					>
+						<PlayerWidget
+							class="w-full border border-mono-100"
+							include={{
+								duration: true,
+								current_time: true,
+								playback_rate: true,
+								skip_back: 10,
+								skip_forward: 30,
+							}}
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</div>
 
-<h1>Demo</h1>
-<a href="/another-page">Another Page</a>
-<button type="button" on:click={user_progress.clear}>Clear progress for all episodes</button>
-<button type="button" on:click={user_preferences.clear}>Clear all preferences</button>
-
-<h5>Load Audio</h5>
-<button type="button" on:click={() => episode_audio.load(sources['syntax'].src, sources['syntax'])}
-	>Syntax</button
->
-<button type="button" on:click={() => episode_audio.load(sources['knomii'].src, sources['knomii'])}
-	>Knomii</button
->
-<button type="button" on:click={() => episode_audio.unload()}>None</button>
-
-<h5>Custom audio controls</h5>
-
-<h6>Play / Pause Actions</h6>
-
-<button type="button" on:click={() => episode_audio.play()}>Play</button>
-<button type="button" on:click={() => episode_audio.pause()}>Pause</button>
-<button type="button" on:click={() => episode_audio.pause('toggle')}>Toggle</button>
-
-<h6>Audio Actions</h6>
-
-<button type="button" on:click={() => episode_audio.mute()}>Mute</button>
-<button type="button" on:click={() => episode_audio.unmute()}>Unmute</button>
-<button type="button" on:click={() => episode_audio.mute('toggle')}>Toggle</button>
-
-<h6>Seeking</h6>
-
-<button type="button" on:click={() => episode_audio.seek(30)}>Go to 30s from start </button>
-<button type="button" on:click={() => episode_audio.seek(30, 'from-end')}>Go to 30s from end</button
->
-<button type="button" on:click={() => episode_audio.skip(10, 'forward')}>Skip 10s</button>
-<button type="button" on:click={() => episode_audio.skip(10, 'backward')}>Rewind 10s</button>
-
-<h6>Playback Rate</h6>
-
-{#each [0.5, 1, 2, 3] as rate}
-	<button type="button" on:click={() => user_preferences.set.playback_rate(rate)}>
-		{rate}x
-	</button>
-{/each}
-
-<hr />
-
-<!-- <PodcastPlayer
-	artwork={$episode_audio?.details?.artwork}
-	title={$episode_audio?.details?.title || 'Podcast Name'}
-/> -->
-
-<br />
-<PlayerWidget />
-<br />
-<br />
-<PlayerWidget include={{ playback_rate: true }} />
-<br />
-<br />
-<PlayerWidget include={{ skip_back: 10, skip_forward: 30 }} />
-<br />
-<br />
-<PlayerWidget
-	style="width: 100%;"
-	include={{
-		current_time: true,
-		playback_rate: true,
-		duration: true,
-		skip_back: 10,
-		skip_forward: 30,
-	}}
-/>
-
-<br />
-<br />
-<PlayerStack style="width:400px;" />
-<br />
-<br />
-<PlayerStack include={{ playback_rate: true }} />
-<br />
-<br />
-<PlayerStack include={{ skip_back: 10, skip_forward: 30, timestamps: true }} />
-<br />
-<br />
-<PlayerStack
-	include={{
-		playback_rate: true,
-		timestamps: true,
-		skip_back: 10,
-		skip_forward: 30,
-	}}
-/>
+<Section>
+	<div class="prose prose-lg prose-slate">
+		{@html data.html}
+	</div>
+</Section>
