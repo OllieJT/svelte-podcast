@@ -20,6 +20,7 @@ function slugify(value: string) {
 		.replace(/\s+/g, '-')
 		.toLowerCase()
 		.trim()
+		// eslint-disable-next-line no-control-regex
 		.replace(/[^\x00-\x7F]/g, '-')
 		.replace(/[^a-z0-9-]/g, '-')
 		.replace(/^-+/, '')
