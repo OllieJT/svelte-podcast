@@ -197,6 +197,7 @@ export const episode_audio = {
 
 	load: load_audio,
 	unload: unload_audio,
+
 	play: play_audio,
 	pause: pause_audio,
 	mute: mute_audio,

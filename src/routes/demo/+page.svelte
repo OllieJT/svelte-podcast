@@ -1,4 +1,6 @@
 <script lang="ts">
+	import PlayerStack from '$src/components/example-player/player-stack.svelte';
+	import PlayerWidget from '$src/components/example-player/player-widget.svelte';
 	import PreviewComponent from '$src/components/preview-component.svelte';
 	import PreviewDataCode from '$src/components/preview-data-code.svelte';
 	import PreviewData from '$src/components/preview-data.svelte';
@@ -6,8 +8,6 @@
 	import {
 		episode_audio,
 		episode_progress,
-		PlayerStack,
-		PlayerWidget,
 		user_preferences,
 		user_progress,
 	} from 'svelte-podcast';

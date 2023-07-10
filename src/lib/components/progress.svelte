@@ -19,18 +19,33 @@
 	}
 </script>
 
-<input
-	class={$$props.class}
-	style="display:block; width:100%;"
-	type="range"
-	data-paused={$episode_audio?.is_paused ? 'true' : 'false'}
-	min={0}
-	{step}
-	max={$episode_audio?.duration || step}
-	value={$episode_progress.current_time}
-	on:change={(e) => episode_audio.seek(e.currentTarget.valueAsNumber)}
-	on:touchstart={() => handle_drag_start('touchstart')}
-	on:mousedown={() => handle_drag_start('mousedown')}
-	on:touchend={() => handle_drag_end('touchend')}
-	on:mouseup={() => handle_drag_end('mouseup')}
-/>
+{#if $episode_audio && $episode_progress}
+	<input
+		class={$$restProps.class}
+		style="display:block; width:100%;"
+		type="range"
+		data-paused={$episode_audio.is_paused ? 'true' : 'false'}
+		min={0}
+		{step}
+		max={$episode_audio.duration || step}
+		value={$episode_progress.current_time}
+		on:change={(e) => episode_audio.seek(e.currentTarget.valueAsNumber)}
+		on:touchstart={() => handle_drag_start('touchstart')}
+		on:mousedown={() => handle_drag_start('mousedown')}
+		on:touchend={() => handle_drag_end('touchend')}
+		on:mouseup={() => handle_drag_end('mouseup')}
+	/>
+{:else}
+	<input
+		class={$$restProps.class}
+		style="display:block; width:100%;"
+		type="range"
+		data-paused={true}
+		min={0}
+		step={1}
+		max={1}
+		value={0}
+		disabled
+		readonly
+	/>
+{/if}

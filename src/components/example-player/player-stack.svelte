@@ -2,39 +2,24 @@
 	import { Pause, Play, SpeakerWave } from '@inqling/svelte-icons/heroicon-20-solid';
 	import { clsx } from 'clsx';
 	import { AudioPlayer, episode_progress, user_preferences } from 'svelte-podcast';
+	import type { EpisodeDetails } from 'svelte-podcast/audio/stores';
 	import { A11yIcon, Skip, Spinner, Timestamp } from './utility';
 
-	type WithElement = {
-		timestamps: boolean;
-		playback_rate: boolean;
-		skip_back: number;
-		skip_forward: number;
-	};
+	export let src: string | undefined;
+	export let metadata: EpisodeDetails = {};
 
-	const default_options = {
-		timestamps: false,
-		playback_rate: false,
-		skip_back: 10,
-		skip_forward: 10,
-	} satisfies WithElement;
+	export let hide_timestamps: boolean = false;
+	export let hide_playback_rate: boolean = false;
 
-	export let include: Partial<WithElement> = {};
-	$: options = { ...default_options, ...include };
+	export let skip_back: number = 30;
+	export let skip_forward: number = 10;
 
 	export let playback_rate_values: number[] = [1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4];
 
 	const { class: ClassName, ...rest } = $$restProps;
 </script>
 
-<AudioPlayer
-	let:AudioProgress
-	let:set_playback_rate
-	let:set_volume
-	let:skip_forward
-	let:skip_back
-	let:toggle_play
-	let:episode
->
+<AudioPlayer {src} {metadata} let:Player let:action let:episode>
 	<div
 		class={clsx('svpod--container svpod--reset', ClassName)}
 		data-loaded={episode.is_loaded ? 'true' : 'false'}
@@ -42,17 +27,17 @@
 	>
 		<div class="svpod--container--row svpod--row--controls">
 			<button
-				on:click={() => skip_back()}
+				on:click={() => action.skip_back(10)}
 				class="svpod--reset svpod--toggle-pause"
 				type="button"
 			>
-				<Skip value={options.skip_back} type="backward" />
+				<Skip value={skip_back} type="backward" />
 			</button>
 
 			<!-- toggle play -->
 			{#if episode.is_loaded}
 				<button
-					on:click={() => toggle_play()}
+					on:click={() => action.toggle()}
 					class="svpod--reset svpod--toggle-pause"
 					type="button"
 				>
@@ -68,11 +53,11 @@
 			{/if}
 
 			<button
-				on:click={() => skip_forward()}
+				on:click={() => action.skip_forward(10)}
 				class="svpod--reset svpod--toggle-pause"
 				type="button"
 			>
-				<Skip value={options.skip_forward} type="forward" />
+				<Skip value={skip_forward} type="forward" />
 			</button>
 		</div>
 
@@ -86,12 +71,12 @@
 		</div>
 
 		<div class="svpod--timeline svpod--row--timeline">
-			<AudioProgress />
+			<Player.AudioProgress />
 		</div>
 
-		{#if options.timestamps || options.playback_rate}
+		{#if !hide_timestamps || !hide_playback_rate}
 			<div class="svpod--container--row svpod--row--timestamps">
-				{#if options.timestamps}
+				{#if !hide_timestamps}
 					<div class="svpod--timestamp">
 						<Timestamp
 							value={$episode_progress?.current_time || 0}
@@ -106,7 +91,7 @@
 					</div>
 				{/if}
 
-				{#if options.playback_rate}
+				{#if !hide_playback_rate}
 					<select
 						class="svpod--playback-rate"
 						value={$user_preferences.playback_rate}
@@ -131,7 +116,7 @@
 	</div>
 </AudioPlayer>
 
-<style>
+<style lang="postcss">
 	.svpod--container {
 		--fg: var(--svpod--content--base);
 		--bg: var(--svpod--surface--darker);
