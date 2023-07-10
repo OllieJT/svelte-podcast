@@ -36,11 +36,13 @@
 		"dist"
 	],
 	"peerDependencies": {
-		"svelte": ">=3.00.0"
+		"@sveltejs/kit": ">=1.0.0",
+		"svelte": ">=3.0.0"
 	},
 	"dependencies": {
 		"@inqling/svelte-icons": "^3.3.2",
 		"clsx": "^1.2.1",
+		"esm-env": "^1.0.0",
 		"just-clamp": "^4.2.0",
 		"svelte-local-storage-store": "^0.5.0"
 	},

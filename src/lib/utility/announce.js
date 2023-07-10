@@ -1,4 +1,4 @@
-import { dev } from '$app/environment';
+import { DEV } from 'esm-env';
 
 /**
  * Object containing logger functions.
@@ -33,7 +33,7 @@ function log(type, ...content) {
 	const logger = use_logger[type];
 
 	// If type is info and not in dev mode, return early
-	if (type === 'info' && !dev) return;
+	if (type === 'info' && !DEV) return;
 
 	// Log message
 	logger(

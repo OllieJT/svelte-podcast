@@ -3,8 +3,7 @@
  * @property {number} playback_rate - The playback rate of the audio element.
  * @property {number} volume - The volume of the audio element.
  */
-
-import { browser } from '$app/environment';
+import { BROWSER } from 'esm-env';
 import { onMount } from 'svelte';
 import { get, readable } from 'svelte/store';
 import { user_preferences } from '../../user';
@@ -15,7 +14,7 @@ import { user_preferences } from '../../user';
  * @exports audio_element
  */
 export const audio_element = readable(undefined, (set) => {
-	if (!browser) return;
+	if (!BROWSER) return;
 	const ID = 'svpod--generated-audio-element';
 
 	onMount(() => {
