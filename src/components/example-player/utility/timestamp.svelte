@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { seconds_to_timestamp } from '../../utility';
+	import { seconds_to_timestamp } from 'svelte-podcast';
 
 	export let value: number;
 	export let force_hours = false;

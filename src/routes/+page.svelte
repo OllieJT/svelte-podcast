@@ -2,9 +2,10 @@
 	import { base } from '$app/paths';
 	import { Section } from '$src/content/components';
 	// import Docs from '$src/content/docs.md';
+	import PlayerWidget from '$src/components/example-player/player-widget.svelte';
 	import { episodes } from '$src/content/episodes';
 	import { onMount } from 'svelte';
-	import { episode_audio, PlayerWidget } from 'svelte-podcast';
+	import { episode_audio } from 'svelte-podcast';
 	import type { PageServerData } from './$types';
 
 	export let data: PageServerData;

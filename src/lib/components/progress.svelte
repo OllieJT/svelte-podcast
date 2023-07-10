@@ -1,0 +1,36 @@
+<script lang="ts">
+	import { episode_audio, episode_progress } from '../audio';
+	import { announce } from '../utility';
+
+	export let step = 10;
+
+	let was_paused = true;
+
+	function handle_drag_start(t: string) {
+		announce.info('drag_start :: ', t);
+		was_paused = $episode_audio?.is_paused || true;
+		episode_audio.pause();
+	}
+
+	function handle_drag_end(t: string) {
+		announce.info('drag_end :: ', t);
+		if (was_paused) return;
+		else episode_audio.play();
+	}
+</script>
+
+<input
+	class={$$props.class}
+	style="display:block; width:100%;"
+	type="range"
+	data-paused={$episode_audio?.is_paused ? 'true' : 'false'}
+	min={0}
+	{step}
+	max={$episode_audio?.duration || step}
+	value={$episode_progress.current_time}
+	on:change={(e) => episode_audio.seek(e.currentTarget.valueAsNumber)}
+	on:touchstart={() => handle_drag_start('touchstart')}
+	on:mousedown={() => handle_drag_start('mousedown')}
+	on:touchend={() => handle_drag_end('touchend')}
+	on:mouseup={() => handle_drag_end('mouseup')}
+/>
