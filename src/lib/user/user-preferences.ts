@@ -1,6 +1,10 @@
 import clamp from 'just-clamp';
 import { persisted } from 'svelte-local-storage-store';
-import type { UserPreferences } from '../types';
+
+export interface UserPreferences {
+	playback_rate: number;
+	volume: number;
+}
 
 const default_user_preferences = { playback_rate: 1, volume: 1 };
 const user_preferences_store = persisted<UserPreferences>(

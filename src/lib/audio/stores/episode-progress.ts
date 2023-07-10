@@ -1,7 +1,12 @@
 import { derived, type Readable } from 'svelte/store';
-import type { EpisodeProgress } from '../types';
-import { seconds_to_timestamp } from '../utility';
+import { seconds_to_timestamp } from '../../utility';
 import { audio_element } from './audio-element';
+
+export type EpisodeProgress = {
+	current_time: number;
+	timestamp: string;
+	has_ended: boolean;
+};
 
 const default_episode_progress = {
 	current_time: 0,
@@ -9,11 +14,17 @@ const default_episode_progress = {
 	has_ended: false,
 } satisfies EpisodeProgress;
 
-type ProgressStore = Readable<EpisodeProgress>;
-
+/**
+ * Episode progress store.
+ *
+ * @returns {Readable<EpisodeProgress>} A Svelte readable store that contains the current progress of the audio episode.
+ */
 export const episode_progress = derived(audio_element, ($audio, set) => {
 	if (!$audio) return set(default_episode_progress);
 
+	/**
+	 * Set episode progress value.
+	 */
 	function set_value() {
 		if (!$audio) return;
 		set({
@@ -24,5 +35,9 @@ export const episode_progress = derived(audio_element, ($audio, set) => {
 	}
 
 	$audio.addEventListener('timeupdate', () => set_value());
+
+	/**
+	 * Remove event listener.
+	 */
 	return () => $audio.removeEventListener('timeupdate', () => set_value());
-}) satisfies ProgressStore;
+}) satisfies Readable<EpisodeProgress>;

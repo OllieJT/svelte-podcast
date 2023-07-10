@@ -3,7 +3,7 @@
 	import { get } from 'svelte/store';
 	import { user_preferences } from '../user';
 	import { announce } from '../utility';
-	import { audio_element } from './audio-element';
+	import { audio_element } from './stores/audio-element';
 
 	$: $audio_element;
 	/* onMount(() => {
@@ -15,7 +15,9 @@
 	onMount(() => {
 		return user_preferences.subscribe((prefs) => {
 			const el = get(audio_element);
+
 			if (!el) return announce.warn('no audio element found');
+
 			announce.info('setting preferences :: ', prefs);
 			el.volume = prefs.volume;
 			el.playbackRate = prefs.playback_rate;
@@ -23,6 +25,7 @@
 	});
 </script>
 
+<!-- TODO: move styles to headless -->
 <svelte:head>
 	<style>
 		:root {
