@@ -5,19 +5,24 @@
 	import { episodes } from '$src/content/episodes';
 	import { Github } from '@inqling/svelte-icons/simple-icons';
 	import clsx from 'clsx';
-	import 'highlight.js/styles/github-dark.css';
+	import github from 'svelte-highlight/styles/github';
 	import { AudioContext } from 'svelte-podcast';
 	import '../app.postcss';
 
 	const page_links = Object.freeze([
 		{ label: 'About', href: '/' },
-		{ label: 'Docs', href: '/#docs' },
+		{ label: 'Setup', href: '/#setup' },
+		{ label: 'API', href: '/#api' },
 		{ label: 'Examples', href: '/#examples' },
 	]);
 
 	/** @type { string | undefined} */
 	let audio_src = episodes.knomii.src;
 </script>
+
+<svelte:head>
+	{@html github}
+</svelte:head>
 
 <AudioContext />
 
@@ -70,7 +75,7 @@
 	</div>
 </nav>
 
-<div class="relative isolate bg-white">
+<header class="relative isolate bg-white">
 	<svg
 		class="absolute inset-0 -z-10 h-full w-full stroke-mono-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
 		aria-hidden="true"
@@ -121,13 +126,13 @@
 					</p>
 					<div class="mt-10 flex items-center justify-center gap-x-3">
 						<a
-							href="{base}/#get-started"
+							href="{base}/#docs"
 							class="rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
 						>
 							Get started
 						</a>
 						<a
-							href="{base}/demo"
+							href="{base}/#examples"
 							class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-mono-600 hover:bg-primary-50 hover:text-primary-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
 						>
 							Examples <span aria-hidden="true">→</span>
@@ -154,8 +159,10 @@
 			</div>
 		</div>
 	</div>
-</div>
+</header>
 
 <main>
 	<slot />
 </main>
+
+<footer />
