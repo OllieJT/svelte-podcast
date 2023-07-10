@@ -1,13 +1,16 @@
-<script lang="ts">
+<script>
 	import { onMount } from 'svelte';
 	import { AudioProgress } from '.';
 	import { episode_audio, episode_progress } from '../audio';
-	import type { EpisodeDetails } from '../audio/stores';
 	import { user_preferences } from '../user';
 	import { seconds_to_timestamp } from '../utility';
 
-	export let src: string | undefined;
-	export let metadata: EpisodeDetails = {};
+	/** @type {string|undefined} */
+	export let src;
+
+	/** @type {import('../audio/stores').EpisodeDetails} */
+	export let metadata = {};
+
 	let mounted = false;
 
 	$: is_loaded = Boolean($episode_audio?.src);
@@ -33,19 +36,19 @@
 	 * Skips the audio forward by a specified number of seconds.
 	 * @param {number} seconds - The number of seconds to skip forward.
 	 */
-	const skip_forward = (seconds: number) => episode_audio.skip(seconds, 'forward');
+	const skip_forward = (seconds) => episode_audio.skip(seconds, 'forward');
 
 	/**
 	 * Skips the audio backward by a specified number of seconds.
 	 * @param {number} seconds - The number of seconds to skip backward.
 	 */
-	const skip_back = (seconds: number) => episode_audio.skip(seconds, 'backward');
+	const skip_back = (seconds) => episode_audio.skip(seconds, 'backward');
 
 	/**
 	 * Seeks to a specific time in the audio.
 	 * @param {number} value - The time to seek to, in seconds.
 	 */
-	const seek_to = (value: number) => episode_audio.seek(value);
+	const seek_to = (value) => episode_audio.seek(value);
 
 	/**
 	 * Toggles the audio playback between play and pause.

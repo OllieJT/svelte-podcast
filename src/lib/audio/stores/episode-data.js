@@ -1,29 +1,33 @@
 import clamp from 'just-clamp';
-import { derived, get, type Readable } from 'svelte/store';
+import { derived, get } from 'svelte/store';
 import { user_preferences, user_progress } from '../../user';
 import { announce } from '../../utility';
 import { audio_element } from './audio-element';
-import { episode_details, type EpisodeDetails } from './episode-details';
+import { episode_details } from './episode-details';
 
-export type EpisodeState = {
-	will_autoplay: boolean;
-	is_paused: boolean;
-	duration: number;
-	src: string;
-	start_at: number;
-	details: EpisodeDetails | null;
-};
+/**
+ * Episode state object
+ * @typedef {Object} EpisodeState
+ * @property {boolean} will_autoplay - Whether the episode will autoplay
+ * @property {boolean} is_paused - Whether the episode is paused
+ * @property {number} duration - The duration of the episode
+ * @property {string} src - The source of the episode
+ * @property {number} start_at - The starting point of the episode
+ * @property {import('./episode-details').EpisodeDetails | null} details - The details of the episode or null if there are none
+ */
 
+/** @type {Omit<EpisodeState, 'src'>} */
 const default_episode_state = {
 	will_autoplay: false,
 	is_paused: true,
 	duration: 0,
 	start_at: 0,
 	details: null,
-} satisfies Omit<EpisodeState, 'src'>;
+};
 
 /**
  * Episode state store
+ * @type {import('svelte/store').Readable<EpisodeState | null>}
  */
 const episode_state = derived([audio_element, episode_details], ([$audio, $details], set) => {
 	if (!$audio) return set(null);
@@ -50,9 +54,11 @@ const episode_state = derived([audio_element, episode_details], ([$audio, $detai
 		$audio.removeEventListener('pause', set_value);
 		$audio.removeEventListener('playing', set_value);
 	};
-}) satisfies Readable<EpisodeState | null>;
+});
 
-type HANDLE_TYPE = 'toggle' | 'set';
+/**
+ * @typedef {'toggle' | 'set'} HANDLE_TYPE
+ */
 
 /**
  * Use audio element
@@ -60,7 +66,7 @@ type HANDLE_TYPE = 'toggle' | 'set';
  * @returns {HTMLAudioElement} - Audio element
  * @throws {string} - Error message if no audio element exists
  */
-const use_element = (action: string): HTMLAudioElement => {
+const use_element = (action) => {
 	const el = get(audio_element);
 	if (!el) throw announce.warn(`could not ${action} :: no audio element exists yet`);
 	return el;
@@ -69,9 +75,10 @@ const use_element = (action: string): HTMLAudioElement => {
 /**
  * Load audio
  * @param {string} src - Audio source
- * @param {EpisodeDetails} details - Episode details
+ * @param {import('./episode-details').EpisodeDetails } details - Episode details
+ * @returns {void}
  */
-const load_audio = (src: string, details: EpisodeDetails): void => {
+const load_audio = (src, details) => {
 	user_progress.save();
 	const el = use_element('load');
 	el.src = src;
@@ -91,8 +98,9 @@ const load_audio = (src: string, details: EpisodeDetails): void => {
 
 /**
  * Unload audio
+ * @returns {void}
  */
-const unload_audio = (): void => {
+const unload_audio = () => {
 	user_progress.save();
 	const el = use_element('unload');
 	el.src = '';
@@ -102,8 +110,9 @@ const unload_audio = (): void => {
 /**
  * Play audio
  * @param {HANDLE_TYPE} t - Handle type
+ * @returns {void}
  */
-const play_audio = (t: HANDLE_TYPE = 'set'): void => {
+const play_audio = (t = 'set') => {
 	const el = use_element('play');
 
 	if (t === 'toggle') {
@@ -116,8 +125,9 @@ const play_audio = (t: HANDLE_TYPE = 'set'): void => {
 /**
  * Pause audio
  * @param {HANDLE_TYPE} t - Handle type
+ * @returns {void}
  */
-const pause_audio = (t: HANDLE_TYPE = 'set'): void => {
+const pause_audio = (t = 'set') => {
 	user_progress.save();
 	const el = use_element('pause');
 
@@ -131,8 +141,9 @@ const pause_audio = (t: HANDLE_TYPE = 'set'): void => {
 /**
  * Mute audio
  * @param {HANDLE_TYPE} t - Handle type
+ * @returns {void}
  */
-const mute_audio = (t: HANDLE_TYPE = 'set'): void => {
+const mute_audio = (t = 'set') => {
 	const el = use_element('mute');
 
 	if (t === 'toggle') {
@@ -145,8 +156,9 @@ const mute_audio = (t: HANDLE_TYPE = 'set'): void => {
 /**
  * Unmute audio
  * @param {HANDLE_TYPE} t - Handle type
+ * @returns {void}
  */
-const unmute_audio = (t: HANDLE_TYPE = 'set'): void => {
+const unmute_audio = (t = 'set') => {
 	const el = use_element('unmute');
 
 	if (t === 'toggle') {
@@ -159,9 +171,10 @@ const unmute_audio = (t: HANDLE_TYPE = 'set'): void => {
 /**
  * Seek to time audio
  * @param {number} seconds - Seconds to seek
- * @param {'from-start' | 'from-end'} from - Seek from start or end
+ * @param {'from-start' | 'from-end'} [from="from-start"] - Seek from start or end
+ * @returns {void}
  */
-const seek_audio = (seconds: number, from: 'from-start' | 'from-end' = 'from-start'): void => {
+const seek_audio = (seconds, from = 'from-start') => {
 	const el = use_element('seek');
 
 	if (from === 'from-end') {
@@ -174,9 +187,10 @@ const seek_audio = (seconds: number, from: 'from-start' | 'from-end' = 'from-sta
 /**
  * Skip by about audio
  * @param {number} seconds - Seconds to skip
- * @param {'forward' | 'backward'} type - Skip forward or backward
+ * @param {'forward' | 'backward'} [type='forward'] - Skip forward or backward
+ * @returns {void}
  */
-const skip_audio = (seconds: number, type: 'forward' | 'backward' = 'forward'): void => {
+const skip_audio = (seconds, type = 'forward') => {
 	const el = use_element('skip');
 
 	if (type === 'backward') {

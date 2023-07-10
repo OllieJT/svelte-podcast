@@ -1,23 +1,28 @@
-import { derived, type Readable } from 'svelte/store';
-import { seconds_to_timestamp } from '../../utility';
+import { seconds_to_timestamp } from 'svelte-podcast/utility';
 import { audio_element } from './audio-element';
+import { derived } from 'svelte/store';
 
-export type EpisodeProgress = {
-	current_time: number;
-	timestamp: string;
-	has_ended: boolean;
-};
+/**
+ * Episode progress object.
+ * @typedef {Object} EpisodeProgress
+ * @property {number} current_time - The current time of the episode in seconds.
+ * @property {string} timestamp - The current time of the episode in the format 'mm:ss'.
+ * @property {boolean} has_ended - Whether the episode has ended or not.
+ */
 
+/**
+ * The default episode progress object.
+ * @type {EpisodeProgress}
+ */
 const default_episode_progress = {
 	current_time: 0,
 	timestamp: '00:00',
 	has_ended: false,
-} satisfies EpisodeProgress;
+};
 
 /**
- * Episode progress store.
- *
- * @returns {Readable<EpisodeProgress>} A Svelte readable store that contains the current progress of the audio episode.
+ * The default episode progress object.
+ * @type {import('svelte/store').Readable<EpisodeProgress>}
  */
 export const episode_progress = derived(audio_element, ($audio, set) => {
 	if (!$audio) return set(default_episode_progress);
@@ -40,4 +45,4 @@ export const episode_progress = derived(audio_element, ($audio, set) => {
 	 * Remove event listener.
 	 */
 	return () => $audio.removeEventListener('timeupdate', () => set_value());
-}) satisfies Readable<EpisodeProgress>;
+});

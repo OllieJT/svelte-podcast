@@ -13,7 +13,7 @@
 	},
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && yarn package",
+		"build": "vite build",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
 		"sync": "svelte-kit sync",
@@ -23,7 +23,7 @@
 		"lint:eslint": "TIMING=1 eslint . --ext .ts,.tsx,.svelte --cache",
 		"lint": "yarn lint:prettier && yarn lint:eslint",
 		"format": "prettier --write --plugin-search-dir=. .",
-		"release": "yarn package && changeset publish",
+		"release": "changeset publish",
 		"ts": "tsc --pretty --noImplicitAny --noEmit"
 	},
 	"exports": {
@@ -36,11 +36,13 @@
 		"dist"
 	],
 	"peerDependencies": {
-		"svelte": ">=3.00.0"
+		"@sveltejs/kit": ">=1.0.0",
+		"svelte": ">=3.0.0"
 	},
 	"dependencies": {
 		"@inqling/svelte-icons": "^3.3.2",
 		"clsx": "^1.2.1",
+		"esm-env": "^1.0.0",
 		"just-clamp": "^4.2.0",
 		"svelte-local-storage-store": "^0.5.0"
 	},
