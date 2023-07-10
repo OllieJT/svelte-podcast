@@ -1,5 +1,12 @@
 # svelte-podcast
 
+## 0.7.0
+
+### Minor Changes
+
+-  16366ec: improvements to headless components
+-  415d083: switch to jsdoc from ts
+
 ## 0.6.0
 
 ### Minor Changes
