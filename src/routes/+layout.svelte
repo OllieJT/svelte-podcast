@@ -4,7 +4,7 @@
 	import { Github } from '@inqling/svelte-icons/simple-icons';
 	import clsx from 'clsx';
 	import 'highlight.js/styles/github-dark.css';
-	import { Audio } from 'svelte-podcast';
+	import { AudioContext } from 'svelte-podcast';
 	import '../app.postcss';
 
 	const page_links = [
@@ -62,6 +62,6 @@
 	</div>
 </header>
 
-<Audio />
+<AudioContext />
 
 <slot />

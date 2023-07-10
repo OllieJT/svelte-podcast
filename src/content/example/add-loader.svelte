@@ -1,8 +1,8 @@
 <script>
-	import { Audio } from 'svelte-podcast';
+	import { AudioContext } from 'svelte-podcast';
 </script>
 
-<Audio />
+<AudioContext />
 
 <!-- your layout -->
 
