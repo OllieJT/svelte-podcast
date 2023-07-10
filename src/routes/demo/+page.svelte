@@ -1,10 +1,11 @@
-<script lang="ts">
+<script>
 	import PlayerStack from '$src/components/example-player/player-stack.svelte';
 	import PlayerWidget from '$src/components/example-player/player-widget.svelte';
 	import PreviewComponent from '$src/components/preview-component.svelte';
 	import PreviewDataCode from '$src/components/preview-data-code.svelte';
 	import PreviewData from '$src/components/preview-data.svelte';
 	import { Section } from '$src/content/components';
+	import { episodes } from '$src/content/episodes';
 	import {
 		episode_audio,
 		episode_progress,
@@ -12,25 +13,8 @@
 		user_progress,
 	} from 'svelte-podcast';
 
-	const sources = {
-		syntax: {
-			src: `/example-syntax.mp3`,
-			title: `Supper Club × Rich Harris, Author of Svelte`,
-			artwork: `https://ssl-static.libsyn.com/p/assets/b/3/c/d/b3cdf28da11ad39fe5bbc093207a2619/Syntax_-_499.jpg`,
-		},
-		knomii: {
-			src: `/example-knomii.mp3`,
-			title: `Empowerment starts with letting go of control`,
-			artwork: `https://ssl-static.libsyn.com/p/assets/f/a/8/d/fa8d56d5226884335f2e77a3093c12a1/ep-6.png`,
-		},
-	} as const;
-
-	// let current_time = 0;
-	// $: current_time = $episode_progress.current_time;
-
 	$: console.log('details :: ', $episode_audio?.details);
 
-	let player_widget_current_time = true;
 	$: player_widget = {
 		current_time: true,
 		playback_rate: true,
@@ -45,6 +29,9 @@
 		skip_back: 10,
 		skip_forward: 30,
 	};
+
+	/** @type { string | undefined} */
+	let audio_src = episodes.knomii.src;
 </script>
 
 <Section>
@@ -82,7 +69,7 @@
 			</div>
 		</svelte:fragment>
 
-		<PlayerWidget include={player_widget} />
+		<PlayerWidget src={audio_src} include={player_widget} />
 	</PreviewComponent>
 </Section>
 
@@ -111,7 +98,7 @@
 			</div>
 		</svelte:fragment>
 
-		<PlayerStack class="max-w-sm" include={player_stack} />
+		<PlayerStack src={audio_src} class="max-w-sm" include={player_stack} />
 	</PreviewComponent>
 </Section>
 
@@ -218,11 +205,15 @@
 <hr />
 
 <h5>Load Audio</h5>
-<button type="button" on:click={() => episode_audio.load(sources['syntax'].src, sources['syntax'])}>
+<button
+	type="button"
+	on:click={() => episode_audio.load(episodes['syntax'].src, episodes['syntax'])}
+>
 	Syntax
 </button>
-<button type="button" on:click={() => episode_audio.load(sources['knomii'].src, sources['knomii'])}
-	>Knomii</button
+<button
+	type="button"
+	on:click={() => episode_audio.load(episodes['knomii'].src, episodes['knomii'])}>Knomii</button
 >
 <button type="button" on:click={() => episode_audio.unload()}>None</button>
 

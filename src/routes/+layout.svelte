@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	import { assets, base } from '$app/paths';
 	import { page } from '$app/stores';
 	import { Github } from '@inqling/svelte-icons/simple-icons';
@@ -7,10 +7,10 @@
 	import { AudioContext } from 'svelte-podcast';
 	import '../app.postcss';
 
-	const page_links = [
+	const page_links = Object.freeze([
 		{ label: 'Docs', href: '/' },
 		{ label: 'Demo', href: '/demo' },
-	] as const;
+	]);
 </script>
 
 <header

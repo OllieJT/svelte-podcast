@@ -1,4 +1,5 @@
-<script lang="ts">
+<script>
+	/** @type {number} */
 	export let size = 24;
 </script>
 

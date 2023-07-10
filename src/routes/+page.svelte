@@ -1,15 +1,14 @@
-<script lang="ts">
+<script>
 	import { base } from '$app/paths';
-	import { Section } from '$src/content/components';
-	// import Docs from '$src/content/docs.md';
-	//import { PodcastPlayer } from '$src/components/example-player/_player';
 	import PlayerWidget from '$src/components/example-player/player-widget.svelte';
+	import { Section } from '$src/content/components';
 	import { episodes } from '$src/content/episodes';
-	import type { PageServerData } from './$types';
 
-	export let data: PageServerData;
+	/** @type { import('./$types').PageServerData} */
+	export let data;
 
-	let audio_src: string | undefined = episodes.knomii.src;
+	/** @type { string | undefined} */
+	let audio_src = episodes.knomii.src;
 </script>
 
 <!-- <PodcastPlayer title="Example title" /> -->

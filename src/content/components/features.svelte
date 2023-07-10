@@ -1,13 +1,13 @@
-<script lang="ts">
-	import type { SvelteIcon } from '@inqling/svelte-icons';
+<script>
+	/**
+	 * @typedef {Object} Feature
+	 * @property {import('@inqling/svelte-icons').SvelteIcon} icon - The icon component for the feature.
+	 * @property {string} title - The title of the feature.
+	 * @property {string} description - The description of the feature.
+	 */
 
-	type Feature = {
-		icon: SvelteIcon;
-		title: string;
-		description: string;
-	};
-
-	export let features: Feature[];
+	/** @type {Feature[]} */
+	export let features;
 </script>
 
 <dl

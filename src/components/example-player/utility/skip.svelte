@@ -1,7 +1,12 @@
-<script lang="ts">
+<script>
+	/** @type {number} [size = 24] */
 	export let size = 24;
-	export let value: number;
-	export let type: 'forward' | 'backward';
+
+	/** @type {number} */
+	export let value;
+
+	/** @type {'forward' | 'backward'} */
+	export let type;
 </script>
 
 <div class="svpod--skip-container" style="font-size:{size}px">

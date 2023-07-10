@@ -1,8 +1,11 @@
-<script lang="ts">
+<script>
 	import Anchor from './anchor.svelte';
 
-	export let title: string;
-	export let anchor: boolean = false;
+	/** @type {string} */
+	export let title;
+
+	/** @type {boolean} */
+	export let anchor = false;
 </script>
 
 <li class="list-item list-disc text-primary-800">

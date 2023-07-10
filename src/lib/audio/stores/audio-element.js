@@ -39,6 +39,10 @@ export const audio_element = readable(undefined, (set) => {
 
 		if (!existing_element) document.body.appendChild(el);
 
+		/*
+		 BUG:	This is a hack to get around poor types.
+		 		The input and output types are correct, so this is safe for now.
+		*/
 		// @ts-expect-error - I'm not sure how to fix this using JSDOC
 		set(el);
 	});

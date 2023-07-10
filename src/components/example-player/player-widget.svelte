@@ -1,23 +1,25 @@
-<script lang="ts">
+<script>
 	import { Pause, Play } from '@inqling/svelte-icons/heroicon-20-solid';
 	import { clsx } from 'clsx';
 	import { AudioPlayer, user_preferences } from 'svelte-podcast';
-	import type { EpisodeDetails } from 'svelte-podcast/audio/stores';
 	import { A11yIcon, Skip, Spinner, Timestamp } from './utility';
 
-	export let src: string | undefined;
-	export let metadata: EpisodeDetails = {};
+	/** @type {string | undefined} */
+	export let src;
 
-	export let hide_duration: boolean = false;
-	export let hide_current_time: boolean = false;
-	export let hide_playback_rate: boolean = false;
-	export let hide_skip_back: boolean = false;
-	export let hide_skip_forward: boolean = false;
+	/** @type {import('svelte-podcast/audio/stores').EpisodeDetails} */
+	export let metadata = {};
 
-	export let skip_back: number = 30;
-	export let skip_forward: number = 10;
+	export let hide_duration = false;
+	export let hide_current_time = false;
+	export let hide_playback_rate = false;
+	export let hide_skip_back = false;
+	export let hide_skip_forward = false;
 
-	export let playback_rate_values: number[] = [1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4];
+	export let skip_back = 30;
+	export let skip_forward = 10;
+
+	export let playback_rate_values = [1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4];
 
 	const { class: ClassName, ...rest } = $$restProps;
 </script>

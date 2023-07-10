@@ -1,7 +1,10 @@
-<script lang="ts">
+<script>
 	import { seconds_to_timestamp } from 'svelte-podcast';
 
-	export let value: number;
+	/** @type {number} */
+	export let value;
+
+	/** @type {boolean} */
 	export let force_hours = false;
 
 	$: timestamp = seconds_to_timestamp(value, force_hours);

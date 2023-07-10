@@ -1,5 +1,6 @@
-<script lang="ts">
-	export let name: string;
+<script>
+	/** @type {string} */
+	export let name;
 </script>
 
 <div class="flex flex-col items-stretch space-y-6">

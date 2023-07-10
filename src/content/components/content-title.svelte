@@ -1,8 +1,11 @@
-<script lang="ts">
+<script>
 	import Anchor from './anchor.svelte';
 
-	export let title: string;
-	export let subtitle: string | undefined = undefined;
+	/** @type {string} */
+	export let title;
+
+	/** @type {string | undefined} */
+	export let subtitle = undefined;
 </script>
 
 <h3 class="text-xl font-medium leading-relaxed text-mono-900"><Anchor value={title} /></h3>

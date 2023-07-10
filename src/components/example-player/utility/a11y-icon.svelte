@@ -1,8 +1,9 @@
-<script lang="ts">
-	import type { SvelteIcon } from '@inqling/svelte-icons';
+<script>
+	/** @type {import('@inqling/svelte-icons').SvelteIcon} */
+	export let icon;
 
-	export let icon: SvelteIcon;
-	export let label: string;
+	/** @type {string} */
+	export let label;
 </script>
 
 <svelte:component this={icon} />
