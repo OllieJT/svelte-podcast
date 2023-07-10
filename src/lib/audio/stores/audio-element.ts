@@ -1,7 +1,7 @@
 import { browser } from '$app/environment';
 import { onMount } from 'svelte';
 import { get, readable } from 'svelte/store';
-import { user_preferences } from '../user';
+import { user_preferences } from '../../user';
 
 export const audio_element = readable<HTMLAudioElement | null>(null, (set) => {
 	if (!browser) return;

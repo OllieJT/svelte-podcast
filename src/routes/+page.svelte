@@ -2,20 +2,17 @@
 	import { base } from '$app/paths';
 	import { Section } from '$src/content/components';
 	// import Docs from '$src/content/docs.md';
+	//import { PodcastPlayer } from '$src/components/example-player/_player';
+	import PlayerWidget from '$src/components/example-player/player-widget.svelte';
 	import { episodes } from '$src/content/episodes';
-	import { onMount } from 'svelte';
-	import { episode_audio, PlayerWidget } from 'svelte-podcast';
 	import type { PageServerData } from './$types';
 
 	export let data: PageServerData;
 
-	onMount(() => {
-		// load the episode on mount without any metadata
-		episode_audio.load(episodes.knomii.src, {
-			/* optional metadata */
-		});
-	});
+	let audio_src: string | undefined = episodes.knomii.src;
 </script>
+
+<!-- <PodcastPlayer title="Example title" /> -->
 
 <div class="relative isolate bg-white">
 	<svg
@@ -86,8 +83,9 @@
 						class="-m-2 rounded-xl border border-mono-100 bg-white p-1 shadow-2xl shadow-mono-200 sm:p-2 lg:-m-4 lg:rounded-2xl lg:p-4"
 					>
 						<PlayerWidget
+							src={audio_src}
 							class="w-full border border-mono-100"
-							include={{
+							options={{
 								duration: true,
 								current_time: true,
 								playback_rate: true,

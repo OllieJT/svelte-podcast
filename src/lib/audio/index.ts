@@ -1,4 +1,2 @@
-export { default as AudioLoader } from './audio-loader.svelte';
-export * from './episode-data';
-export * from './episode-details';
-export * from './episode-progress';
+export { default as Audio } from './component.svelte';
+export { episode_audio, episode_details, episode_progress } from './stores';

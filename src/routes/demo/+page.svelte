@@ -1,16 +1,16 @@
 <script lang="ts">
+	import PlayerStack from '$src/components/example-player/player-stack.svelte';
+	import PlayerWidget from '$src/components/example-player/player-widget.svelte';
+	import PreviewComponent from '$src/components/preview-component.svelte';
+	import PreviewDataCode from '$src/components/preview-data-code.svelte';
+	import PreviewData from '$src/components/preview-data.svelte';
 	import { Section } from '$src/content/components';
 	import {
 		episode_audio,
 		episode_progress,
-		PlayerStack,
-		PlayerWidget,
 		user_preferences,
 		user_progress,
 	} from 'svelte-podcast';
-	import PreviewComponent from './preview-component.svelte';
-	import PreviewDataCode from './preview-data-code.svelte';
-	import PreviewData from './preview-data.svelte';
 
 	const sources = {
 		syntax: {
@@ -180,11 +180,11 @@
 				description="clears all user preferences and resets them to default values"
 			/>
 			<PreviewDataCode
-				code={`user_preferences.set.playback_rate(value: number)`}
+				code={`user_preferences.set_playback_rate(value: number)`}
 				description="sets the users prefered playback_rate (speed)"
 			/>
 			<PreviewDataCode
-				code={`user_preferences.set.volume(value: number)`}
+				code={`user_preferences.set_volume(value: number)`}
 				description="sets the users prefered volume"
 			/>
 		</PreviewData>
@@ -259,7 +259,7 @@
 <h6>Playback Rate</h6>
 
 {#each [0.5, 1, 2, 3] as rate}
-	<button type="button" on:click={() => user_preferences.set.playback_rate(rate)}>
+	<button type="button" on:click={() => user_preferences.set_playback_rate(rate)}>
 		{rate}x
 	</button>
 {/each}

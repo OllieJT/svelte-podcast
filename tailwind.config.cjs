@@ -16,11 +16,7 @@ const config = {
 		},
 	},
 
-	plugins: [
-		require('@tailwindcss/typography'),
-		require('@tailwindcss/forms'),
-		require('@tailwindcss/line-clamp'),
-	],
+	plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
 };
 
 module.exports = config;
