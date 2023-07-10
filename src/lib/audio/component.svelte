@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 	import { user_preferences } from '../user';
@@ -6,11 +6,6 @@
 	import { audio_element } from './stores/audio-element';
 
 	$: $audio_element;
-	/* onMount(() => {
-	return audio_element.subscribe((el) => {
-		if (el) info('mounted audio element :: ', el);
-	});
-}); */
 
 	onMount(() => {
 		return user_preferences.subscribe((prefs) => {
