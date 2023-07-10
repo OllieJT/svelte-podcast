@@ -4,14 +4,14 @@
 
 ### Minor Changes
 
-- 9232f4d: Improves theming with css variables
-  Improves developer logs
-  Fixes various package export issues
-  Adds player components:
+-  9232f4d: Improves theming with css variables
+   Improves developer logs
+   Fixes various package export issues
+   Adds player components:
 
-  - Player: `<PlayerStack />`
-  - Player: `<PlayerWidget />`
-  - Utility: `<HeadlessTimeline />`
+   -  Player: `<PlayerStack />`
+   -  Player: `<PlayerWidget />`
+   -  Utility: `<HeadlessTimeline />`
 
 ## 0.5.0
 
