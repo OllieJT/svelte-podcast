@@ -1,4 +1,5 @@
 <script>
+	import Metadata from '$src/components/metadata.svelte';
 	import { Section } from '$src/content/components';
 	import { episodes } from '$src/content/episodes';
 
@@ -11,6 +12,7 @@
 
 <!-- TODO: add screenshots under images -->
 
+<Metadata />
 
 <Section>
 	<div class="prose prose-lg prose-slate">

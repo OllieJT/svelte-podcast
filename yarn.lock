@@ -3807,6 +3807,11 @@ sander@^0.5.0:
     mkdirp "^0.5.1"
     rimraf "^2.5.2"
 
+schema-dts@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/schema-dts/-/schema-dts-1.1.2.tgz#82ccf71b5dcb80065a1cc5941888507a4ce1e44b"
+  integrity sha512-MpNwH0dZJHinVxk9bT8XUdjKTxMYrA5bLtrrGmFA6PTLwlOKnhi67XoRd6/ty+Djt6ZC0slR57qFhZDNMI6DhQ==
+
 scroll-into-view-if-needed@^3.0.4:
   version "3.0.10"
   resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-3.0.10.tgz#38fbfe770d490baff0fb2ba34ae3539f6ec44e13"
@@ -4099,6 +4104,13 @@ svelte-local-storage-store@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/svelte-local-storage-store/-/svelte-local-storage-store-0.5.0.tgz#2ae3ff6a19c5f015143d2227ced76cd585d9e8b1"
   integrity sha512-SEDrpapeia6fUqta+r1NvSLlJYPkZ4pBcl15EYIOSPNzy6vhpoXu8cnzUDmZxsWl7fZGAHxrVH9UyZCbyO4W+g==
+
+svelte-meta-tags@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/svelte-meta-tags/-/svelte-meta-tags-2.8.0.tgz#9e47ad308697daca8ad03f8d12d0ebacd5e6ca20"
+  integrity sha512-CgnNNk8iJv4Ks0iAqerfvtC+qjOq6WKDvUnV30ss8k80nVC4pD6I6fGnAg/ieOuRNL1uir49zosZzwPjAsjdAQ==
+  dependencies:
+    schema-dts "^1.1.2"
 
 svelte-preprocess@^5.0.3, svelte-preprocess@^5.0.4:
   version "5.0.4"
