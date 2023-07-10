@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	import { episode_audio, episode_progress } from '../audio';
 	import { announce } from '../utility';
 
@@ -6,13 +6,19 @@
 
 	let was_paused = true;
 
-	function handle_drag_start(t: string) {
+	/**
+	 * @param {string} t - The type of event that triggered the drag end.
+	 */
+	function handle_drag_start(t) {
 		announce.info('drag_start :: ', t);
 		was_paused = $episode_audio?.is_paused || true;
 		episode_audio.pause();
 	}
 
-	function handle_drag_end(t: string) {
+	/**
+	 * @param {string} t - The type of event that triggered the drag end.
+	 */
+	function handle_drag_end(t) {
 		announce.info('drag_end :: ', t);
 		if (was_paused) return;
 		else episode_audio.play();

@@ -1,5 +1,5 @@
 /**
- * Utility functions module.
+ * User storage module.
  * @module user
  */
 
