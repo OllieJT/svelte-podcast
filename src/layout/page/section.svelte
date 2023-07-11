@@ -1,11 +1,11 @@
 <script>
+	import { slugify } from '$src/layout/helper';
 	import Container from '$src/layout/page/container.svelte';
 
 	/** @type {string} */
 	export let title;
 
-	/** @type {string} */
-	export let anchor = title.replaceAll(' ', '-').trim();
+	export let anchor = slugify(title);
 
 	/** @type {'h2'|'h3'|'h4'|'h5'} */
 	export let level = 'h2';

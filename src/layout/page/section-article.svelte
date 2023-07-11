@@ -1,9 +1,10 @@
 <script>
+	import { slugify } from '$src/layout/helper';
+
 	/** @type {string} */
 	export let title;
 
-	/** @type {string} */
-	export let anchor = title.replaceAll(' ', '-').trim();
+	export let anchor = slugify(title);
 
 	/** @type {'h3'|'h4'|'h5'} */
 	export let level = 'h3';

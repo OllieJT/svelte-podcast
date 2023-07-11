@@ -240,7 +240,7 @@
 	</Section>
 
 	<!-- seconds_to_timestamp -->
-	<Section title="seconds_to_ timestamp">
+	<Section title="seconds_to_timestamp">
 		<TableSchema
 			rows={[
 				{

@@ -1,4 +1,5 @@
 <script>
+	import { slugify } from '$src/layout/helper';
 	import Metadata from '$src/layout/metadata.svelte';
 	import Container from '$src/layout/page/container.svelte';
 	import SectionArticle from '$src/layout/page/section-article.svelte';
@@ -8,14 +9,18 @@
 
 	/** @type {string}*/
 	export let title;
+
+	export let anchor = slugify(title);
 </script>
 
 <Metadata {title} />
 
-<Container as="header" aria-labelledby="api">
-	<div class="richtext pt-20">
-		<h1 id="api">{title}</h1>
-	</div>
-</Container>
+<slot name="header" {anchor} {title}>
+	<Container as="header" aria-labelledby={anchor}>
+		<div class="richtext pt-20">
+			<h1 id={anchor}>{title}</h1>
+		</div>
+	</Container>
+</slot>
 
 <slot {Section} {SectionArticle} {TableModule} {TableSchema} />

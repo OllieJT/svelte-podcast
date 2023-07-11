@@ -1,19 +1,13 @@
 <script>
-	import { Section } from '$src/content/components';
-	import Metadata from '$src/layout/metadata.svelte';
+	import { DocsPage } from '$src/layout/page';
 	import { add_audio_loader, install } from '$src/routes/code';
 
 	import { Highlight, HighlightSvelte } from 'svelte-highlight';
 	import lang_shell from 'svelte-highlight/languages/shell';
 </script>
 
-<Metadata title="Setup" />
-
-<Section labelledby="setup">
-	<div class="richtext">
-		<h2 id="setup"><a href="#setup">Setup</a></h2>
-		<h3 id="installation"><a href="#installation">Installation</a></h3>
-
+<DocsPage title="Setup" let:Section>
+	<Section title="Installation">
 		<p>
 			Install the latest version of svelte-podcast with your preferred
 			package manager.
@@ -22,9 +16,8 @@
 		<div class="codeblock not-prose flex flex-col items-stretch gap-2 py-1">
 			<Highlight language={lang_shell} code={install} />
 		</div>
-
-		<h3 id="add-loader"><a href="#add-loader">Add Loader</a></h3>
-
+	</Section>
+	<Section title="Add Loader">
 		<p class="text-primary-600">
 			<b class="font-medium">Important</b>: The AudioLoader component does
 			<em>not</em>
@@ -56,5 +49,5 @@
 		<div class="codeblock not-prose flex flex-col items-stretch gap-2 py-1">
 			<HighlightSvelte code={add_audio_loader} />
 		</div>
-	</div>
-</Section>
+	</Section>
+</DocsPage>
