@@ -1,7 +1,7 @@
 <script>
-	import { AudioLoader } from 'svelte-podcast';
+	import { AudioContext } from 'svelte-podcast';
 </script>
 
-<AudioLoader />
+<AudioContext />
 
 <slot />

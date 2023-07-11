@@ -1,7 +1,6 @@
 <script>
 	import PlayerStack from '$src/components/example-player/player-stack.svelte';
 	import PlayerWidget from '$src/components/example-player/player-widget.svelte';
-	import { Section } from '$src/content/components';
 	import { episodes } from '$src/content/episodes';
 	import PreviewComponent from '$src/layout/preview-component.svelte';
 	import PreviewDataCode from '$src/layout/preview-data-code.svelte';
@@ -34,13 +33,13 @@
 	let audio_src = episodes.knomii.src;
 </script>
 
-<Section>
+<section>
 	<div class="flex flex-col items-stretch space-y-6">
 		<h1>This page is a work in progress</h1>
 	</div>
-</Section>
+</section>
 
-<Section>
+<section>
 	<PreviewComponent name="PlayerWidget">
 		<svelte:fragment slot="options">
 			<div>
@@ -87,9 +86,9 @@
 
 		<PlayerWidget src={audio_src} include={player_widget} />
 	</PreviewComponent>
-</Section>
+</section>
 
-<Section>
+<section>
 	<PreviewComponent name="PlayerStack">
 		<svelte:fragment slot="options">
 			<div>
@@ -128,9 +127,9 @@
 
 		<PlayerStack src={audio_src} class="max-w-sm" include={player_stack} />
 	</PreviewComponent>
-</Section>
+</section>
 
-<Section>
+<section>
 	<div class="prose prose-lg prose-slate">
 		<h2>Data</h2>
 		<p>
@@ -231,7 +230,7 @@
 			/>
 		</PreviewData>
 	</div>
-</Section>
+</section>
 
 <h1>Demo</h1>
 <button type="button" on:click={user_preferences.clear}

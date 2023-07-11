@@ -4,7 +4,6 @@
 		Play,
 		SpeakerWave,
 	} from '@inqling/svelte-icons/heroicon-20-solid';
-	import { clsx } from 'clsx';
 	import {
 		AudioPlayer,
 		episode_progress,
@@ -25,15 +24,13 @@
 	export let skip_forward = 10;
 
 	export let playback_rate_values = [1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4];
-
-	const { class: ClassName, ...rest } = $$restProps;
 </script>
 
 <AudioPlayer {src} {metadata} let:Player let:action let:episode>
 	<div
-		class={clsx('svpod--container svpod--reset', ClassName)}
+		{...$$restProps}
+		class="svpod--container svpod--reset"
 		data-loaded={episode.is_loaded ? 'true' : 'false'}
-		{...rest}
 	>
 		<div class="svpod--container--row svpod--row--controls">
 			<button

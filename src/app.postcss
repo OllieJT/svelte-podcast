@@ -1,5 +1,3 @@
-@import 'highlight.js/styles/github.css';
-
 /* Write your global styles here, in PostCSS syntax */
 @tailwind base;
 @tailwind components;
@@ -18,15 +16,6 @@
 }
 
 @layer components {
-	.prose code {
-		@apply inline overflow-hidden rounded-xl border border-mono-200 px-2 py-1 font-mono text-base leading-normal shadow-2xl shadow-mono-200;
-		overflow-wrap: anywhere;
-	}
-	.prose code::before,
-	.prose code::after {
-		content: '';
-	}
-
 	h1.anchor,
 	h2.anchor,
 	h3.anchor,
@@ -36,12 +25,12 @@
 		@apply m-0 text-3xl font-semibold leading-10 text-mono-900;
 	}
 
-	.prose h1 a,
-	.prose h2 a,
-	.prose h3 a,
-	.prose h4 a,
-	.prose h5 a,
-	.prose h6 a,
+	.richtext h1 a,
+	.richtext h2 a,
+	.richtext h3 a,
+	.richtext h4 a,
+	.richtext h5 a,
+	.richtext h6 a,
 	h1.anchor a,
 	h2.anchor a,
 	h3.anchor a,
@@ -61,33 +50,130 @@
 		}
 	}
 
-	.prose h3 a {
+	.richtext h3 a {
 		@apply text-primary-600;
 	}
 
-	.prose #table-of-contents + ol {
-		list-style: decimal-leading-zero;
-	}
-	.prose #table-of-contents + ol,
-	.prose #table-of-contents + ul {
-		ul,
-		ol,
-		li {
-			@apply my-0.5;
-		}
-
-		ol {
-			list-style: lower-alpha;
-			ol {
-				list-style: disc;
-				ol {
-					list-style: circle;
-				}
-			}
-		}
-	}
-
-	.prose #features + table td:first-child > * {
+	.richtext #features + table td:first-child > * {
 		@apply sm:block sm:w-max;
+	}
+
+	.richtext code.hljs {
+		@apply p-0 text-sm;
+		overflow-wrap: anywhere;
+	}
+
+	.richtext .codeblock code.hljs {
+		@apply overflow-hidden rounded-xl border border-mono-200 p-4 font-mono text-base leading-normal shadow-2xl shadow-mono-200;
+	}
+
+	.richtext {
+		@apply prose prose-lg prose-slate max-w-none prose-h5:mb-1 prose-h5:mt-10 prose-h5:text-sm prose-h5:font-medium prose-h5:leading-normal prose-h5:text-primary-800 prose-code:before:content-none prose-code:after:content-none;
+	}
+
+	.richtext td,
+	.richtext th {
+		@apply px-4 py-2;
+	}
+
+	.richtext td {
+		@apply min-w-max;
+	}
+
+	/* HLJS */
+	pre code.hljs {
+		display: block;
+		overflow-x: auto;
+		padding: 1em;
+	}
+	code.hljs {
+		padding: 3px 5px;
+	}
+	/*
+		Theme: GitHub
+		Description: Light theme as seen on github.com
+		Author: github.com
+		Maintainer: @Hirse
+		Updated: 2021-05-15
+
+		Outdated base version: https://github.com/primer/github-syntax-light
+		Current colors taken from GitHub's CSS
+	*/
+	.hljs {
+		color: #24292e;
+		background: #fff;
+	}
+	.hljs-doctag,
+	.hljs-keyword,
+	.hljs-meta .hljs-keyword,
+	.hljs-template-tag,
+	.hljs-template-variable,
+	.hljs-type,
+	.hljs-variable.language_ {
+		color: #d73a49;
+	}
+	.hljs-title,
+	.hljs-title.class_,
+	.hljs-title.class_.inherited__,
+	.hljs-title.function_ {
+		color: #6f42c1;
+	}
+	.hljs-attr,
+	.hljs-attribute,
+	.hljs-literal,
+	.hljs-meta,
+	.hljs-number,
+	.hljs-operator,
+	.hljs-selector-attr,
+	.hljs-selector-class,
+	.hljs-selector-id,
+	.hljs-variable {
+		color: #005cc5;
+	}
+	.hljs-meta .hljs-string,
+	.hljs-regexp,
+	.hljs-string {
+		color: #032f62;
+	}
+	.hljs-built_in,
+	.hljs-symbol {
+		color: #e36209;
+	}
+	.hljs-code,
+	.hljs-comment,
+	.hljs-formula {
+		color: #6a737d;
+	}
+	.hljs-name,
+	.hljs-quote,
+	.hljs-selector-pseudo,
+	.hljs-selector-tag {
+		color: #22863a;
+	}
+	.hljs-subst {
+		color: #24292e;
+	}
+	.hljs-section {
+		color: #005cc5;
+		font-weight: 700;
+	}
+	.hljs-bullet {
+		color: #735c0f;
+	}
+	.hljs-emphasis {
+		color: #24292e;
+		font-style: italic;
+	}
+	.hljs-strong {
+		color: #24292e;
+		font-weight: 700;
+	}
+	.hljs-addition {
+		color: #22863a;
+		background-color: #f0fff4;
+	}
+	.hljs-deletion {
+		color: #b31d28;
+		background-color: #ffeef0;
 	}
 }

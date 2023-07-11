@@ -1,177 +1,102 @@
 <script>
-	import { Section } from '$src/content/components';
+	import { base } from '$app/paths';
+	import { PlayerWidget } from '$src/components/example-player';
 	import { episodes } from '$src/content/episodes';
 	import Metadata from '$src/layout/metadata.svelte';
-	import {
-		add_audio_loader,
-		install,
-		load_audio_local,
-		load_audio_remote,
-	} from '$src/routes/code';
-
-	import { Highlight, HighlightSvelte } from 'svelte-highlight';
-	import lang_shell from 'svelte-highlight/languages/shell';
-	import lang_ts from 'svelte-highlight/languages/typescript';
-
-	/** @type { import('./$types').PageServerData} */
-	export let data;
 
 	/** @type { string | undefined} */
 	let audio_src = episodes.knomii.src;
 </script>
 
-<!-- TODO: add screenshots under images -->
-
 <Metadata />
 
-<Section labelledby="about">
-	<div class="prose prose-lg prose-slate">
-		<h2 id="about"><a href="#about">Introduction</a></h2>
-		<p>
-			Svelte-Podcast streamlines the creation of custom audio players and
-			simplifies state management in Svelte apps.
-		</p>
-
-		<p>
-			<b>Build custom Audio Player UI</b>
-			<br />
-			Simplify the creation of custom audio players with a set of headless components
-			that keep out of your way and take care of core functionality.
-		</p>
-
-		<p>
-			<b>Easily manage Audio State</b>
-			<br />
-			Loading, controlling, and keeping track of multiple audio sources is a pain.
-			svelte-podcast abstracts this away and provides a simple interface to manage
-			audio state.
-		</p>
-
-		<p>
-			<b>Track user preferences</b>
-			<br />
-			Users expect a lot from media players. It should remember their preferences
-			like playback speed, and it should remember where they were in an episode
-			even after reloading the page. svelte-podcast takes care of this for you,
-			and provides you with access to extend this with your own database.
-		</p>
-	</div>
-</Section>
-
-<Section labelledby="setup">
-	<div class="prose prose-lg prose-slate">
-		<h2 id="setup"><a href="#setup">Setup</a></h2>
-		<h3 id="installation"><a href="#installation">Installation</a></h3>
-
-		<p>
-			Install the latest version of svelte-podcast with your preferred
-			package manager.
-		</p>
-
-		<div class="not-prose flex flex-col items-stretch gap-2 py-1">
-			<Highlight language={lang_shell} code={install} />
-		</div>
-
-		<h3 id="add-loader"><a href="#add-loader">Add Loader</a></h3>
-
-		<p class="text-primary-600">
-			<b class="font-medium">Important</b>: The AudioLoader component does
-			<em>not</em>
-			render any UI. However it <em>is required</em> to use svelte-podcast.
-		</p>
-
-		<p>
-			This component is responsible for loading the audio sources and
-			persisting the audio state between page loads. This means that your
-			audio will continue playing even if the user refreshes the page, or you
-			use different UI for the media player.
-		</p>
-
-		<p>
-			Add the AudioLoader component to your app. It should be as close to the
-			root of your app as possible to ensure the audio state behaves as
-			expected in nested routes.
-		</p>
-
-		<ul>
-			<li>You must have one of these for svelte-podcast to work.</li>
-			<li>You should also only load one instance of this at a time</li>
-			<li>
-				We recommend you loading it at the base of your app in your
-				layout.svelte file.
-			</li>
-		</ul>
-
-		<div class="not-prose flex flex-col items-stretch gap-2 py-1">
-			<HighlightSvelte code={add_audio_loader} />
-		</div>
-	</div>
-</Section>
-
-<Section labelledby="api">
-	<div class="prose prose-lg prose-slate">
-		<h2 id="api"><a href="#api">API</a></h2>
-
-		<section aria-labelledby="load-audio">
-			<h3 id="load-audio"><a href="#load-audio">Load audio source</a></h3>
-
-			<p>
-				All you need to load an episode is a URL to an audio file.
-				svelte-podcast uses a html audio element under the hood, so any
-				audio file compatible with the autio element is also compatible with
-				this package.
-			</p>
-
-			<h4>Using a remote file (URL)</h4>
-
-			<p>
-				An <em>audio url</em> could be a URL to an MP3 file from an RSS
-				feed, like this:
-				<code>https://media.transistor.fm/27a058c9/27b595e2.mp3</code>. It
-				could also be a path to a static file on your server.
-			</p>
-
-			<div class="not-prose flex flex-col items-stretch gap-2 py-1">
-				<Highlight code={load_audio_remote} language={lang_ts} />
+<header class="relative isolate bg-white">
+	<svg
+		class="absolute inset-0 -z-10 h-full w-full stroke-mono-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+		aria-hidden="true"
+	>
+		<defs>
+			<pattern
+				id="0787a7c5-978c-4f66-83c7-11c213f99cb7"
+				width="200"
+				height="200"
+				x="50%"
+				y="-1"
+				patternUnits="userSpaceOnUse"
+			>
+				<path d="M.5 200V.5H200" fill="none" />
+			</pattern>
+		</defs>
+		<rect
+			width="100%"
+			height="100%"
+			stroke-width="0"
+			fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"
+		/>
+	</svg>
+	<div>
+		<div class="relative py-24 sm:py-32 lg:pb-40">
+			<div class="mx-auto max-w-7xl px-6 lg:px-8">
+				<div class="mx-auto max-w-2xl text-center">
+					<h1>
+						<span class="block text-xl font-medium text-primary-600">
+							svelte-podcast<span class="sr-only">: </span>
+						</span>
+						<span
+							class="text-4xl font-bold tracking-tight text-mono-900 sm:text-6xl"
+						>
+							The fastest way to build a podcast site with Svelte.
+						</span>
+					</h1>
+					<p class="mt-6 text-xl leading-8 text-mono-600">
+						A suite of tools and components to build your own podcast
+						players, and work with RSS podcast data in SvelteKit.
+						<span
+							class="mt-3 block text-base leading-none text-primary-800"
+						>
+							<span
+								class="inline-block rounded-full bg-primary-50 px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-primary-600"
+							>
+								Coming Soon<span class="sr-only">:</span>
+							</span>
+							<span class="tracking-wide"
+								>SSR utilities for consuming RSS podcast feeds</span
+							>
+						</span>
+					</p>
+					<div class="mt-10 flex items-center justify-center gap-x-3">
+						<a
+							href="{base}/#docs"
+							class="rounded-md bg-primary-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+						>
+							Get started
+						</a>
+						<a
+							href="{base}/#examples"
+							class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-mono-600 hover:bg-primary-50 hover:text-primary-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+						>
+							Examples <span aria-hidden="true">→</span>
+						</a>
+					</div>
+				</div>
+				<div class="mt-16 flow-root sm:mt-24">
+					<div
+						class="-m-2 rounded-xl border border-mono-100 bg-white p-1 shadow-2xl shadow-mono-200 sm:p-2 lg:-m-4 lg:rounded-2xl lg:p-4"
+					>
+						<PlayerWidget
+							src={audio_src}
+							class="w-full border border-mono-100"
+							options={{
+								duration: true,
+								current_time: true,
+								playback_rate: true,
+								skip_back: 10,
+								skip_forward: 30,
+							}}
+						/>
+					</div>
+				</div>
 			</div>
-
-			<h4>Using a local file (relative path)</h4>
-
-			<p>
-				If you're using SvelteKit, you can store <em>static files</em> in
-				the /static directory. When your site is built, everything in the
-				static directory will be at the root of your site. If you have a
-				file in <code>/static/episides/episode-01.mp3</code> you could load
-				it as <code>/episides/episode-01.mp3</code>
-			</p>
-
-			<div class="not-prose flex flex-col items-stretch gap-2 py-1">
-				<Highlight code={load_audio_local} language={lang_ts} />
-			</div>
-		</section>
-
-		<!-- episode_audio -->
-		<section aria-labelledby="episode-audio">
-			<h3 id="episode-audio"><a href="#episode-audio">episode_audio</a></h3>
-			<p>TODO</p>
-		</section>
-
-		<!-- episode_details -->
-		<section aria-labelledby="episode-details">
-			<h3 id="episode-details">
-				<a href="#episode-details">episode_details</a>
-			</h3>
-			<p>TODO</p>
-		</section>
-
-		<!-- episode_progress -->
-		<section aria-labelledby="episode-progress">
-			<h3 id="episode-progress">
-				<a href="#episode-progress">episode_progress</a>
-			</h3>
-			<p>TODO</p>
-		</section>
+		</div>
 	</div>
-</Section>
-
-<div class="prose prose-lg prose-slate">{@html data.html}</div>
+</header>
