@@ -1,8 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
+	import { announce } from '../internal';
 	import { user_preferences } from '../user';
-	import { announce } from '../utility';
 	import { audio_element } from './stores/audio-element';
 
 	$: $audio_element;
@@ -24,9 +24,10 @@
 <svelte:head>
 	<style>
 		:root {
-			--svpod--font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-				Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
-				'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+			--svpod--font: ui-sans-serif, system-ui, -apple-system,
+				BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+				'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+				'Segoe UI Symbol', 'Noto Color Emoji';
 
 			--svpod--surface--darker: rgb(0, 0, 0);
 			--svpod--surface--base: rgb(40, 40, 40);

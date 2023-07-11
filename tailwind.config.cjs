@@ -1,7 +1,11 @@
 const colors = require('tailwindcss/colors');
+const plugin = require('tailwindcss/plugin');
 
 const config = {
-	content: ['./src/**/*.{html,js,md,mdx,svx,svelte,ts}', './node_modules/svhighlight/**/*.svelte'],
+	content: [
+		'./src/**/*.{html,js,md,mdx,svx,svelte,ts}',
+		'./node_modules/svhighlight/**/*.svelte',
+	],
 
 	theme: {
 		extend: {
@@ -16,7 +20,16 @@ const config = {
 		},
 	},
 
-	plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
+	plugins: [
+		require('@tailwindcss/typography'),
+		require('@tailwindcss/forms'),
+
+		plugin(function ({ addVariant }) {
+			addVariant('hocus', ['&:hover', '&:focus', '&:focus-visible']);
+			addVariant('focus', ['&:focus', '&:focus-visible']);
+			addVariant('active', ['&.active']);
+		}),
+	],
 };
 
 module.exports = config;

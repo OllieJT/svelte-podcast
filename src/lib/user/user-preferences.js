@@ -17,7 +17,10 @@ const DEFAULT_USER_PREFERENCES = { playback_rate: 1, volume: 1 };
  * The user preferences store
  * @type {import('svelte/store').Writable<UserPreferences>}
  */
-const USER_PREFERENCES_STORE = persisted('USER_PREFERENCE', DEFAULT_USER_PREFERENCES);
+const USER_PREFERENCES_STORE = persisted(
+	'USER_PREFERENCE',
+	DEFAULT_USER_PREFERENCES,
+);
 
 /**
  * Sets the playback rate for the user
@@ -26,7 +29,10 @@ const USER_PREFERENCES_STORE = persisted('USER_PREFERENCE', DEFAULT_USER_PREFERE
  */
 const set_playback_rate = (value) => {
 	const playback_rate = clamp(value, 0.5, 5);
-	return USER_PREFERENCES_STORE.update((prefs) => ({ ...prefs, playback_rate }));
+	return USER_PREFERENCES_STORE.update((prefs) => ({
+		...prefs,
+		playback_rate,
+	}));
 };
 
 /**

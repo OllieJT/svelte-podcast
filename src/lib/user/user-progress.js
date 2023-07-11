@@ -1,7 +1,7 @@
 import { persisted } from 'svelte-local-storage-store';
 import { get } from 'svelte/store';
 import { episode_audio, episode_progress } from '../audio';
-import { announce, use_url } from '../utility';
+import { use_url, announce } from '../internal';
 
 /**
  * User progress object type.
@@ -34,7 +34,10 @@ const save_user_progress = () => {
 
 	const pathname = use_url(audio.src).pathname;
 	const current_time = get(episode_progress).current_time;
-	USER_PROGRESS_STORE.update((prev) => ({ ...prev, [pathname]: current_time }));
+	USER_PROGRESS_STORE.update((prev) => ({
+		...prev,
+		[pathname]: current_time,
+	}));
 };
 
 /**
@@ -59,7 +62,8 @@ const get_user_progress = (src) => {
  * @function
  * @returns {void}
  */
-const clear_user_progress = () => USER_PROGRESS_STORE.set(DEFAULT_USER_PROGRESS);
+const clear_user_progress = () =>
+	USER_PROGRESS_STORE.set(DEFAULT_USER_PROGRESS);
 
 /**
  * User progress object

@@ -15,4 +15,8 @@ declare global {
 	}
 }
 
+declare module '*.md' {
+	export default ComponentType<SvelteComponentTyped>;
+}
+
 export {};

@@ -1,32 +1,31 @@
-<script lang="ts">
+<script>
 	import { Pause, Play } from '@inqling/svelte-icons/heroicon-20-solid';
-	import { clsx } from 'clsx';
 	import { AudioPlayer, user_preferences } from 'svelte-podcast';
-	import type { EpisodeDetails } from 'svelte-podcast/audio/stores';
 	import { A11yIcon, Skip, Spinner, Timestamp } from './utility';
 
-	export let src: string | undefined;
-	export let metadata: EpisodeDetails = {};
+	/** @type {string | undefined} */
+	export let src;
 
-	export let hide_duration: boolean = false;
-	export let hide_current_time: boolean = false;
-	export let hide_playback_rate: boolean = false;
-	export let hide_skip_back: boolean = false;
-	export let hide_skip_forward: boolean = false;
+	/** @type {import('svelte-podcast/audio/stores').EpisodeDetails} */
+	export let metadata = {};
 
-	export let skip_back: number = 30;
-	export let skip_forward: number = 10;
+	export let hide_duration = false;
+	export let hide_current_time = false;
+	export let hide_playback_rate = false;
+	export let hide_skip_back = false;
+	export let hide_skip_forward = false;
 
-	export let playback_rate_values: number[] = [1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4];
+	export let skip_back = 30;
+	export let skip_forward = 10;
 
-	const { class: ClassName, ...rest } = $$restProps;
+	export let playback_rate_values = [1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4];
 </script>
 
 <AudioPlayer {src} {metadata} let:Player let:action let:episode>
 	<div
-		class={clsx('svpod--container svpod--reset', ClassName)}
+		{...$$restProps}
+		class="svpod--container svpod--reset"
 		data-loaded={episode.is_loaded ? 'true' : 'false'}
-		{...rest}
 	>
 		{#if !hide_skip_back}
 			<button
@@ -68,7 +67,10 @@
 
 		{#if !hide_current_time}
 			<div class="svpod--timestamp">
-				<Timestamp value={episode.current_time} force_hours={episode.timestamp_hours} />
+				<Timestamp
+					value={episode.current_time}
+					force_hours={episode.timestamp_hours}
+				/>
 			</div>
 		{/if}
 
@@ -118,7 +120,9 @@
 		--svpod--timeline-track--shape--radius: var(--inner-radius);
 		--svpod--timeline-track--shape--border: 2px;
 
-		--svpod--timeline-thumb--shape--height: var(--svpod--timeline-track--shape--height);
+		--svpod--timeline-thumb--shape--height: var(
+			--svpod--timeline-track--shape--height
+		);
 		--svpod--timeline-thumb--shape--width: 3px;
 		--svpod--timeline-thumb--shape--radius: 1px;
 		--svpod--timeline-thumb--shape--border: 0px;
@@ -226,10 +230,15 @@
 
 	.svpod--timeline {
 		:global(input[type='range']) {
-			--track--shape--height: calc(var(--svpod--timeline-track--shape--height));
-			--thumb-border-offset: calc(var(--svpod--timeline-thumb--shape--border) * 2);
+			--track--shape--height: calc(
+				var(--svpod--timeline-track--shape--height)
+			);
+			--thumb-border-offset: calc(
+				var(--svpod--timeline-thumb--shape--border) * 2
+			);
 			--thumb--shape--height: calc(
-				var(--svpod--timeline-thumb--shape--height) - var(--thumb-border-offset)
+				var(--svpod--timeline-thumb--shape--height) -
+					var(--thumb-border-offset)
 			);
 
 			--svpod--timeline-track--bg: var(--svpod--surface--base);

@@ -16,36 +16,14 @@
 }
 
 @layer components {
-	.prose code {
-		@apply inline rounded bg-primary-100 px-2 py-1 font-mono leading-none text-primary-800;
-		overflow-wrap: anywhere;
-	}
-	.prose code::before,
-	.prose code::after {
-		content: '';
-	}
-	h1.anchor,
-	h2.anchor,
-	h3.anchor,
-	h4.anchor,
-	h5.anchor,
-	h6.anchor {
-		@apply m-0 text-3xl font-semibold leading-10 text-mono-900;
-	}
+	.richtext h1 a,
+	.richtext h2 a,
+	.richtext h3 a,
+	.richtext h4 a,
+	.richtext h5 a,
+	.richtext h6 a {
+		@apply relative underline decoration-transparent decoration-solid underline-offset-2;
 
-	.prose h1 a,
-	.prose h2 a,
-	.prose h3 a,
-	.prose h4 a,
-	.prose h5 a,
-	.prose h6 a,
-	h1.anchor a,
-	h2.anchor a,
-	h3.anchor a,
-	h4.anchor a,
-	h5.anchor a,
-	h6.anchor a {
-		@apply relative font-medium underline decoration-transparent decoration-solid decoration-2 underline-offset-2;
 		&::before {
 			@apply absolute -left-[1.25ch] inline-block font-light leading-normal text-mono-400;
 			content: '#';
@@ -58,168 +36,122 @@
 		}
 	}
 
-	.prose h3 a {
-		@apply text-primary-600;
+	.richtext code.hljs {
+		@apply p-0 text-sm;
+		overflow-wrap: anywhere;
 	}
 
-	.prose #table-of-contents + ol {
-		list-style: decimal-leading-zero;
-	}
-	.prose #table-of-contents + ol,
-	.prose #table-of-contents + ul {
-		ul,
-		ol,
-		li {
-			@apply my-0.5;
-		}
-
-		ol {
-			list-style: lower-alpha;
-			ol {
-				list-style: disc;
-				ol {
-					list-style: circle;
-				}
-			}
-		}
+	.richtext .codeblock code.hljs {
+		@apply overflow-hidden rounded-xl border border-mono-200 p-4 font-mono text-base leading-normal shadow-2xl shadow-mono-200;
 	}
 
-	.prose #features + table td:first-child > * {
-		@apply sm:block sm:w-max;
+	.richtext {
+		@apply prose prose-lg prose-slate max-w-none prose-h5:mb-1 prose-h5:mt-10 prose-h5:text-sm prose-h5:font-medium prose-h5:leading-normal prose-h5:text-primary-800 prose-code:before:content-none prose-code:after:content-none;
 	}
-}
 
-/***** prism-theme	*****/
-/*
- * Laserwave Theme originally by Jared Jones for Visual Studio Code
- * https://github.com/Jaredk3nt/laserwave
- *
- * Ported for PrismJS by Simon Jespersen [https://github.com/simjes]
- */
+	.richtext td,
+	.richtext th {
+		@apply px-4 py-2;
+	}
 
-code[class*='language-'],
-pre[class*='language-'] {
-	background: #27212e;
-	color: #ffffff;
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; /* this is the default */
-	/* The following properties are standard, please leave them as they are */
-	font-size: 1em;
-	direction: ltr;
-	text-align: left;
-	white-space: pre;
-	word-spacing: normal;
-	word-break: normal;
-	line-height: 1.5;
-	-moz-tab-size: 2;
-	-o-tab-size: 2;
-	tab-size: 2;
-	/* The following properties are also standard */
-	-webkit-hyphens: none;
-	-moz-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
-}
+	.richtext td {
+		@apply min-w-max;
+	}
 
-code[class*='language-']::-moz-selection,
-code[class*='language-'] ::-moz-selection,
-pre[class*='language-']::-moz-selection,
-pre[class*='language-'] ::-moz-selection {
-	background: #eb64b927;
-	color: inherit;
-}
+	/* HLJS */
+	pre code.hljs {
+		display: block;
+		overflow-x: auto;
+		padding: 1em;
+	}
+	code.hljs {
+		padding: 3px 5px;
+	}
+	/*
+		Theme: GitHub
+		Description: Light theme as seen on github.com
+		Author: github.com
+		Maintainer: @Hirse
+		Updated: 2021-05-15
 
-code[class*='language-']::selection,
-code[class*='language-'] ::selection,
-pre[class*='language-']::selection,
-pre[class*='language-'] ::selection {
-	background: #eb64b927;
-	color: inherit;
-}
-
-/* Properties specific to code blocks */
-pre[class*='language-'] {
-	padding: 1em; /* this is standard */
-	margin: 0.5em 0; /* this is the default */
-	overflow: auto; /* this is standard */
-	border-radius: 0.5em;
-}
-
-/* Properties specific to inline code */
-:not(pre) > code[class*='language-'] {
-	padding: 0.2em 0.3em;
-	border-radius: 0.5rem;
-	white-space: normal; /* this is standard */
-}
-
-.token.comment,
-.token.prolog,
-.token.cdata {
-	color: #91889b;
-}
-
-.token.punctuation {
-	color: #7b6995;
-}
-
-.token.builtin,
-.token.constant,
-.token.boolean {
-	color: #ffe261;
-}
-
-.token.number {
-	color: #b381c5;
-}
-
-.token.important,
-.token.atrule,
-.token.property,
-.token.keyword {
-	color: #40b4c4;
-}
-
-.token.doctype,
-.token.operator,
-.token.inserted,
-.token.tag,
-.token.class-name,
-.token.symbol {
-	color: #74dfc4;
-}
-
-.token.attr-name,
-.token.function,
-.token.deleted,
-.token.selector {
-	color: #eb64b9;
-}
-
-.token.attr-value,
-.token.regex,
-.token.char,
-.token.string {
-	color: #b4dce7;
-}
-
-.token.entity,
-.token.url,
-.token.variable {
-	color: #ffffff;
-}
-
-/* The following rules are pretty similar across themes, but feel free to adjust them */
-.token.bold {
-	font-weight: bold;
-}
-
-.token.italic {
-	font-style: italic;
-}
-
-.token.entity {
-	cursor: help;
-}
-
-.token.namespace {
-	opacity: 0.7;
+		Outdated base version: https://github.com/primer/github-syntax-light
+		Current colors taken from GitHub's CSS
+	*/
+	.hljs {
+		color: #24292e;
+		background: #fff;
+	}
+	.hljs-doctag,
+	.hljs-keyword,
+	.hljs-meta .hljs-keyword,
+	.hljs-template-tag,
+	.hljs-template-variable,
+	.hljs-type,
+	.hljs-variable.language_ {
+		color: #d73a49;
+	}
+	.hljs-title,
+	.hljs-title.class_,
+	.hljs-title.class_.inherited__,
+	.hljs-title.function_ {
+		color: #6f42c1;
+	}
+	.hljs-attr,
+	.hljs-attribute,
+	.hljs-literal,
+	.hljs-meta,
+	.hljs-number,
+	.hljs-operator,
+	.hljs-selector-attr,
+	.hljs-selector-class,
+	.hljs-selector-id,
+	.hljs-variable {
+		color: #005cc5;
+	}
+	.hljs-meta .hljs-string,
+	.hljs-regexp,
+	.hljs-string {
+		color: #032f62;
+	}
+	.hljs-built_in,
+	.hljs-symbol {
+		color: #e36209;
+	}
+	.hljs-code,
+	.hljs-comment,
+	.hljs-formula {
+		color: #6a737d;
+	}
+	.hljs-name,
+	.hljs-quote,
+	.hljs-selector-pseudo,
+	.hljs-selector-tag {
+		color: #22863a;
+	}
+	.hljs-subst {
+		color: #24292e;
+	}
+	.hljs-section {
+		color: #005cc5;
+		font-weight: 700;
+	}
+	.hljs-bullet {
+		color: #735c0f;
+	}
+	.hljs-emphasis {
+		color: #24292e;
+		font-style: italic;
+	}
+	.hljs-strong {
+		color: #24292e;
+		font-weight: 700;
+	}
+	.hljs-addition {
+		color: #22863a;
+		background-color: #f0fff4;
+	}
+	.hljs-deletion {
+		color: #b31d28;
+		background-color: #ffeef0;
+	}
 }

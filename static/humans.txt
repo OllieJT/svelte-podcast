@@ -1,0 +1,7 @@
+/* Maintainer */
+	Name: Ollie Taylor
+	Website: https://olliejt.com
+
+/* Contributor */
+	Name: Ollie Taylor
+	Website: https://olliejt.com

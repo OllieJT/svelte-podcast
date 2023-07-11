@@ -1,7 +1,7 @@
 import clamp from 'just-clamp';
 import { derived, get } from 'svelte/store';
 import { user_preferences, user_progress } from '../../user';
-import { announce } from '../../utility';
+import { announce } from '../../internal';
 import { audio_element } from './audio-element';
 import { episode_details } from './episode-details';
 
@@ -29,32 +29,35 @@ const default_episode_state = {
  * Episode state store
  * @type {import('svelte/store').Readable<EpisodeState | null>}
  */
-const episode_state = derived([audio_element, episode_details], ([$audio, $details], set) => {
-	if (!$audio) return set(null);
+const episode_state = derived(
+	[audio_element, episode_details],
+	([$audio, $details], set) => {
+		if (!$audio) return set(null);
 
-	function set_value() {
-		if (!$audio?.src) return null;
-		set({
-			...default_episode_state,
-			src: $audio.src,
-			duration: $audio.duration,
-			details: $details,
-			will_autoplay: $audio.autoplay,
-			is_paused: $audio.paused,
-			start_at: user_progress.get($audio.src) ?? 0,
-		});
-	}
+		function set_value() {
+			if (!$audio?.src) return null;
+			set({
+				...default_episode_state,
+				src: $audio.src,
+				duration: $audio.duration,
+				details: $details,
+				will_autoplay: $audio.autoplay,
+				is_paused: $audio.paused,
+				start_at: user_progress.get($audio.src) ?? 0,
+			});
+		}
 
-	$audio.addEventListener('loadeddata', set_value);
-	$audio.addEventListener('pause', set_value);
-	$audio.addEventListener('playing', set_value);
+		$audio.addEventListener('loadeddata', set_value);
+		$audio.addEventListener('pause', set_value);
+		$audio.addEventListener('playing', set_value);
 
-	return () => {
-		$audio.removeEventListener('loadeddata', set_value);
-		$audio.removeEventListener('pause', set_value);
-		$audio.removeEventListener('playing', set_value);
-	};
-});
+		return () => {
+			$audio.removeEventListener('loadeddata', set_value);
+			$audio.removeEventListener('pause', set_value);
+			$audio.removeEventListener('playing', set_value);
+		};
+	},
+);
 
 /**
  * @typedef {'toggle' | 'set'} HANDLE_TYPE
@@ -68,7 +71,8 @@ const episode_state = derived([audio_element, episode_details], ([$audio, $detai
  */
 const use_element = (action) => {
 	const el = get(audio_element);
-	if (!el) throw announce.warn(`could not ${action} :: no audio element exists yet`);
+	if (!el)
+		throw announce.warn(`could not ${action} :: no audio element exists yet`);
 	return el;
 };
 

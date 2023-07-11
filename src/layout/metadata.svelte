@@ -1,0 +1,36 @@
+<script>
+	import { base } from '$app/paths';
+	import { page } from '$app/stores';
+	import { MetaTags } from 'svelte-meta-tags';
+
+	const site_name = 'Svelte Podcast';
+	/** @type {string} */
+	export let title = 'The fastest way to build a podcast site with Svelte.';
+	/** @type {string} */
+	export let description =
+		'A suite of tools and components to build your own podcast players, and work with RSS podcast data in SvelteKit.';
+
+	// TODO: update canonical link with static link
+	/** @type {string} */
+	export let canonical = $page.url.href + base;
+
+	// TODO: add screenshots under images
+	/** @type {import('svelte-meta-tags').OpenGraph["images"]}*/
+	export let images = [];
+</script>
+
+<MetaTags
+	titleTemplate="%s | {site_name}"
+	{title}
+	{description}
+	{canonical}
+	openGraph={{
+		locale: 'en_US',
+		site_name,
+		type: 'website',
+		url: canonical,
+		title: title,
+		description,
+		images,
+	}}
+/>
