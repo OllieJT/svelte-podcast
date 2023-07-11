@@ -13,7 +13,7 @@
 
 <Container as="section" aria-labelledby={anchor}>
 	<div class="richtext">
-		<svelte:element this={level} id={anchor}>
+		<svelte:element this={level} id={anchor} class="mt-0">
 			<a href="#{anchor}">{title}</a>
 		</svelte:element>
 

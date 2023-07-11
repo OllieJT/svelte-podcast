@@ -18,7 +18,7 @@
 <slot name="header" {anchor} {title}>
 	<Container as="header" aria-labelledby={anchor}>
 		<div class="richtext pt-20">
-			<h1 id={anchor}>{title}</h1>
+			<h1 id={anchor} class="my-0">{title}</h1>
 		</div>
 	</Container>
 </slot>

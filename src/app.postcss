@@ -16,28 +16,14 @@
 }
 
 @layer components {
-	h1.anchor,
-	h2.anchor,
-	h3.anchor,
-	h4.anchor,
-	h5.anchor,
-	h6.anchor {
-		@apply m-0 text-3xl font-semibold leading-10 text-mono-900;
-	}
-
 	.richtext h1 a,
 	.richtext h2 a,
 	.richtext h3 a,
 	.richtext h4 a,
 	.richtext h5 a,
-	.richtext h6 a,
-	h1.anchor a,
-	h2.anchor a,
-	h3.anchor a,
-	h4.anchor a,
-	h5.anchor a,
-	h6.anchor a {
-		@apply relative font-medium underline decoration-transparent decoration-solid decoration-2 underline-offset-2;
+	.richtext h6 a {
+		@apply relative underline decoration-transparent decoration-solid underline-offset-2;
+
 		&::before {
 			@apply absolute -left-[1.25ch] inline-block font-light leading-normal text-mono-400;
 			content: '#';
@@ -50,14 +36,6 @@
 		}
 	}
 
-	.richtext h3 a {
-		@apply text-primary-600;
-	}
-
-	.richtext #features + table td:first-child > * {
-		@apply sm:block sm:w-max;
-	}
-
 	.richtext code.hljs {
 		@apply p-0 text-sm;
 		overflow-wrap: anywhere;
@@ -68,7 +46,7 @@
 	}
 
 	.richtext {
-		@apply prose prose-lg prose-slate max-w-none prose-headings:first:mt-0 prose-headings:last:mb-0 prose-h5:mb-1 prose-h5:mt-10 prose-h5:text-sm prose-h5:font-medium prose-h5:leading-normal prose-h5:text-primary-800 prose-code:before:content-none prose-code:after:content-none;
+		@apply prose prose-lg prose-slate max-w-none prose-h5:mb-1 prose-h5:mt-10 prose-h5:text-sm prose-h5:font-medium prose-h5:leading-normal prose-h5:text-primary-800 prose-code:before:content-none prose-code:after:content-none;
 	}
 
 	.richtext td,
