@@ -1,11 +1,11 @@
 <script>
 	import PlayerStack from '$src/components/example-player/player-stack.svelte';
 	import PlayerWidget from '$src/components/example-player/player-widget.svelte';
-	import PreviewComponent from '$src/components/preview-component.svelte';
-	import PreviewDataCode from '$src/components/preview-data-code.svelte';
-	import PreviewData from '$src/components/preview-data.svelte';
 	import { Section } from '$src/content/components';
 	import { episodes } from '$src/content/episodes';
+	import PreviewComponent from '$src/layout/preview-component.svelte';
+	import PreviewDataCode from '$src/layout/preview-data-code.svelte';
+	import PreviewData from '$src/layout/preview-data.svelte';
 	import {
 		episode_audio,
 		episode_progress,
@@ -45,7 +45,11 @@
 		<svelte:fragment slot="options">
 			<div>
 				<label for="pw_current_time">current_time</label>
-				<input id="pw_current_time" type="checkbox" bind:checked={player_widget.current_time} />
+				<input
+					id="pw_current_time"
+					type="checkbox"
+					bind:checked={player_widget.current_time}
+				/>
 			</div>
 			<div>
 				<label for="pw_playback_rate">playback_rate</label>
@@ -57,15 +61,27 @@
 			</div>
 			<div>
 				<label for="pw_duration">duration</label>
-				<input id="pw_duration" type="checkbox" bind:checked={player_widget.duration} />
+				<input
+					id="pw_duration"
+					type="checkbox"
+					bind:checked={player_widget.duration}
+				/>
 			</div>
 			<div>
 				<label for="pw_skip_back">skip_back</label>
-				<input id="pw_skip_back" type="number" bind:value={player_widget.skip_back} />
+				<input
+					id="pw_skip_back"
+					type="number"
+					bind:value={player_widget.skip_back}
+				/>
 			</div>
 			<div>
 				<label for="pw_skip_forward">skip_forward</label>
-				<input id="pw_skip_forward" type="number" bind:value={player_widget.skip_forward} />
+				<input
+					id="pw_skip_forward"
+					type="number"
+					bind:value={player_widget.skip_forward}
+				/>
 			</div>
 		</svelte:fragment>
 
@@ -86,15 +102,27 @@
 			</div>
 			<div>
 				<label for="pw_timestamps">timestamps</label>
-				<input id="pw_timestamps" type="checkbox" bind:checked={player_stack.timestamps} />
+				<input
+					id="pw_timestamps"
+					type="checkbox"
+					bind:checked={player_stack.timestamps}
+				/>
 			</div>
 			<div>
 				<label for="pw_skip_back">skip_back</label>
-				<input id="pw_skip_back" type="number" bind:value={player_stack.skip_back} />
+				<input
+					id="pw_skip_back"
+					type="number"
+					bind:value={player_stack.skip_back}
+				/>
 			</div>
 			<div>
 				<label for="pw_skip_forward">skip_forward</label>
-				<input id="pw_skip_forward" type="number" bind:value={player_stack.skip_forward} />
+				<input
+					id="pw_skip_forward"
+					type="number"
+					bind:value={player_stack.skip_forward}
+				/>
 			</div>
 		</svelte:fragment>
 
@@ -106,8 +134,8 @@
 	<div class="prose prose-lg prose-slate">
 		<h2>Data</h2>
 		<p>
-			The following are the stores that are available to you based on the active episode being
-			played in the above examples.
+			The following are the stores that are available to you based on the
+			active episode being played in the above examples.
 		</p>
 		<PreviewData name="episode_audio" data={episode_audio}>
 			<PreviewDataCode
@@ -180,17 +208,23 @@
 				code={`user_progress.subscribe()`}
 				description="subscribes to the user_progress data"
 			/>
-			<button type="button" on:click={user_progress.clear}>user_progress.clear()</button>
+			<button type="button" on:click={user_progress.clear}
+				>user_progress.clear()</button
+			>
 			<PreviewDataCode
 				code={`user_progress.clear()`}
 				description="clears all user progress for all episodes"
 			/>
-			<button type="button" on:click={user_progress.clear}>user_progress.clear()</button>
+			<button type="button" on:click={user_progress.clear}
+				>user_progress.clear()</button
+			>
 			<PreviewDataCode
 				code={`user_progress.get(src:string)`}
 				description="gets the users progress (seconds) for a specific episode"
 			/>
-			<button type="button" on:click={user_progress.save}>user_progress.save()</button>
+			<button type="button" on:click={user_progress.save}
+				>user_progress.save()</button
+			>
 			<PreviewDataCode
 				code={`user_progress.save()`}
 				description="saves all user progress for all episodes they have interacted with in the current session"
@@ -200,20 +234,25 @@
 </Section>
 
 <h1>Demo</h1>
-<button type="button" on:click={user_preferences.clear}>Clear all preferences</button>
+<button type="button" on:click={user_preferences.clear}
+	>Clear all preferences</button
+>
 
 <hr />
 
 <h5>Load Audio</h5>
 <button
 	type="button"
-	on:click={() => episode_audio.load(episodes['syntax'].src, episodes['syntax'])}
+	on:click={() =>
+		episode_audio.load(episodes['syntax'].src, episodes['syntax'])}
 >
 	Syntax
 </button>
 <button
 	type="button"
-	on:click={() => episode_audio.load(episodes['knomii'].src, episodes['knomii'])}>Knomii</button
+	on:click={() =>
+		episode_audio.load(episodes['knomii'].src, episodes['knomii'])}
+	>Knomii</button
 >
 <button type="button" on:click={() => episode_audio.unload()}>None</button>
 
@@ -225,7 +264,9 @@
 
 <button type="button" on:click={() => episode_audio.play()}>Play</button>
 <button type="button" on:click={() => episode_audio.pause()}>Pause</button>
-<button type="button" on:click={() => episode_audio.pause('toggle')}>Toggle</button>
+<button type="button" on:click={() => episode_audio.pause('toggle')}
+	>Toggle</button
+>
 
 <hr />
 
@@ -233,24 +274,36 @@
 
 <button type="button" on:click={() => episode_audio.mute()}>Mute</button>
 <button type="button" on:click={() => episode_audio.unmute()}>Unmute</button>
-<button type="button" on:click={() => episode_audio.mute('toggle')}>Toggle</button>
+<button type="button" on:click={() => episode_audio.mute('toggle')}
+	>Toggle</button
+>
 
 <hr />
 
 <h6>Seeking</h6>
 
-<button type="button" on:click={() => episode_audio.seek(30)}>Go to 30s from start </button>
-<button type="button" on:click={() => episode_audio.seek(30, 'from-end')}>Go to 30s from end</button
+<button type="button" on:click={() => episode_audio.seek(30)}
+	>Go to 30s from start
+</button>
+<button type="button" on:click={() => episode_audio.seek(30, 'from-end')}
+	>Go to 30s from end</button
 >
-<button type="button" on:click={() => episode_audio.skip(10, 'forward')}>Skip 10s</button>
-<button type="button" on:click={() => episode_audio.skip(10, 'backward')}>Rewind 10s</button>
+<button type="button" on:click={() => episode_audio.skip(10, 'forward')}
+	>Skip 10s</button
+>
+<button type="button" on:click={() => episode_audio.skip(10, 'backward')}
+	>Rewind 10s</button
+>
 
 <hr />
 
 <h6>Playback Rate</h6>
 
 {#each [0.5, 1, 2, 3] as rate}
-	<button type="button" on:click={() => user_preferences.set_playback_rate(rate)}>
+	<button
+		type="button"
+		on:click={() => user_preferences.set_playback_rate(rate)}
+	>
 		{rate}x
 	</button>
 {/each}

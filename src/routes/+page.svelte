@@ -1,7 +1,7 @@
 <script>
-	import Metadata from '$src/components/metadata.svelte';
 	import { Section } from '$src/content/components';
 	import { episodes } from '$src/content/episodes';
+	import Metadata from '$src/layout/metadata.svelte';
 	import {
 		add_audio_loader,
 		install,
@@ -136,9 +136,24 @@
 			</div>
 		</section>
 
-		<section aria-labelledby="load-audio">
-			<h3 id="load-audio"><a href="#load-audio">Load audio source</a></h3>
+		<!-- episode_audio -->
+		<section aria-labelledby="episode-audio">
+			<h3 id="episode-audio"><a href="#episode-audio">episode_audio</a></h3>
+			<p>TODO</p>
+		</section>
+
+		<!-- episode_details -->
+		<section aria-labelledby="episode-details">
+			<h3 id="episode-details"><a href="#episode-details">episode_details</a></h3>
+			<p>TODO</p>
+		</section>
+
+		<!-- episode_progress -->
+		<section aria-labelledby="episode-progress">
+			<h3 id="episode-progress"><a href="#episode-progress">episode_progress</a></h3>
 			<p>TODO</p>
 		</section>
 	</div>
 </Section>
+
+<div class="prose prose-lg prose-slate">{@html data.html}</div>
