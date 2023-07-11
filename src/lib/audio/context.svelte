@@ -1,8 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
+	import { announce } from '../internal';
 	import { user_preferences } from '../user';
-	import { announce } from '../utility';
 	import { audio_element } from './stores/audio-element';
 
 	$: $audio_element;

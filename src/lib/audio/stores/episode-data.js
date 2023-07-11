@@ -1,7 +1,7 @@
 import clamp from 'just-clamp';
 import { derived, get } from 'svelte/store';
 import { user_preferences, user_progress } from '../../user';
-import { announce } from '../../utility';
+import { announce } from '../../internal';
 import { audio_element } from './audio-element';
 import { episode_details } from './episode-details';
 

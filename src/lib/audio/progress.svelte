@@ -1,6 +1,6 @@
 <script>
 	import { episode_audio, episode_progress } from '../audio';
-	import { announce } from '../utility';
+	import { announce } from '../internal';
 
 	export let step = 10;
 
