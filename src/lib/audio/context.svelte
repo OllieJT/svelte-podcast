@@ -12,6 +12,7 @@
 			const el = get(audio_element);
 
 			if (!el) return announce.warn('no audio element found');
+			else announce.info('audio element found :: ', el);
 
 			announce.info('setting preferences :: ', prefs);
 			el.volume = prefs.volume;
