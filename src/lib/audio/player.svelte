@@ -17,7 +17,9 @@
 	$: is_playing = $episode_audio?.is_paused === false;
 	$: current_time = $episode_progress?.current_time || 0;
 	$: duration = $episode_audio?.duration || 0;
-	$: timestamp_hours = Boolean($episode_audio?.duration && $episode_audio.duration >= 3600);
+	$: timestamp_hours = Boolean(
+		$episode_audio?.duration && $episode_audio.duration >= 3600,
+	);
 	$: timestamp = duration && seconds_to_timestamp(duration);
 
 	onMount(() => {

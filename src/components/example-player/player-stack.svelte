@@ -1,7 +1,15 @@
 <script>
-	import { Pause, Play, SpeakerWave } from '@inqling/svelte-icons/heroicon-20-solid';
+	import {
+		Pause,
+		Play,
+		SpeakerWave,
+	} from '@inqling/svelte-icons/heroicon-20-solid';
 	import { clsx } from 'clsx';
-	import { AudioPlayer, episode_progress, user_preferences } from 'svelte-podcast';
+	import {
+		AudioPlayer,
+		episode_progress,
+		user_preferences,
+	} from 'svelte-podcast';
 	import { A11yIcon, Skip, Spinner, Timestamp } from './utility';
 
 	/** @type {string | undefined} */
@@ -131,7 +139,9 @@
 		--svpod--timeline-track--shape--radius: var(--inner-radius);
 		--svpod--timeline-track--shape--border: 2px;
 
-		--svpod--timeline-thumb--shape--height: var(--svpod--timeline-track--shape--height);
+		--svpod--timeline-thumb--shape--height: var(
+			--svpod--timeline-track--shape--height
+		);
 		--svpod--timeline-thumb--shape--width: 3px;
 		--svpod--timeline-thumb--shape--radius: 1px;
 		--svpod--timeline-thumb--shape--border: 0px;
@@ -301,7 +311,11 @@
 		height: 100%;
 		content: '';
 		opacity: 0.5;
-		background: linear-gradient(45deg, var(--svpod--accent--base), transparent);
+		background: linear-gradient(
+			45deg,
+			var(--svpod--accent--base),
+			transparent
+		);
 	}
 
 	span.svpod--aspect--square {
@@ -313,10 +327,15 @@
 
 	.svpod--timeline {
 		:global(input[type='range']) {
-			--track--shape--height: calc(var(--svpod--timeline-track--shape--height));
-			--thumb-border-offset: calc(var(--svpod--timeline-thumb--shape--border) * 2);
+			--track--shape--height: calc(
+				var(--svpod--timeline-track--shape--height)
+			);
+			--thumb-border-offset: calc(
+				var(--svpod--timeline-thumb--shape--border) * 2
+			);
 			--thumb--shape--height: calc(
-				var(--svpod--timeline-thumb--shape--height) - var(--thumb-border-offset)
+				var(--svpod--timeline-thumb--shape--height) -
+					var(--thumb-border-offset)
 			);
 
 			--svpod--timeline-track--bg: var(--svpod--surface--base);

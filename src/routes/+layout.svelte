@@ -43,10 +43,14 @@
 					/>
 				</a>
 			</div>
-			<div class="col-span-8 flex items-center justify-center leading-none sm:gap-1">
+			<div
+				class="col-span-8 flex items-center justify-center leading-none sm:gap-1"
+			>
 				{#each page_links as link}
-					{@const is_homepage = link.href === '/' && $page.url.pathname === link.href}
-					{@const is_match = link.href !== '/' && $page.url.pathname.startsWith(link.href)}
+					{@const is_homepage =
+						link.href === '/' && $page.url.pathname === link.href}
+					{@const is_match =
+						link.href !== '/' && $page.url.pathname.startsWith(link.href)}
 					<a
 						href={base + link.href}
 						class={clsx(
@@ -107,20 +111,25 @@
 						<span class="block text-xl font-medium text-primary-600">
 							svelte-podcast<span class="sr-only">: </span>
 						</span>
-						<span class="text-4xl font-bold tracking-tight text-mono-900 sm:text-6xl">
+						<span
+							class="text-4xl font-bold tracking-tight text-mono-900 sm:text-6xl"
+						>
 							The fastest way to build a podcast site with Svelte.
 						</span>
 					</h1>
 					<p class="mt-6 text-xl leading-8 text-mono-600">
-						A suite of tools and components to build your own podcast players, and work with
-						RSS podcast data in SvelteKit.
-						<span class="mt-3 block text-base leading-none text-primary-800">
+						A suite of tools and components to build your own podcast
+						players, and work with RSS podcast data in SvelteKit.
+						<span
+							class="mt-3 block text-base leading-none text-primary-800"
+						>
 							<span
 								class="inline-block rounded-full bg-primary-50 px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-primary-600"
 							>
 								Coming Soon<span class="sr-only">:</span>
 							</span>
-							<span class="tracking-wide">SSR utilities for consuming RSS podcast feeds</span
+							<span class="tracking-wide"
+								>SSR utilities for consuming RSS podcast feeds</span
 							>
 						</span>
 					</p>

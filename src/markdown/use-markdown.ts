@@ -17,7 +17,9 @@ export async function use_markdown(markdown: string) {
 	const pipeline = unified()
 		.use(remarkParse)
 		.use(remarkGfm)
-		.use(remarkGithub, { repository: 'https://github.com/OllieJT/svelte-podcast.git' })
+		.use(remarkGithub, {
+			repository: 'https://github.com/OllieJT/svelte-podcast.git',
+		})
 		.use(remarkToc, { tight: true, ordered: true, maxDepth: 4 })
 		.use(remarkRehype)
 		.use(rehypeStringify)
@@ -95,7 +97,10 @@ export async function use_markdown(markdown: string) {
 		.use(rehypeHighlight, { languages: { svelte: hljsDefineSvelte } })
 		.use(rehypeSlug)
 		.use(rehypeAutolinkHeadings, { behavior: 'wrap' })
-		.use(rehypeExternalLinks, { target: '_blank', rel: ['nofollow', 'noopener', 'noreferrer'] });
+		.use(rehypeExternalLinks, {
+			target: '_blank',
+			rel: ['nofollow', 'noopener', 'noreferrer'],
+		});
 
 	const output = await pipeline.process(markdown);
 

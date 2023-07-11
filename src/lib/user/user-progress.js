@@ -35,7 +35,10 @@ const save_user_progress = () => {
 
 	const pathname = use_url(audio.src).pathname;
 	const current_time = get(episode_progress).current_time;
-	USER_PROGRESS_STORE.update((prev) => ({ ...prev, [pathname]: current_time }));
+	USER_PROGRESS_STORE.update((prev) => ({
+		...prev,
+		[pathname]: current_time,
+	}));
 };
 
 /**
@@ -60,7 +63,8 @@ const get_user_progress = (src) => {
  * @function
  * @returns {void}
  */
-const clear_user_progress = () => USER_PROGRESS_STORE.set(DEFAULT_USER_PROGRESS);
+const clear_user_progress = () =>
+	USER_PROGRESS_STORE.set(DEFAULT_USER_PROGRESS);
 
 /**
  * User progress object

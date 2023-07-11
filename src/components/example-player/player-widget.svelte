@@ -70,7 +70,10 @@
 
 		{#if !hide_current_time}
 			<div class="svpod--timestamp">
-				<Timestamp value={episode.current_time} force_hours={episode.timestamp_hours} />
+				<Timestamp
+					value={episode.current_time}
+					force_hours={episode.timestamp_hours}
+				/>
 			</div>
 		{/if}
 
@@ -120,7 +123,9 @@
 		--svpod--timeline-track--shape--radius: var(--inner-radius);
 		--svpod--timeline-track--shape--border: 2px;
 
-		--svpod--timeline-thumb--shape--height: var(--svpod--timeline-track--shape--height);
+		--svpod--timeline-thumb--shape--height: var(
+			--svpod--timeline-track--shape--height
+		);
 		--svpod--timeline-thumb--shape--width: 3px;
 		--svpod--timeline-thumb--shape--radius: 1px;
 		--svpod--timeline-thumb--shape--border: 0px;
@@ -228,10 +233,15 @@
 
 	.svpod--timeline {
 		:global(input[type='range']) {
-			--track--shape--height: calc(var(--svpod--timeline-track--shape--height));
-			--thumb-border-offset: calc(var(--svpod--timeline-thumb--shape--border) * 2);
+			--track--shape--height: calc(
+				var(--svpod--timeline-track--shape--height)
+			);
+			--thumb-border-offset: calc(
+				var(--svpod--timeline-thumb--shape--border) * 2
+			);
 			--thumb--shape--height: calc(
-				var(--svpod--timeline-thumb--shape--height) - var(--thumb-border-offset)
+				var(--svpod--timeline-thumb--shape--height) -
+					var(--thumb-border-offset)
 			);
 
 			--svpod--timeline-track--bg: var(--svpod--surface--base);
