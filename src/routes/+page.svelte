@@ -135,5 +135,10 @@
 				<Highlight code={load_audio_local} language={lang_ts} />
 			</div>
 		</section>
+
+		<section aria-labelledby="load-audio">
+			<h3 id="load-audio"><a href="#load-audio">Load audio source</a></h3>
+			<p>TODO</p>
+		</section>
 	</div>
 </Section>
