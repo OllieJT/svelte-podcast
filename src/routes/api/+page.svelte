@@ -1,13 +1,13 @@
 <script>
 	import { DocsPage } from '$src/layout/page';
+	import { Highlight } from 'svelte-highlight';
+	import lang_ts from 'svelte-highlight/languages/typescript';
 	import {
 		load_audio_local,
 		load_audio_remote,
 		override_episode_state,
 		seconds_to_timestamp,
-	} from '$src/routes/code';
-	import { Highlight } from 'svelte-highlight';
-	import lang_ts from 'svelte-highlight/languages/typescript';
+	} from './code';
 </script>
 
 <DocsPage

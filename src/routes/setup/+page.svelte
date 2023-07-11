@@ -1,6 +1,6 @@
 <script>
 	import { DocsPage } from '$src/layout/page';
-	import { add_audio_loader, install } from '$src/routes/code';
+	import { add_audio_loader, install } from './code';
 
 	import { Highlight, HighlightSvelte } from 'svelte-highlight';
 	import lang_shell from 'svelte-highlight/languages/shell';
