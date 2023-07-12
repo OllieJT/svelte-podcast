@@ -3,7 +3,7 @@ import clamp from 'just-clamp';
 
 import { get } from 'svelte/store';
 import { user_preferences, user_progress } from '../user';
-import { use_audio_element } from './audio-element';
+import { audio_attributes, use_audio_element } from './audio-element';
 import { audio_element_source } from './audio-element-source';
 import { audio_metadata } from './audio-metadata';
 
@@ -13,7 +13,7 @@ import { audio_metadata } from './audio-metadata';
  * @param {import('./audio-metadata').AudioMetadata } metadata - Audio metadata
  * @returns {void}
  */
-const load = (src, metadata, autoplay = false) => {
+const load = (src, metadata = {}, autoplay = false) => {
 	if (!BROWSER) return;
 
 	// Save the current progress if audio is already loaded
@@ -153,6 +153,7 @@ const skip = (seconds, type = 'forward') => {
  *  Audio controls
  */
 export const audio = {
+	subscribe: audio_attributes.subscribe,
 	load,
 	unload,
 	play,

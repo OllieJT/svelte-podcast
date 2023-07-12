@@ -57,11 +57,6 @@
 	) => {
 		if (!is_current_page) return false;
 
-		if (typeof document !== 'undefined') {
-			const el = document.querySelector(`[id="${anchor}"]`);
-			if (!el) throw new Error(`No element found with id "${anchor}"`);
-		}
-
 		return $page.url.hash.includes(anchor);
 	};
 </script>

@@ -48,6 +48,9 @@
 	.richtext {
 		@apply prose prose-lg prose-slate max-w-none prose-h5:mb-1 prose-h5:mt-10 prose-h5:text-sm prose-h5:font-medium prose-h5:leading-normal prose-h5:text-primary-800 prose-code:before:content-none prose-code:after:content-none;
 	}
+	.richtext code:not(.hljs) {
+		@apply rounded-md border border-mono-200 bg-white px-1.5 py-0.5 font-mono font-normal tracking-wide text-mono-950;
+	}
 
 	.richtext td,
 	.richtext th {

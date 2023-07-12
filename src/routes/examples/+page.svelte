@@ -17,6 +17,7 @@
 </script>
 
 <DocsPage title="Examples" let:Section>
+	<p class="text-xl font-semibold text-red-500">Work in progress!</p>
 	<Section title="PlayerWidget">
 		<PreviewComponent name="PlayerWidget">
 			<svelte:fragment slot="options">
