@@ -1,5 +1,4 @@
 <script>
-	import PlayerStack from '$src/components/example-player/player-stack.svelte';
 	import PlayerWidget from '$src/components/example-player/player-widget.svelte';
 	import { episodes } from '$src/content/episodes';
 	import { DocsPage } from '$src/layout/page';
@@ -80,47 +79,6 @@
 			</svelte:fragment>
 
 			<PlayerWidget src={audio_src} include={player_widget} />
-		</PreviewComponent>
-	</Section>
-
-	<Section title="PlayerStack">
-		<PreviewComponent name="PlayerStack">
-			<svelte:fragment slot="options">
-				<div>
-					<label for="pw_playback_rate">playback_rate</label>
-					<input
-						id="pw_playback_rate"
-						type="checkbox"
-						bind:checked={player_stack.playback_rate}
-					/>
-				</div>
-				<div>
-					<label for="pw_timestamps">timestamps</label>
-					<input
-						id="pw_timestamps"
-						type="checkbox"
-						bind:checked={player_stack.timestamps}
-					/>
-				</div>
-				<div>
-					<label for="pw_skip_back">skip_back</label>
-					<input
-						id="pw_skip_back"
-						type="number"
-						bind:value={player_stack.skip_back}
-					/>
-				</div>
-				<div>
-					<label for="pw_skip_forward">skip_forward</label>
-					<input
-						id="pw_skip_forward"
-						type="number"
-						bind:value={player_stack.skip_forward}
-					/>
-				</div>
-			</svelte:fragment>
-
-			<PlayerStack src={audio_src} class="max-w-sm" include={player_stack} />
 		</PreviewComponent>
 	</Section>
 </DocsPage>
