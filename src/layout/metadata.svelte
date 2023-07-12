@@ -1,5 +1,4 @@
 <script>
-	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 	import { MetaTags } from 'svelte-meta-tags';
 
@@ -10,9 +9,8 @@
 	export let description =
 		'A suite of tools and components to build your own podcast players, and work with RSS podcast data in SvelteKit.';
 
-	// TODO: update canonical link with static link
 	/** @type {string} */
-	export let canonical = $page.url.href + base;
+	export let canonical = 'https://svelte-podcast.com' + $page.url.pathname;
 
 	// TODO: add screenshots under images
 	/** @type {import('svelte-meta-tags').OpenGraph["images"]}*/

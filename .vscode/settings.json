@@ -10,6 +10,11 @@
 			"source.organizeImports": true
 		}
 	},
+	"[javascript]": {
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": true
+		}
+	},
 	"eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -33,5 +38,8 @@
 		"**/node_modules": true,
 		"**/.svelte-kit": true
 	},
-	"problems.sortOrder": "severity"
+	"problems.sortOrder": "severity",
+	"javascript.preferences.importModuleSpecifier": "relative",
+	"typescript.preferences.importModuleSpecifier": "relative",
+	"todo-tree.tree.scanMode": "workspace only"
 }

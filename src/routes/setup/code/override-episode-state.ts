@@ -2,9 +2,9 @@
 
 declare module 'svelte-podcast' {
 	interface EpisodeDetails {
-		// define your own properties here
 		title: string;
-		artwork?: string;
+		artwork: string;
+		guest_name: string;
 	}
 }
 

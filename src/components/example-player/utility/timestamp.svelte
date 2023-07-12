@@ -1,5 +1,5 @@
 <script>
-	import { seconds_to_timestamp } from 'svelte-podcast';
+	import { seconds_to_timestamp } from 'svelte-podcast/utility';
 
 	/** @type {number} */
 	export let value;

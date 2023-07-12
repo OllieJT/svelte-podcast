@@ -3,7 +3,6 @@
 	import GitHubIcon from '@inqling/svelte-icons/simple-icons/github.svelte';
 	import NPMIcon from '@inqling/svelte-icons/simple-icons/npm.svelte';
 	import github from 'svelte-highlight/styles/github';
-	import { AudioContext } from 'svelte-podcast';
 	import { circIn, circOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
 	import '../app.postcss';
@@ -18,21 +17,54 @@
 			label: 'Setup',
 			href: '/setup',
 			sections: [
-				{ label: 'installation', anchor: 'installation' },
-				{ label: 'Loader', anchor: 'add_loader' },
+				{ label: 'Installation', anchor: 'installation' },
+				{ label: 'Audio Sources', anchor: 'audio_sources' },
+				{ label: 'Type Safety', anchor: 'type_safety' },
 			],
 		},
 		{
 			label: 'API',
 			href: '/api',
 			sections: [
-				{ label: 'Episode Audio', anchor: 'episode_audio' },
-				{ label: 'Load Audio Source', anchor: 'load_audio_source' },
-				{ label: 'Episode Details', anchor: 'episode_details' },
-				{ label: 'Episode Progress', anchor: 'episode_progress' },
-				{ label: 'Seconds To Timestamp', anchor: 'seconds_to_timestamp' },
-				{ label: 'User Preferences', anchor: 'user_preferences' },
-				{ label: 'User Progress', anchor: 'user_progress' },
+				{ label: 'audio', anchor: 'audio' },
+				{ label: 'audio_data', anchor: 'audio_data' },
+				{ label: 'audio.subscribe', anchor: 'audio.subscribe' },
+				{ label: 'audio.load', anchor: 'audio.load' },
+				{ label: 'audio.unload', anchor: 'audio.unload' },
+				{ label: 'audio.play', anchor: 'audio.play' },
+				{ label: 'audio.pause', anchor: 'audio.pause' },
+				{ label: 'audio.mute', anchor: 'audio.mute' },
+				{ label: 'audio.unmute', anchor: 'audio.unmute' },
+				{ label: 'audio.seek', anchor: 'audio.seek' },
+				{ label: 'audio.skip', anchor: 'audio.skip' },
+				{ label: 'user_preferences', anchor: 'user_preferences' },
+				{ label: 'user_preferences_data', anchor: 'user_preferences_data' },
+				{
+					label: 'user_preferences.subscribe',
+					anchor: 'user_preferences.subscribe',
+				},
+				{
+					label: 'user_preferences.set_playback_rate',
+					anchor: 'user_preferences.set_playback_rate',
+				},
+				{
+					label: 'user_preferences.set_volume',
+					anchor: 'user_preferences.set_volume',
+				},
+				{
+					label: 'user_preferences.clear',
+					anchor: 'user_preferences.clear',
+				},
+				{ label: 'user_progress', anchor: 'user_progress' },
+				{ label: 'user_progress_data', anchor: 'user_progress_data' },
+				{
+					label: 'user_progress.subscribe',
+					anchor: 'user_progress.subscribe',
+				},
+				{ label: 'user_progress.get', anchor: 'user_progress.get' },
+				{ label: 'user_progress.clear', anchor: 'user_progress.clear' },
+				{ label: 'user_progress.save', anchor: 'user_progress.save' },
+				{ label: 'seconds_to_timestamp', anchor: 'seconds_to_timestamp' },
 			],
 		},
 		{
@@ -55,6 +87,19 @@
 		},
 	]);
 
+	const podcast_links = Object.freeze([
+		{
+			label: 'Svelte Radio',
+			href: 'https://www.svelteradio.com/',
+			src: '/svelte-radio.png',
+		},
+		{
+			label: 'Syntax',
+			href: 'https://syntax.fm/',
+			src: '/syntax.png',
+		},
+	]);
+
 	let is_menu_open = false;
 
 	const open_menu = () => (is_menu_open = true);
@@ -64,8 +109,6 @@
 <svelte:head>
 	{@html github}
 </svelte:head>
-
-<AudioContext />
 
 <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
 <div
@@ -122,6 +165,7 @@
 					class="pb-2"
 					pages={page_links}
 					resources={resource_links}
+					podcasts={podcast_links}
 				/>
 			</div>
 		{/if}
@@ -134,6 +178,7 @@
 		class="border-r border-mono-200"
 		pages={page_links}
 		resources={resource_links}
+		podcasts={podcast_links}
 	/>
 </div>
 
@@ -179,7 +224,7 @@
 </div>
 
 <main class="py-10 lg:pl-72">
-	<div class="px-4 sm:px-6 lg:px-8">
+	<div class="px-2">
 		<slot />
 	</div>
 </main>

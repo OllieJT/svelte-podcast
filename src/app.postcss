@@ -22,7 +22,7 @@
 	.richtext h4 a,
 	.richtext h5 a,
 	.richtext h6 a {
-		@apply relative underline decoration-transparent decoration-solid underline-offset-2;
+		@apply relative break-all underline decoration-transparent decoration-solid underline-offset-2;
 
 		&::before {
 			@apply absolute -left-[1.25ch] inline-block font-light leading-normal text-mono-400;
@@ -37,16 +37,19 @@
 	}
 
 	.richtext code.hljs {
-		@apply p-0 text-sm;
+		@apply overflow-x-auto p-0 text-sm;
 		overflow-wrap: anywhere;
 	}
 
 	.richtext .codeblock code.hljs {
-		@apply overflow-hidden rounded-xl border border-mono-200 p-4 font-mono text-base leading-normal shadow-2xl shadow-mono-200;
+		@apply overflow-auto rounded-xl border border-mono-200 p-4 font-mono text-base leading-normal shadow-2xl shadow-mono-200;
 	}
 
 	.richtext {
-		@apply prose prose-lg prose-slate max-w-none prose-h5:mb-1 prose-h5:mt-10 prose-h5:text-sm prose-h5:font-medium prose-h5:leading-normal prose-h5:text-primary-800 prose-code:before:content-none prose-code:after:content-none;
+		@apply prose prose-slate max-w-none sm:prose-lg prose-headings:px-2 prose-h5:mb-1 prose-h5:mt-10 prose-h5:text-sm prose-h5:font-medium prose-h5:leading-normal prose-h5:text-primary-800 prose-p:px-2 prose-code:before:content-none prose-code:after:content-none;
+	}
+	.richtext code:not(.hljs) {
+		@apply inline whitespace-pre-wrap break-all rounded-md border border-mono-200 bg-white px-1.5 py-0.5 font-mono font-normal tracking-wide text-mono-950;
 	}
 
 	.richtext td,

@@ -36,6 +36,16 @@
 	/** @type {Readonly<ResourceLink[]>}  */
 	export let resources;
 
+	/**
+	 * @typedef {Object} PodcastLink
+	 * @property {string} label - The label of the page link.
+	 * @property {string} href - The URL of the page link.
+	 * @property {string} src - The URL of the page link.
+	 */
+
+	/** @type {Readonly<PodcastLink[]>}  */
+	export let podcasts;
+
 	$: use_is_current = (/** @type {string } */ href) => {
 		let href_pathname = href;
 
@@ -56,11 +66,6 @@
 		/** @type {string} */ anchor,
 	) => {
 		if (!is_current_page) return false;
-
-		if (typeof document !== 'undefined') {
-			const el = document.querySelector(`[id="${anchor}"]`);
-			if (!el) throw new Error(`No element found with id "${anchor}"`);
-		}
 
 		return $page.url.hash.includes(anchor);
 	};
@@ -168,6 +173,37 @@
 								>
 									<svelte:component this={link.icon} class="h-4 w-4" />
 								</span>
+								<span class="truncate">{link.label}</span>
+							</a>
+						</li>
+					{/each}
+				</ul>
+			</li>
+			<li>
+				<div class="text-xs font-semibold leading-6 text-mono-400">
+					Svelte Podcasts
+				</div>
+				<ul role="list" class="-mx-2 mt-2 space-y-1">
+					{#each podcasts as link}
+						{@const is_current = use_is_current(link.href)}
+						<li>
+							<a
+								href={link.href}
+								target="_blank"
+								class={clsx(
+									'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
+									is_current
+										? 'bg-mono-50 text-primary-600'
+										: 'text-mono-700 hover:bg-mono-50 hover:text-primary-600',
+								)}
+							>
+								<img
+									src={link.src}
+									height="56"
+									width="56"
+									alt=""
+									class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-mono-200 bg-white text-[0.625rem] font-medium text-mono-400 group-hover:border-primary-600 group-hover:text-primary-600"
+								/>
 								<span class="truncate">{link.label}</span>
 							</a>
 						</li>
