@@ -13,7 +13,7 @@ import { audio_metadata } from './audio-metadata';
  * @param {import('./audio-metadata').AudioMetadata } metadata - Audio metadata
  * @returns {void}
  */
-const load = (src, metadata) => {
+const load = (src, metadata, autoplay = false) => {
 	if (!BROWSER) return;
 
 	// Save the current progress if audio is already loaded
@@ -28,6 +28,7 @@ const load = (src, metadata) => {
 		start_at: user_progress.get(src) || 0,
 		playback_rate: preferences.playback_rate,
 		volume: preferences.volume,
+		autoplay: autoplay,
 	});
 
 	// Set metadata for current audio

@@ -45,6 +45,7 @@ export const audio_element = derived(
 				el.currentTime = $audio_element_src.start_at;
 				el.playbackRate = $audio_element_src.playback_rate || 1;
 				el.volume = $audio_element_src.volume || 1;
+				el.autoplay = $audio_element_src.autoplay || false;
 			}
 			console.log('$audio_element_src', $audio_element_src);
 
@@ -56,6 +57,7 @@ export const audio_element = derived(
 			// Define a function to set the HTMLAudioElement and call it.
 			const handle_update = () => {
 				set(el);
+				$audio_element_src?.autoplay && el.play();
 				announce.info('Updating audio element');
 			};
 
