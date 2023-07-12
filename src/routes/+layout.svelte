@@ -87,6 +87,19 @@
 		},
 	]);
 
+	const podcast_links = Object.freeze([
+		{
+			label: 'Svelte Radio',
+			href: 'https://www.svelteradio.com/',
+			src: '/svelte-radio.png',
+		},
+		{
+			label: 'Syntax',
+			href: 'https://syntax.fm/',
+			src: '/syntax.png',
+		},
+	]);
+
 	let is_menu_open = false;
 
 	const open_menu = () => (is_menu_open = true);
@@ -152,6 +165,7 @@
 					class="pb-2"
 					pages={page_links}
 					resources={resource_links}
+					podcasts={podcast_links}
 				/>
 			</div>
 		{/if}
@@ -164,6 +178,7 @@
 		class="border-r border-mono-200"
 		pages={page_links}
 		resources={resource_links}
+		podcasts={podcast_links}
 	/>
 </div>
 

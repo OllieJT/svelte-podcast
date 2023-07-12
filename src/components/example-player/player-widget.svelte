@@ -116,7 +116,6 @@
 </svelte:head>
 
 <AudioPlayer {src} {metadata} let:Player let:action let:attributes>
-	<pre>{JSON.stringify(attributes, null, 3)}</pre>
 	<div
 		{...$$restProps}
 		class="svpod--container svpod--reset"
