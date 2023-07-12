@@ -3,7 +3,6 @@
 	import { PlayerWidget } from '$src/components/example-player';
 	import { episodes } from '$src/content/episodes';
 	import { DocsPage } from '$src/layout/page';
-	import { audio_element } from 'svelte-podcast/audio';
 
 	/** @type { string | undefined} */
 	let audio_src = episodes.knomii.src;
@@ -136,21 +135,3 @@
 		</p>
 	</Section>
 </DocsPage>
-<button
-	on:click={() => {
-		if (!$audio_element) return console.log('no element');
-		const player = $audio_element;
-		player.controls = true;
-		player.src = episodes.syntax.src;
-	}}
->
-	Show Audio Element
-</button>
-
-<style>
-	:global(#svpod--generated-audio-element) {
-		margin: auto;
-		width: 50vw;
-		display: block;
-	}
-</style>
