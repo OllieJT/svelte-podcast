@@ -31,7 +31,6 @@
 	 * @returns {void}
 	 */
 	const handle_seek_to = (seconds) => {
-		console.log('handle_seek_to :: ', seconds);
 		const el = $audio_element;
 		if (!el) return;
 

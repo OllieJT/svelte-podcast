@@ -24,7 +24,6 @@ export const audio_element = derived(
 
 	([$audio_element_src], /** @type {SetAudioElement} */ set) => {
 		// If not in a browser environment, return early.
-		console.log('BROWSER', BROWSER);
 		if (BROWSER) {
 			// Find an existing HTMLAudioElement or create a new one.
 			const found = document.getElementById(ELEMENT_ID);
@@ -47,9 +46,6 @@ export const audio_element = derived(
 				el.volume = $audio_element_src.volume || 1;
 				el.autoplay = $audio_element_src.autoplay || false;
 			}
-			console.log('$audio_element_src', $audio_element_src);
-
-			console.log('$preferences');
 
 			// If a new HTMLAudioElement was created, append it to the body.
 			if (!found) document.body.appendChild(el);
