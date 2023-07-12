@@ -1,5 +1,13 @@
 # svelte-podcast
 
+## 0.8.0
+
+### Minor Changes
+
+-  d18b0c7: refactor audio element logic
+-  29ef657: switch to jsdoc from ts
+-  d18b0c7: rewrite docs with code samples
+
 ## 0.7.0
 
 ### Minor Changes
