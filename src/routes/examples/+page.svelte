@@ -3,9 +3,6 @@
 	import { episodes } from '$src/content/episodes';
 	import { DocsPage } from '$src/layout/page';
 	import PreviewComponent from '$src/layout/preview-component.svelte';
-	import { episode_audio } from 'svelte-podcast';
-
-	$: console.log('details :: ', $episode_audio?.details);
 
 	$: player_widget = {
 		current_time: true,
@@ -15,24 +12,11 @@
 		skip_forward: 30,
 	};
 
-	$: player_stack = {
-		playback_rate: true,
-		timestamps: true,
-		skip_back: 10,
-		skip_forward: 30,
-	};
-
 	/** @type { string | undefined} */
 	let audio_src = episodes.knomii.src;
 </script>
 
-<DocsPage
-	title="Examples"
-	let:Section
-	let:SectionArticle
-	let:TableModule
-	let:TableSchema
->
+<DocsPage title="Examples" let:Section>
 	<Section title="PlayerWidget">
 		<PreviewComponent name="PlayerWidget">
 			<svelte:fragment slot="options">

@@ -3,7 +3,9 @@
  * @module audio
  */
 
-export { default as AudioContext } from './context.svelte';
+export * from './actions';
+export * from './audio-element';
+export * from './audio-element-source';
+export * from './audio-metadata';
 export { default as AudioPlayer } from './player.svelte';
 export { default as AudioProgress } from './progress.svelte';
-export { episode_audio, episode_details, episode_progress } from './stores';

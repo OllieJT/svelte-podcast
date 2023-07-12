@@ -3,7 +3,6 @@
 	import GitHubIcon from '@inqling/svelte-icons/simple-icons/github.svelte';
 	import NPMIcon from '@inqling/svelte-icons/simple-icons/npm.svelte';
 	import github from 'svelte-highlight/styles/github';
-	import { AudioContext } from 'svelte-podcast';
 	import { circIn, circOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
 	import '../app.postcss';
@@ -64,8 +63,6 @@
 <svelte:head>
 	{@html github}
 </svelte:head>
-
-<AudioContext />
 
 <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
 <div

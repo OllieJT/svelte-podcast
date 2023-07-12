@@ -153,8 +153,4 @@
 			transform: rotate(360deg);
 		}
 	}
-
-	svg {
-		/* animation: Spin 1s cubic-bezier(0.5, 0.1, 0.1, 0.8) infinite; */
-	}
 </style>

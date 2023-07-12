@@ -1,6 +1,6 @@
-import { episode_audio } from 'svelte-podcast';
+import { audio } from 'svelte-podcast';
 
-episode_audio.load(
+audio.load(
 	// path to file
 	'/episode-audio.mp3',
 

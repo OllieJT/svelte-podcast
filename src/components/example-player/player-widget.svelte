@@ -6,7 +6,7 @@
 	/** @type {string | undefined} */
 	export let src;
 
-	/** @type {import('svelte-podcast/audio/stores').EpisodeDetails} */
+	/** @type {import('svelte-podcast/audio').AudioMetadata} */
 	export let metadata = {};
 
 	export let hide_duration = false;
@@ -115,11 +115,12 @@
 	</style>
 </svelte:head>
 
-<AudioPlayer {src} {metadata} let:Player let:action let:episode>
+<AudioPlayer {src} {metadata} let:Player let:action let:attributes>
+	<pre>{JSON.stringify(attributes, null, 3)}</pre>
 	<div
 		{...$$restProps}
 		class="svpod--container svpod--reset"
-		data-loaded={episode.is_loaded ? 'true' : 'false'}
+		data-loaded={attributes.is_loaded ? 'true' : 'false'}
 	>
 		{#if !hide_skip_back}
 			<button
@@ -132,15 +133,15 @@
 		{/if}
 
 		<!-- toggle play -->
-		{#if episode.is_loaded}
+		{#if attributes.is_loaded}
 			<button
 				on:click={() => action.toggle()}
 				class="svpod--reset svpod--toggle-pause"
 				type="button"
 			>
 				<A11yIcon
-					icon={episode.is_playing ? Pause : Play}
-					label={episode.is_playing ? 'Pause' : 'Play'}
+					icon={attributes.is_paused ? Play : Pause}
+					label={attributes.is_paused ? 'Play' : 'Pause'}
 				/>
 			</button>
 		{:else}
@@ -162,8 +163,8 @@
 		{#if !hide_current_time}
 			<div class="svpod--timestamp">
 				<Timestamp
-					value={episode.current_time}
-					force_hours={episode.timestamp_hours}
+					value={attributes.current_time}
+					force_hours={attributes.duration >= 3600}
 				/>
 			</div>
 		{/if}
@@ -174,7 +175,7 @@
 
 		{#if !hide_duration}
 			<div class="svpod--timestamp">
-				<Timestamp value={episode.duration} />
+				<Timestamp value={attributes.duration} />
 			</div>
 		{/if}
 

@@ -1,4 +1,7 @@
-export * from './audio';
-export { AudioPlayer as default } from './audio';
+import { default as AudioPlayer } from './audio/player.svelte';
+
+export * from './audio/actions';
 export * from './user';
-export * from './utility';
+
+export { AudioPlayer };
+export default AudioPlayer;

@@ -1,11 +1,11 @@
 <script>
-	import { episode_audio } from 'svelte-podcast';
+	import { audio } from 'svelte-podcast';
 </script>
 
 <!-- load the episode on click -->
 <button
 	on:click={() =>
-		episode_audio.load('/episode-audio.mp3', {
+		audio.load('/episode-audio.mp3', {
 			/* optional metadata */
 		})}
 >
@@ -13,4 +13,4 @@
 </button>
 
 <!-- unload the episode on click -->
-<button on:click={() => episode_audio.unload()}>Unload Episode</button>
+<button on:click={() => audio.unload()}>Unload Episode</button>
