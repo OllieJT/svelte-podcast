@@ -6,7 +6,7 @@
 <svelte:element
 	this={as}
 	{...$$restProps}
-	class="relative mx-auto w-full max-w-6xl p-4 md:p-6"
+	class="relative mx-auto w-full max-w-6xl px-2 py-4 md:px-6 md:py-6"
 >
 	<slot />
 </svelte:element>

@@ -24,13 +24,7 @@
 	} from './code';
 </script>
 
-<DocsPage
-	title="API"
-	let:Section
-	let:SectionArticle
-	let:TableModule
-	let:TableSchema
->
+<DocsPage title="API" let:Section let:SectionArticle let:TableSchema>
 	<Section title="audio">
 		<SectionArticle title="audio data">
 			<TableSchema
@@ -290,32 +284,6 @@
 				<Highlight code={user_progress_save} language={lang_ts} />
 			</div>
 		</SectionArticle>
-
-		<!-- methods -->
-		<h3>Methods</h3>
-		<TableModule
-			rows={[
-				{
-					method: '.subscribe() | $episode_progress',
-					description:
-						'You can subscribe to changes in the users progress.',
-				},
-				{
-					method: '.get(\n  src:string\n): number | undefined',
-					description:
-						'You can get the users progress for a given audio source.',
-				},
-				{
-					method: '.save(\n  src:string, \n  value:number\n)',
-					description:
-						'You can save the users progress for a given audio source.',
-				},
-				{
-					method: '.clear()',
-					description: 'You can clear the users progress.',
-				},
-			]}
-		/>
 	</Section>
 
 	<!-- seconds_to_timestamp -->

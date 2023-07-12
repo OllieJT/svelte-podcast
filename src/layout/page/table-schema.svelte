@@ -14,9 +14,9 @@
 	export let rows;
 </script>
 
-<div class="w-full overflow-x-auto">
-	<table class="">
-		<thead>
+<div class="-mx-6 min-w-full overflow-x-auto bg-white md:-mx-8">
+	<table class="my-2 w-max min-w-full">
+		<thead class="">
 			<th class="w-max">Property</th>
 			<th class="w-max">Type</th>
 			<th>Description</th>
