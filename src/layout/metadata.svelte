@@ -14,7 +14,14 @@
 
 	// TODO: add screenshots under images
 	/** @type {import('svelte-meta-tags').OpenGraph["images"]}*/
-	export let images = [];
+	export let images = [
+		{
+			url: '"https://svelte-podcast.com/thumb-4_3.png"',
+			width: 800,
+			height: 600,
+			alt: 'Svelte Podcast Tools',
+		},
+	];
 </script>
 
 <MetaTags
