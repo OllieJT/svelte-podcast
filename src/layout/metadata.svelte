@@ -16,7 +16,7 @@
 	/** @type {import('svelte-meta-tags').OpenGraph["images"]}*/
 	export let images = [
 		{
-			url: '"https://svelte-podcast.com/thumb-4_3.png"',
+			url: 'https://svelte-podcast.com/thumb-4_3.png',
 			width: 800,
 			height: 600,
 			alt: 'Svelte Podcast Tools',
