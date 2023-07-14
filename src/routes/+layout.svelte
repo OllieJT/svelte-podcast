@@ -1,12 +1,13 @@
 <script>
 	import { afterNavigate } from '$app/navigation';
 	import Sidebar from '$src/layout/sidebar.svelte';
+	import CloseIcon from '@inqling/svelte-icons/heroicon-24-outline/x-mark.svelte';
 	import GitHubIcon from '@inqling/svelte-icons/simple-icons/github.svelte';
 	import NPMIcon from '@inqling/svelte-icons/simple-icons/npm.svelte';
 	import { onMount } from 'svelte';
 	import github from 'svelte-highlight/styles/github';
-	import { circIn, circOut } from 'svelte/easing';
-	import { fade } from 'svelte/transition';
+	import { circOut, cubicInOut, cubicOut } from 'svelte/easing';
+	import { fade, scale } from 'svelte/transition';
 	import '../app.postcss';
 
 	const page_links = Object.freeze([
@@ -153,46 +154,33 @@
 	{#if is_menu_open}
 		<div
 			in:fade={{
-				duration: 300,
-				easing: circOut,
+				duration: 400,
+				easing: cubicOut,
 			}}
 			out:fade={{
-				duration: 300,
-				easing: circIn,
+				duration: 120,
+				easing: cubicInOut,
 			}}
 			class="fixed inset-0 bg-mono-900/80"
 		/>
 	{/if}
 
-	<div class="fixed inset-0 flex">
-		{#if is_menu_open}
+	{#if is_menu_open}
+		<button
+			type="button"
+			on:click={close_menu}
+			class="pointer-events-auto fixed inset-0 flex"
+		>
 			<div class="relative mr-16 flex w-full max-w-xs flex-1">
-				<div
-					in:fade
-					out:fade
-					class="absolute left-full top-0 flex w-16 justify-center pt-5"
-				>
-					<button
-						on:click={close_menu}
-						type="button"
-						class="pointer-events-auto -m-2.5 p-2.5"
+				<div class="absolute left-full top-0 flex w-16 justify-center pt-5">
+					<div
+						class="pointer-events-auto -m-2.5 origin-center p-2.5"
+						in:scale={{ delay: 200, easing: circOut, duration: 150 }}
+						out:scale={{ easing: cubicInOut, duration: 80 }}
 					>
 						<span class="sr-only">Close sidebar</span>
-						<svg
-							class="h-6 w-6 text-white"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							aria-hidden="true"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M6 18L18 6M6 6l12 12"
-							/>
-						</svg>
-					</button>
+						<CloseIcon class="h-6 w-6 text-white" />
+					</div>
 				</div>
 
 				<Sidebar
@@ -202,8 +190,8 @@
 					podcasts={podcast_links}
 				/>
 			</div>
-		{/if}
-	</div>
+		</button>
+	{/if}
 </div>
 
 <!-- Static sidebar for desktop -->

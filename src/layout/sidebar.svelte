@@ -2,7 +2,7 @@
 	import { assets } from '$app/paths';
 	import { page } from '$app/stores';
 	import clsx from 'clsx';
-	import { circIn, circOut } from 'svelte/easing';
+	import { circOut } from 'svelte/easing';
 	import { fly } from 'svelte/transition';
 
 	/**
@@ -77,12 +77,13 @@
 		x: -320,
 		duration: 300,
 		easing: circOut,
-		opacity: 0,
+		opacity: 1,
 	}}
 	out:fly={{
 		x: -320,
 		duration: 300,
-		easing: circIn,
+		easing: circOut,
+		opacity: 1,
 	}}
 	class={clsx(
 		'pointer-events-auto flex grow origin-left flex-col gap-y-5 overflow-y-auto bg-white px-6',
