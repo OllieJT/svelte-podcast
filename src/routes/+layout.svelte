@@ -1,4 +1,5 @@
 <script>
+	import { afterNavigate } from '$app/navigation';
 	import Sidebar from '$src/layout/sidebar.svelte';
 	import GitHubIcon from '@inqling/svelte-icons/simple-icons/github.svelte';
 	import NPMIcon from '@inqling/svelte-icons/simple-icons/npm.svelte';
@@ -135,6 +136,8 @@
 			window.removeEventListener('keydown', handle_keydown);
 		};
 	});
+
+	afterNavigate(close_menu);
 </script>
 
 <svelte:head>
