@@ -2,6 +2,7 @@
 	import Sidebar from '$src/layout/sidebar.svelte';
 	import GitHubIcon from '@inqling/svelte-icons/simple-icons/github.svelte';
 	import NPMIcon from '@inqling/svelte-icons/simple-icons/npm.svelte';
+	import { onMount } from 'svelte';
 	import github from 'svelte-highlight/styles/github';
 	import { circIn, circOut } from 'svelte/easing';
 	import { fade } from 'svelte/transition';
@@ -104,6 +105,36 @@
 
 	const open_menu = () => (is_menu_open = true);
 	const close_menu = () => (is_menu_open = false);
+	const toggle_menu = () => (is_menu_open = !is_menu_open);
+
+	/**
+	 * @param {KeyboardEvent} event - The keyboard event object.
+	 */
+	const handle_keydown = (event) => {
+		// on esc close menu
+		if (event.key === 'Escape' || event.key === 'Esc') {
+			close_menu();
+		}
+
+		// on command + / open menu
+		if (event.metaKey && event.key === '/') {
+			toggle_menu();
+		}
+
+		// on command + return open menu
+		if (event.metaKey && event.key === 'Enter') {
+			toggle_menu();
+		}
+	};
+
+	onMount(() => {
+		// close menu on esc
+		window.addEventListener('keydown', handle_keydown);
+
+		return () => {
+			window.removeEventListener('keydown', handle_keydown);
+		};
+	});
 </script>
 
 <svelte:head>
