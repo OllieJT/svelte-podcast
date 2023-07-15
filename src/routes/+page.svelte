@@ -1,6 +1,6 @@
 <script>
 	import { base } from '$app/paths';
-	import { PlayerWidget } from '$src/components/example-player';
+	import { PlayerWidget } from '$src/components/player';
 	import { episodes } from '$src/content/episodes';
 	import { DocsPage } from '$src/layout/page';
 

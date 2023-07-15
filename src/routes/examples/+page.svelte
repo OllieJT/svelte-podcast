@@ -1,69 +1,33 @@
 <script>
-	import PlayerWidget from '$src/components/example-player/player-widget.svelte';
+	import PlayerWidget from '$src/components/player/player-widget.svelte';
 	import { episodes } from '$src/content/episodes';
 	import { DocsPage } from '$src/layout/page';
-	import PreviewComponent from '$src/layout/preview-component.svelte';
-
-	$: player_widget = {
-		current_time: true,
-		playback_rate: true,
-		duration: true,
-		skip_back: 10,
-		skip_forward: 30,
-	};
+	import { HighlightSvelte } from 'svelte-highlight';
+	import { player_css } from './code';
 
 	/** @type { string | undefined} */
 	let audio_src = episodes.knomii.src;
 </script>
 
 <DocsPage title="Examples" let:Section>
-	<p class="text-xl font-semibold text-red-500">Work in progress!</p>
+	<Section title="Coming Soon...">
+		<p class="text-xl font-semibold text-red-500">
+			This page is a work in progress.
+		</p>
+	</Section>
 	<Section title="PlayerWidget">
-		<PreviewComponent name="PlayerWidget">
-			<svelte:fragment slot="options">
-				<div>
-					<label for="pw_current_time">current_time</label>
-					<input
-						id="pw_current_time"
-						type="checkbox"
-						bind:checked={player_widget.current_time}
-					/>
-				</div>
-				<div>
-					<label for="pw_playback_rate">playback_rate</label>
-					<input
-						id="pw_playback_rate"
-						type="checkbox"
-						bind:checked={player_widget.playback_rate}
-					/>
-				</div>
-				<div>
-					<label for="pw_duration">duration</label>
-					<input
-						id="pw_duration"
-						type="checkbox"
-						bind:checked={player_widget.duration}
-					/>
-				</div>
-				<div>
-					<label for="pw_skip_back">skip_back</label>
-					<input
-						id="pw_skip_back"
-						type="number"
-						bind:value={player_widget.skip_back}
-					/>
-				</div>
-				<div>
-					<label for="pw_skip_forward">skip_forward</label>
-					<input
-						id="pw_skip_forward"
-						type="number"
-						bind:value={player_widget.skip_forward}
-					/>
-				</div>
-			</svelte:fragment>
+		<div class="not-prose py-4">
+			<PlayerWidget
+				src={audio_src}
+				skip_back={30}
+				skip_forward={10}
+				metadata={{}}
+				playback_rate_values={[1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4]}
+			/>
+		</div>
 
-			<PlayerWidget src={audio_src} include={player_widget} />
-		</PreviewComponent>
+		<div class="codeblock not-prose flex flex-col items-stretch gap-2 py-1">
+			<HighlightSvelte code={player_css} />
+		</div>
 	</Section>
 </DocsPage>
