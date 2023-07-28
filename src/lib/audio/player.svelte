@@ -46,7 +46,7 @@
 </script>
 
 <slot
-	Player={{ AudioProgress }}
+	Player={{ Progress: AudioProgress }}
 	action={{
 		set_playback_rate: user_preferences.set_playback_rate,
 		set_volume: user_preferences.set_volume,

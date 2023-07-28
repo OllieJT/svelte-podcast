@@ -68,3 +68,146 @@
 		readonly
 	/>
 {/if}
+
+<svelte:head>
+	<style>
+		:root {
+			/* initial player progress colors */
+			--progress-bg: rgb(0, 0, 0);
+			--progress-fg: rgb(155, 155, 155);
+			--progress-border: rgb(105, 105, 105);
+			--progress-active-bg: rgb(55, 55, 55);
+			--progress-active-fg: rgb(255, 255, 255);
+			--progress-active-border: rgb(155, 155, 155);
+
+			/* initial player progress shape */
+			--progress-radius: 4px;
+			--progress-thumb-width: 2px;
+			--progress-height: 40px;
+		}
+	</style>
+</svelte:head>
+
+<style lang="postcss">
+	input[type='range'] {
+		--thumb-border-offset: calc(var(--thumb-border-size) * 2);
+		--thumb-shape-height: calc(
+			var(--progress-height) - var(--thumb-border-offset)
+		);
+
+		--track-bg: var(--progress-bg);
+		--track-border-color: var(--progress-border);
+		--track-border-size: 1px;
+		--track-radius: var(--progress-radius);
+
+		--thumb--bg: var(--progress-fg);
+		--thumb-border-color: var(--progress-border);
+		--thumb-border-size: 0px;
+		--thumb--radius: var(--progress-radius);
+		--thumb-width: var(--progress-thumb-width);
+
+		font-size: 1em;
+
+		--borders: calc(var(--thumb-border-size) * 2);
+
+		height: calc(var(--thumb-shape-height) + var(--borders));
+		appearance: none;
+		margin: 0;
+		width: 100%;
+		background: transparent;
+		outline: 1px solid transparent;
+
+		&:hover {
+			--track-bg: var(--progress-active-bg);
+			--track-border-color: var(--progress-active-border);
+			--thumb--bg: var(--progress-active-fg);
+			--thumb-border-color: var(--progress-active-border);
+		}
+
+		&:focus {
+			outline-color: var(--progress-active-fg);
+			--track-border-color: var(--progress-active-fg);
+			--thumb--bg: var(--progress-active-fg);
+			--thumb-border-color: var(--progress-active-fg);
+
+			&::-webkit-slider-runnable-track,
+			&::-ms-fill-lower,
+			&::-ms-fill-upper {
+				background: var(--track-bg);
+			}
+		}
+	}
+
+	/* webkit */
+	input[type='range']::-webkit-slider-runnable-track {
+		width: 100%;
+		height: var(--progress-height);
+		cursor: pointer;
+		animate: 0.2s;
+		box-shadow: none;
+		background: var(--track-bg);
+		border-radius: var(--track-radius);
+		border: var(--track-border-size) solid var(--track-border-color);
+	}
+	input[type='range']::-webkit-slider-thumb {
+		--offset: calc(var(--track-border-size) * -1);
+		box-shadow: none;
+		border: var(--thumb-border-size) solid var(--thumb-border-color);
+		height: var(--thumb-shape-height);
+		width: var(--thumb-width);
+		border-radius: var(--thumb-radius);
+		background: var(--thumb--bg);
+		cursor: pointer;
+		-webkit-appearance: none;
+		margin-top: var(--offset);
+	}
+
+	/* mozilla */
+	input[type='range']::-moz-range-track {
+		width: 100%;
+		height: var(--progress-height);
+		cursor: pointer;
+		animate: 0.2s;
+		box-shadow: none;
+		background: var(--track-bg);
+		border-radius: var(--track-radius);
+		border: var(--track-border-size) solid var(--track-border-color);
+	}
+	input[type='range']::-moz-range-thumb {
+		box-shadow: none;
+		border: var(--thumb-border-size) solid var(--thumb-border-color);
+		height: var(--thumb-shape-height);
+		width: var(--thumb-width);
+		border-radius: var(--thumb-radius);
+		background: var(--thumb--bg);
+		cursor: pointer;
+	}
+
+	/* internet explorer */
+	input[type='range']::-ms-track {
+		width: 100%;
+		height: var(--progress-height);
+		cursor: pointer;
+		animate: 0.2s;
+		background: transparent;
+		border-color: transparent;
+		color: transparent;
+	}
+	input[type='range']::-ms-fill-lower,
+	input[type='range']::-ms-fill-upper {
+		background: var(--track-bg);
+		border: var(--track-border-size) solid var(--track-border-color);
+		border-radius: calc(var(--track-radius) * 2);
+		box-shadow: none;
+	}
+	input[type='range']::-ms-thumb {
+		margin-top: 1px;
+		box-shadow: none;
+		border: var(--thumb-border-size) solid var(--thumb-border-color);
+		height: var(--thumb-shape-height);
+		width: var(--thumb-width);
+		border-radius: var(--thumb-radius);
+		background: var(--thumb--bg);
+		cursor: pointer;
+	}
+</style>
