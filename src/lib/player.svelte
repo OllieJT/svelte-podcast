@@ -1,7 +1,7 @@
 <script>
-	import { AudioProgress, audio_attributes } from '.';
-	import { audio } from '../audio';
-	import { user_preferences } from '../user';
+	import { AudioProgress, audio } from '.';
+	import { audio_attributes } from './audio-element';
+	import { user_preferences } from './user-preferences';
 
 	/** @type {string|undefined} */
 	export let src;

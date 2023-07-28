@@ -2,10 +2,11 @@ import { BROWSER } from 'esm-env';
 import clamp from 'just-clamp';
 
 import { get } from 'svelte/store';
-import { user_preferences, user_progress } from '../user';
 import { audio_attributes, use_audio_element } from './audio-element';
-import { audio_element_source } from './audio-element-source';
 import { audio_metadata } from './audio-metadata';
+import { audio_state } from './audio-state';
+import { user_preferences } from './user-preferences';
+import { user_progress } from './user-progress';
 
 /**
  * Load audio
@@ -23,7 +24,7 @@ const load = (src, metadata = {}, autoplay = false) => {
 	const preferences = get(user_preferences);
 
 	// Set audio element source
-	audio_element_source.set({
+	audio_state.set({
 		src,
 		start_at: user_progress.get(src) || 0,
 		playback_rate: preferences.playback_rate,
@@ -46,7 +47,7 @@ const unload = () => {
 	user_progress.save();
 
 	// Unset audio element source
-	audio_element_source.set(null);
+	audio_state.set(null);
 
 	// Unset metadata
 	audio_metadata.set(null);

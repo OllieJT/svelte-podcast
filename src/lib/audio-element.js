@@ -1,15 +1,15 @@
 import { BROWSER } from 'esm-env';
 import { derived, get } from 'svelte/store';
-import { announce } from '../internal';
-import { seconds_to_timestamp } from '../utility';
-import { audio_element_source } from './audio-element-source';
+import { audio_state } from './audio-state';
+import { announce } from './internal';
+import { seconds_to_timestamp } from './utility';
 
 /**
  * @typedef {import('svelte/store').Readable<HTMLAudioElement | undefined>} ReadableAudioElement
  */
 
 /**
- * @typedef {import('../user').UserPreferences} Preferences
+ * @typedef {import('./user-preferences').UserPreferences} Preferences
  */
 
 /**
@@ -20,9 +20,9 @@ const ELEMENT_ID = 'svpod--generated-audio-element';
 
 /** @type {ReadableAudioElement} */
 export const audio_element = derived(
-	[audio_element_source],
+	[audio_state],
 
-	([$audio_element_src], /** @type {SetAudioElement} */ set) => {
+	([$audio_state], /** @type {SetAudioElement} */ set) => {
 		// If not in a browser environment, return early.
 		if (BROWSER) {
 			// Find an existing HTMLAudioElement or create a new one.
@@ -39,12 +39,12 @@ export const audio_element = derived(
 			el.autoplay = false;
 			el.controls = false;
 
-			if ($audio_element_src) {
-				el.src = $audio_element_src.src;
-				el.currentTime = $audio_element_src.start_at;
-				el.playbackRate = $audio_element_src.playback_rate || 1;
-				el.volume = $audio_element_src.volume || 1;
-				el.autoplay = $audio_element_src.autoplay || false;
+			if ($audio_state) {
+				el.src = $audio_state.src;
+				el.currentTime = $audio_state.start_at;
+				el.playbackRate = $audio_state.playback_rate || 1;
+				el.volume = $audio_state.volume || 1;
+				el.autoplay = $audio_state.autoplay || false;
 			}
 
 			// If a new HTMLAudioElement was created, append it to the body.
@@ -53,7 +53,7 @@ export const audio_element = derived(
 			// Define a function to set the HTMLAudioElement and call it.
 			const handle_update = () => {
 				set(el);
-				$audio_element_src?.autoplay && el.play();
+				$audio_state?.autoplay && el.play();
 				announce.info('Updating audio element');
 			};
 

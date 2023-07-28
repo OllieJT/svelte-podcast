@@ -1,7 +1,7 @@
 import { persisted } from 'svelte-local-storage-store';
 import { get } from 'svelte/store';
-import { audio_element } from '../audio';
-import { announce, use_url } from '../internal';
+import { audio_element } from './audio-element';
+import { announce, use_url } from './internal';
 
 /**
  * User progress object type.

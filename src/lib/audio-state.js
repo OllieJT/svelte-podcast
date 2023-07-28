@@ -3,7 +3,7 @@ import { writable } from 'svelte/store';
 // TODO: implement autoplay
 
 /**
- * @typedef {Object} AudioSource
+ * @typedef {Object} AudioState
  * @property {string} src - A path or URL to the audio file
  * @property {number} start_at - The starting point of the audio
  * @property {number} [playback_rate=1] - The playback speed of the audio
@@ -11,5 +11,5 @@ import { writable } from 'svelte/store';
  * @property {boolean} [autoplay=false] - Whether the audio should play as soon as it's loaded
  */
 
-/** @type {import('svelte/store').Writable<AudioSource | null>} */
-export const audio_element_source = writable(null);
+/** @type {import('svelte/store').Writable<AudioState | null>} */
+export const audio_state = writable(null);

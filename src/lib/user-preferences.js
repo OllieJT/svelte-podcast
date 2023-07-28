@@ -17,7 +17,7 @@ const DEFAULT_USER_PREFERENCES = { playback_rate: 1, volume: 1 };
  * The user preferences store
  * @type {import('svelte/store').Writable<UserPreferences>}
  */
-const USER_PREFERENCES_STORE = persisted(
+export const USER_PREFERENCES_STORE = persisted(
 	'USER_PREFERENCE',
 	DEFAULT_USER_PREFERENCES,
 );
