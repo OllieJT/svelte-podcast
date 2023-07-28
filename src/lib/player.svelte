@@ -1,6 +1,6 @@
 <script>
 	import { AudioProgress, audio } from '.';
-	import { audio_attributes } from './audio-element';
+	import { audio_attributes } from './audio-attributes';
 	import { user_preferences } from './user-preferences';
 
 	/** @type {string|undefined} */

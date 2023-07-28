@@ -2,7 +2,8 @@ import { BROWSER } from 'esm-env';
 import clamp from 'just-clamp';
 
 import { get } from 'svelte/store';
-import { audio_attributes, use_audio_element } from './audio-element';
+import { audio_attributes } from './audio-attributes';
+import { use_audio_element } from './audio-element';
 import { audio_metadata } from './audio-metadata';
 import { audio_state } from './audio-state';
 import { user_preferences } from './user-preferences';

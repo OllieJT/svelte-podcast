@@ -1,8 +1,8 @@
 <script>
 	import clamp from 'just-clamp';
-	import { audio_attributes, audio_element } from './audio-element';
+	import { audio_attributes } from './audio-attributes';
+	import { audio_element } from './audio-element';
 	import { announce } from './internal';
-
 	export let step = 10;
 
 	let was_paused = true;

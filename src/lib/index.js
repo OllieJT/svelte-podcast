@@ -2,6 +2,7 @@ export * from './user-preferences';
 export * from './user-progress';
 
 export * from './actions';
+export * from './audio-attributes';
 export * from './audio-element';
 export * from './audio-metadata';
 export * from './audio-state';
