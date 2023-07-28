@@ -2,7 +2,7 @@
 	"name": "svelte-podcast",
 	"version": "0.8.0",
 	"license": "MIT",
-	"author": "Ollie Taylor",
+	"author": "Ollie Taylor (https://olliejt.com)",
 	"homepage": "https://github.com/OllieJT/svelte-podcast/blob/main/README.md",
 	"bugs": {
 		"url": "https://github.com/OllieJT/svelte-podcast/issues"
