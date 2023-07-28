@@ -6,6 +6,7 @@
 
 	/** @type { string | undefined} */
 	let audio_src = episodes.knomii.src;
+	audio_src;
 </script>
 
 <DocsPage title="Examples" let:Section>

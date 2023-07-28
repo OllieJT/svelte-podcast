@@ -39,7 +39,7 @@
 
 <AudioPlayer {src} {metadata} let:Player let:action let:attributes>
 	<div
-		class="svpod-container"
+		class="svpod-container {$$restProps.class}"
 		data-loaded={attributes.is_loaded ? 'true' : 'false'}
 	>
 		<!-- Player Action: Skip back -->
