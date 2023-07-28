@@ -26,6 +26,25 @@
 			],
 		},
 		{
+			label: 'Components',
+			href: '/components',
+			sections: [
+				{
+					label: 'AudioPlayer',
+					anchor: 'audioplayer',
+				},
+				{
+					label: 'AudioProgress',
+					anchor: 'audioprogress',
+				},
+			],
+		},
+		{
+			label: 'Examples',
+			href: '/examples',
+			sections: [],
+		},
+		{
 			label: 'API',
 			href: '/api',
 			sections: [
@@ -69,11 +88,6 @@
 				{ label: 'user_progress.save', anchor: 'user_progress.save' },
 				{ label: 'seconds_to_timestamp', anchor: 'seconds_to_timestamp' },
 			],
-		},
-		{
-			label: 'Examples',
-			href: '/examples',
-			sections: [],
 		},
 	]);
 
