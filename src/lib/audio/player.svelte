@@ -1,5 +1,5 @@
 <script>
-	import { AudioProgress, audio_attributes } from '.';
+	import { AudioPlaybackRate, AudioProgress, audio_attributes } from '.';
 	import { audio } from '../audio';
 	import { user_preferences } from '../user';
 
@@ -46,7 +46,7 @@
 </script>
 
 <slot
-	Player={{ Progress: AudioProgress }}
+	Player={{ Progress: AudioProgress, PlaybackRate: AudioPlaybackRate }}
 	action={{
 		set_playback_rate: user_preferences.set_playback_rate,
 		set_volume: user_preferences.set_volume,
