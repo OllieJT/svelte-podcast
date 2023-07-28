@@ -1,14 +1,14 @@
 import { BROWSER } from 'esm-env';
 import { derived, get } from 'svelte/store';
+import { announce } from '../internal';
 import { audio_state } from './audio-state';
-import { announce } from './internal';
 
 /**
  * @typedef {import('svelte/store').Readable<HTMLAudioElement | undefined>} ReadableAudioElement
  */
 
 /**
- * @typedef {import('./user-preferences').UserPreferences} Preferences
+ * @typedef {import('../user-preferences').UserPreferences} Preferences
  */
 
 /**

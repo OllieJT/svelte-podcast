@@ -1,7 +1,7 @@
 <script>
 	import clamp from 'just-clamp';
-	import { audio_attributes } from './audio-attributes';
-	import { audio_element } from './audio-element';
+	import { audio_attributes } from './attributes';
+	import { audio_element } from './core/audio-element';
 	import { announce } from './internal';
 	export let step = 10;
 

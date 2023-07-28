@@ -2,17 +2,17 @@ import { BROWSER } from 'esm-env';
 import clamp from 'just-clamp';
 
 import { get } from 'svelte/store';
-import { audio_attributes } from './audio-attributes';
-import { use_audio_element } from './audio-element';
-import { audio_metadata } from './audio-metadata';
-import { audio_state } from './audio-state';
+import { audio_attributes } from './attributes';
+import { use_audio_element } from './core/audio-element';
+import { audio_metadata } from './core/audio-metadata';
+import { audio_state } from './core/audio-state';
 import { user_preferences } from './user-preferences';
 import { user_progress } from './user-progress';
 
 /**
  * Load audio
  * @param {string} src - Audio source
- * @param {import('./audio-metadata').AudioMetadata } metadata - Audio metadata
+ * @param {import('./core/audio-metadata').AudioMetadata } metadata - Audio metadata
  * @returns {void}
  */
 const load = (src, metadata = {}, autoplay = false) => {

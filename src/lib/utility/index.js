@@ -1,6 +1,6 @@
 /**
  * Utility functions module.
- * @module utility
+ * @module Utility
  */
 
 export * from './seconds-to-timestamp';

@@ -1,12 +1,13 @@
 <script>
-	import { AudioProgress, audio } from '.';
-	import { audio_attributes } from './audio-attributes';
+	import { AudioProgress } from '.';
+	import { audio } from './actions';
+	import { audio_attributes } from './attributes';
 	import { user_preferences } from './user-preferences';
 
 	/** @type {string|undefined} */
 	export let src;
 
-	/** @type {import('./audio-metadata').AudioMetadata} */
+	/** @type {import('./core/audio-metadata').AudioMetadata} */
 	export let metadata = {};
 
 	$: src && audio.load(src, metadata || {});

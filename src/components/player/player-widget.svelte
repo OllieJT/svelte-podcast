@@ -13,7 +13,7 @@
 	export let skip_back = 30;
 	export let skip_forward = 10;
 
-	/** @type {import('svelte-podcast').AudioMetadata} */
+	/** @type {import('svelte-podcast/core').AudioMetadata} */
 	export let metadata = {};
 
 	export let playback_rate_values = [1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4];

@@ -1,6 +1,6 @@
 /**
  * Utility functions module.
- * @module internal
+ * @module Internal
  */
 
 export * from './announce';

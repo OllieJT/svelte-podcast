@@ -1,6 +1,6 @@
 import { persisted } from 'svelte-local-storage-store';
 import { get } from 'svelte/store';
-import { audio_element } from './audio-element';
+import { audio_element } from './core/audio-element';
 import { announce, use_url } from './internal';
 
 /**
