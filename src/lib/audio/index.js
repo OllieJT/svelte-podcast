@@ -12,3 +12,4 @@ export { default as AudioProgress } from './progress.svelte';
 
 // TODO
 export { default as AudioPlaybackRate } from './button-skip.svelte';
+export { default as ButtonSkip } from './playback-rate.svelte';
