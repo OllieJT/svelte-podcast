@@ -70,7 +70,7 @@
 			Along side your audio source, you can optionally define arbitrary
 			metadata for you to use in your player, and determine if the episode
 			should autoplay once loaded. Learn more in the <a
-				href="/api/#audio.load">api docs</a
+				href="/api/#audio.src">api docs</a
 			>
 		</p>
 
