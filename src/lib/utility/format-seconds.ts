@@ -1,3 +1,5 @@
+import { announce } from '../_internal_/announce';
+
 /**
  * Returns a string timestamp in the format of "hh:mm:ss" from a given number of seconds.
  * @param seconds - The number of seconds to convert to a timestamp.
@@ -10,12 +12,12 @@ function seconds_to_timestamp(
 	force_hours = false,
 	seperator = ':',
 ): string {
-	if (typeof seconds !== 'number') {
-		return force_hours ? '00:00:00' : '00:00';
-	}
+	const safe_seconds = Number(seconds) || 0;
 
-	const hours = Math.floor(seconds / 3600);
-	const hours_remainder = seconds % 3600;
+	announce.info({ seconds, force_hours, seperator, safe_seconds });
+
+	const hours = Math.floor(safe_seconds / 3600);
+	const hours_remainder = safe_seconds % 3600;
 
 	const minutes = Math.floor(hours_remainder / 60);
 	const minutes_remainder = hours_remainder % 60;
