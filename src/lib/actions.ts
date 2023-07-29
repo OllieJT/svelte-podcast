@@ -15,11 +15,7 @@ import { user_progress } from './user-progress';
  * @param  src - Audio source
  * @param  metadata - Audio metadata
  */
-const load_src = (
-	src: string,
-	metadata: AudioMetadata = {},
-	autoplay = false,
-) => {
+const load_src = (src: string, metadata: AudioMetadata, autoplay = false) => {
 	if (!BROWSER) return;
 
 	// Save the current progress if audio is already loaded

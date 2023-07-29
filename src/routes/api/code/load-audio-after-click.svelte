@@ -6,7 +6,9 @@
 <button
 	on:click={() =>
 		audio.src.load('/episode-audio.mp3', {
-			/* optional metadata */
+			/* your metadata */
+			title: 'Episode Title',
+			artwork: '/artwork.png',
 		})}
 >
 	Load Episode

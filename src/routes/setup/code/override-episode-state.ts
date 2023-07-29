@@ -2,10 +2,7 @@
 
 declare module 'svelte-podcast' {
 	interface AudioMetadata {
-		id: number;
 		title: string;
-		href: string;
-		author: string;
 		artwork: string | null;
 	}
 }

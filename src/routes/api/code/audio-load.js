@@ -8,6 +8,8 @@ audio.src.load(
 	// custom metadata defined by you
 	{
 		title: 'Supper Club × Rich Harris, Author of Svelte',
+		artwork:
+			'https://ssl-static.libsyn.com/p/assets/b/3/c/d/b3cdf28da11ad39fe5bbc093207a2619/Syntax_-_499.jpg',
 		guests: ['Rich Harris'],
 		hosts: ['Wes Bos', 'Scott Tolinski'],
 	},

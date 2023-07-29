@@ -5,7 +5,10 @@
 	import { DocsPage } from '$src/layout/page';
 	import { audio } from '../lib/actions';
 
-	audio.src.load(episodes.syntax.src);
+	audio.src.load(episodes.syntax.src, {
+		title: episodes.syntax.title,
+		artwork: episodes.syntax.artwork,
+	});
 </script>
 
 <DocsPage title="Docs" let:Section>
