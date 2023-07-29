@@ -1,60 +1,30 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { AudioProgress, type AudioMetadata } from '.';
+	import { use_audio_element } from './_internal_/audio-element';
 	import { audio } from './actions';
 	import { audio_attributes } from './attributes';
 	import { user_preferences } from './user-preferences';
+	import { user_progress } from './user-progress';
+
+	onMount(() => use_audio_element('initialise'));
 
 	export let src: string | undefined;
-
 	export let metadata: AudioMetadata = {};
 
-	$: src && audio.load(src, metadata || {});
-
-	/**
-	 * Skips the audio forward by a specified number of seconds.
-	 * @param {number} seconds - The number of seconds to skip forward.
-	 */
-	const skip_forward = (seconds: number) => audio.skip(seconds, 'forward');
-
-	/**
-	 * Skips the audio backward by a specified number of seconds.
-	 * @param {number} seconds - The number of seconds to skip backward.
-	 */
-	const skip_back = (seconds: number) => audio.skip(seconds, 'backward');
-
-	/**
-	 * Seeks to a specific time in the audio.
-	 * @param {number} value - The time to seek to, in seconds.
-	 */
-	const seek_to = (value: number) => audio.seek(value);
-
-	/**
-	 * Toggles the audio playback between play and pause.
-	 */
-	const toggle = () => audio.play('toggle');
-
-	/**
-	 * Starts playing the audio.
-	 */
-	const play = () => audio.play('set');
-
-	/**
-	 * Pauses the audio.
-	 */
-	const pause = () => audio.pause('set');
+	$: src && audio.src.load(src, metadata || {});
 </script>
 
 <slot
 	Player={{ Progress: AudioProgress }}
-	action={{
+	attributes={$audio_attributes}
+	preference={{
 		set_playback_rate: user_preferences.set_playback_rate,
 		set_volume: user_preferences.set_volume,
-		skip_forward,
-		skip_back,
-		seek_to,
-		toggle,
-		play,
-		pause,
+		save_progress: user_progress.save,
 	}}
-	attributes={$audio_attributes}
+	play={audio.play}
+	mute={audio.mute}
+	seek_to={audio.seek_to}
+	skip_by={audio.skip_by}
 />

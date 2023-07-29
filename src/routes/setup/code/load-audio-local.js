@@ -1,3 +1,3 @@
 import { audio } from 'svelte-podcast';
 
-audio.load('/episode-audio.mp3');
+audio.src.load('/episode-audio.mp3');

@@ -15,7 +15,11 @@ import { user_progress } from './user-progress';
  * @param  src - Audio source
  * @param  metadata - Audio metadata
  */
-const load = (src: string, metadata: AudioMetadata = {}, autoplay = false) => {
+const load_src = (
+	src: string,
+	metadata: AudioMetadata = {},
+	autoplay = false,
+) => {
 	if (!BROWSER) return;
 
 	// Save the current progress if audio is already loaded
@@ -40,7 +44,7 @@ const load = (src: string, metadata: AudioMetadata = {}, autoplay = false) => {
 /**
  * Unload audio
  */
-const unload = () => {
+const unload_src = () => {
 	if (!BROWSER) return;
 
 	// Save the current progress if audio is already loaded
@@ -53,71 +57,44 @@ const unload = () => {
 	audio_metadata.set(null);
 };
 
-type HANDLE_TYPE = 'toggle' | 'set';
-
 /**
- * Play audio
- * @param  t - Handle type
+ * Play / Pause audio
+ * @param  playing - Set or toggle the play state
  */
-const play = (t: HANDLE_TYPE = 'set') => {
+const play = (playing: boolean | 'toggle' = 'toggle') => {
 	const el = use_audio_element('play');
 
-	if (t === 'toggle') {
+	if (typeof playing === 'boolean') {
+		playing ? el.play() : el.pause();
+	}
+
+	if (playing === 'toggle') {
 		el.paused ? el.play() : el.pause();
-	} else {
-		el.play();
 	}
 };
 
 /**
- * Pause audio
- * @param  t - Handle type
+ * Mute / Unmute audio
+ * @param  muted - Set or toggle the mute state
  */
-const pause = (t: HANDLE_TYPE = 'set') => {
-	user_progress.save();
-	const el = use_audio_element('pause');
-
-	if (t === 'toggle') {
-		el.paused ? el.play() : el.pause();
-	} else {
-		el.pause();
-	}
-};
-
-/**
- * Mute audio
- * @param  t - Handle type
- */
-const mute = (t: HANDLE_TYPE = 'set') => {
+const mute = (muted: boolean | 'toggle' = 'toggle') => {
 	const el = use_audio_element('mute');
 
-	if (t === 'toggle') {
+	if (typeof muted === 'boolean') {
+		el.muted = muted;
+	}
+
+	if (muted === 'toggle') {
 		el.muted = !el.muted;
-	} else {
-		el.muted = true;
 	}
 };
 
 /**
- * Unmute audio
- * @param  t - Handle type
+ * Seeks to a specific time in the audio.
+ * @param seconds Timestamp in seconds
+ * @param from Seek from-start or from-end
  */
-const unmute = (t: HANDLE_TYPE = 'set') => {
-	const el = use_audio_element('unmute');
-
-	if (t === 'toggle') {
-		el.muted = !el.muted;
-	} else {
-		el.muted = false;
-	}
-};
-
-/**
- * Seek to time audio
- * @param seconds - Seconds to seek
- * @param from- Seek from start or end
- */
-const seek = (
+const seek_to = (
 	seconds: number,
 	from: 'from-start' | 'from-end' = 'from-start',
 ) => {
@@ -131,11 +108,11 @@ const seek = (
 };
 
 /**
- * Skip by about audio
- * @param seconds - Seconds to skip
+ * Skips the audio forward or backward by a specified number of seconds.
+ * @param seconds - Time to skip in seconds
  * @param type [type='forward'] - Skip forward or backward
  */
-const skip = (seconds: number, type: 'forward' | 'backward' = 'forward') => {
+const skip_by = (seconds: number, type: 'forward' | 'backward' = 'forward') => {
 	const el = use_audio_element('skip');
 
 	if (type === 'backward') {
@@ -150,12 +127,12 @@ const skip = (seconds: number, type: 'forward' | 'backward' = 'forward') => {
  */
 export const audio = {
 	subscribe: audio_attributes.subscribe,
-	load,
-	unload,
+	src: {
+		load: load_src,
+		unload: unload_src,
+	},
 	play,
-	pause,
 	mute,
-	unmute,
-	seek,
-	skip,
+	seek_to,
+	skip_by,
 };

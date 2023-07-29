@@ -36,14 +36,22 @@
 	</style>
 </svelte:head>
 
-<AudioPlayer {src} {metadata} let:Player let:action let:attributes>
+<AudioPlayer
+	{src}
+	{metadata}
+	let:Player
+	let:skip_by
+	let:play
+	let:preference
+	let:attributes
+>
 	<div
 		class="svpod-container {$$restProps.class}"
 		data-loaded={attributes.is_loaded ? 'true' : 'false'}
 	>
 		<!-- Player Action: Skip back -->
 		<button
-			on:click={() => action.skip_back(skip_back)}
+			on:click={() => skip_by(skip_back, 'backward')}
 			class="svpod-skip"
 			type="button"
 			aria-label="Skip back {skip_back} seconds"
@@ -61,7 +69,7 @@
 		<!-- Player Action: Toggle play / pause -->
 		{#if attributes.is_loaded}
 			<button
-				on:click={() => action.toggle()}
+				on:click={() => play('toggle')}
 				class="svpod-toggle"
 				type="button"
 				aria-label={attributes.is_paused ? 'Play' : 'Pause'}
@@ -77,7 +85,7 @@
 
 		<!-- Player Action: Skip forward -->
 		<button
-			on:click={() => action.skip_forward(skip_forward)}
+			on:click={() => skip_by(skip_forward, 'forward')}
 			class="svpod-skip"
 			type="button"
 			aria-label="Skip forward {skip_forward} seconds"
@@ -118,7 +126,7 @@
 			value={$user_preferences.playback_rate}
 			on:change={(e) => {
 				const value = parseFloat(e.currentTarget.value);
-				action.set_playback_rate(value);
+				preference.set_playback_rate(value);
 			}}
 		>
 			{#each playback_rate_values as value}

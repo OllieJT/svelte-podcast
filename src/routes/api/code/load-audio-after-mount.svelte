@@ -4,7 +4,7 @@
 
 	onMount(() => {
 		// load the episode on mount without any metadata
-		audio.load('/episode-audio.mp3', {
+		audio.src.load('/episode-audio.mp3', {
 			/* optional metadata */
 		});
 	});

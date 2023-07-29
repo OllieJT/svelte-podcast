@@ -1,9 +1,10 @@
 import { audio } from 'svelte-podcast';
 
 // play the current audio source
-// do nothing if it's already playing
-audio.play('set');
+audio.play(true);
 
-// play the current audio if it's paused
-// pause the current audio if it's playing
+// pause the current audio source
+audio.play(false);
+
+// invert the play state of the current audio source
 audio.play('toggle');

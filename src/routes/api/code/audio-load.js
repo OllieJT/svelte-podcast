@@ -1,11 +1,11 @@
 import { audio } from 'svelte-podcast';
 
-// load a new audio source
-audio.load(
+// load a new audio source into the player
+audio.src.load(
 	// path to audio file
 	'/episode-377.mp3',
 
-	// custom metadata
+	// custom metadata defined by you
 	{
 		title: 'Supper Club × Rich Harris, Author of Svelte',
 		guests: ['Rich Harris'],
@@ -13,5 +13,8 @@ audio.load(
 	},
 
 	// autoplay
-	true,
+	false,
 );
+
+// unload the current audio source
+audio.src.unload();
