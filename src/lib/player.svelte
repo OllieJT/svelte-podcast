@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
 	import { AudioProgress } from '.';
 	import { audio } from './actions';
 	import { audio_attributes } from './attributes';
 	import { user_preferences } from './user-preferences';
 
 	/** @type {string|undefined} */
-	export let src;
+	export let src: string;
 
 	/** @type {import('./core/audio-metadata').AudioMetadata} */
 	export let metadata = {};
@@ -16,19 +16,19 @@
 	 * Skips the audio forward by a specified number of seconds.
 	 * @param {number} seconds - The number of seconds to skip forward.
 	 */
-	const skip_forward = (seconds) => audio.skip(seconds, 'forward');
+	const skip_forward = (seconds: number) => audio.skip(seconds, 'forward');
 
 	/**
 	 * Skips the audio backward by a specified number of seconds.
 	 * @param {number} seconds - The number of seconds to skip backward.
 	 */
-	const skip_back = (seconds) => audio.skip(seconds, 'backward');
+	const skip_back = (seconds: number) => audio.skip(seconds, 'backward');
 
 	/**
 	 * Seeks to a specific time in the audio.
 	 * @param {number} value - The time to seek to, in seconds.
 	 */
-	const seek_to = (value) => audio.seek(value);
+	const seek_to = (value: number) => audio.seek(value);
 
 	/**
 	 * Toggles the audio playback between play and pause.

@@ -4,18 +4,17 @@ import clamp from 'just-clamp';
 import { get } from 'svelte/store';
 import { audio_attributes } from './attributes';
 import { use_audio_element } from './core/audio-element';
-import { audio_metadata } from './core/audio-metadata';
+import { audio_metadata, type AudioMetadata } from './core/audio-metadata';
 import { audio_state } from './core/audio-state';
 import { user_preferences } from './user-preferences';
 import { user_progress } from './user-progress';
 
 /**
  * Load audio
- * @param {string} src - Audio source
- * @param {import('./core/audio-metadata').AudioMetadata } metadata - Audio metadata
- * @returns {void}
+ * @param  src - Audio source
+ * @param  metadata - Audio metadata
  */
-const load = (src, metadata = {}, autoplay = false) => {
+const load = (src: string, metadata: AudioMetadata = {}, autoplay = false) => {
 	if (!BROWSER) return;
 
 	// Save the current progress if audio is already loaded
@@ -39,7 +38,6 @@ const load = (src, metadata = {}, autoplay = false) => {
 
 /**
  * Unload audio
- * @returns {void}
  */
 const unload = () => {
 	if (!BROWSER) return;
@@ -54,16 +52,13 @@ const unload = () => {
 	audio_metadata.set(null);
 };
 
-/**
- * @typedef {'toggle' | 'set'} HANDLE_TYPE
- */
+type HANDLE_TYPE = 'toggle' | 'set';
 
 /**
  * Play audio
- * @param {HANDLE_TYPE} t - Handle type
- * @returns {void}
+ * @param  t - Handle type
  */
-const play = (t = 'set') => {
+const play = (t: HANDLE_TYPE = 'set') => {
 	const el = use_audio_element('play');
 
 	if (t === 'toggle') {
@@ -75,10 +70,10 @@ const play = (t = 'set') => {
 
 /**
  * Pause audio
- * @param {HANDLE_TYPE} t - Handle type
+ * @param  t - Handle type
  * @returns {void}
  */
-const pause = (t = 'set') => {
+const pause = (t: HANDLE_TYPE = 'set') => {
 	user_progress.save();
 	const el = use_audio_element('pause');
 
@@ -91,10 +86,10 @@ const pause = (t = 'set') => {
 
 /**
  * Mute audio
- * @param {HANDLE_TYPE} t - Handle type
+ * @param  t - Handle type
  * @returns {void}
  */
-const mute = (t = 'set') => {
+const mute = (t: HANDLE_TYPE = 'set') => {
 	const el = use_audio_element('mute');
 
 	if (t === 'toggle') {
@@ -106,10 +101,10 @@ const mute = (t = 'set') => {
 
 /**
  * Unmute audio
- * @param {HANDLE_TYPE} t - Handle type
+ * @param  t - Handle type
  * @returns {void}
  */
-const unmute = (t = 'set') => {
+const unmute = (t: HANDLE_TYPE = 'set') => {
 	const el = use_audio_element('unmute');
 
 	if (t === 'toggle') {
@@ -125,7 +120,10 @@ const unmute = (t = 'set') => {
  * @param {'from-start' | 'from-end'} [from="from-start"] - Seek from start or end
  * @returns {void}
  */
-const seek = (seconds, from = 'from-start') => {
+const seek = (
+	seconds: number,
+	from: 'from-start' | 'from-end' = 'from-start',
+) => {
 	const el = use_audio_element('seek');
 
 	if (from === 'from-end') {
@@ -137,11 +135,10 @@ const seek = (seconds, from = 'from-start') => {
 
 /**
  * Skip by about audio
- * @param {number} seconds - Seconds to skip
- * @param {'forward' | 'backward'} [type='forward'] - Skip forward or backward
- * @returns {void}
+ * @param seconds - Seconds to skip
+ * @param type [type='forward'] - Skip forward or backward
  */
-const skip = (seconds, type = 'forward') => {
+const skip = (seconds: number, type: 'forward' | 'backward' = 'forward') => {
 	const el = use_audio_element('skip');
 
 	if (type === 'backward') {

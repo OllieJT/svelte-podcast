@@ -1,14 +1,25 @@
-import { writable } from 'svelte/store';
+import { writable, type Writable } from 'svelte/store';
 
 /**
- * @typedef {Object.<string, unknown>} AudioMetadata
+ * An object representing the metadata for an audio source.
  */
+export interface AudioMetadata {
+	[key: string]: unknown;
+}
 
-/**
- * Audio metadata store.
- * @type {import('svelte/store').Writable<AudioMetadata | null>}
- * @description This store holds the metadata for a single audio source.
- */
-export const audio_metadata = writable(null);
+/* declare global {
+	namespace SveltePodcast {
+		interface AudioMetadata {
+			[key: string]: unknown;
+		}
+	}
+}
 
-// console log AudioMetadata
+type thing = SveltePodcast.AudioMetadata;
+
+const thing: SveltePodcast.AudioMetadata = { asd: 123 };
+thing;
+*/
+
+/** A writable Svelte store containing the audio metadata. */
+export const audio_metadata: Writable<AudioMetadata | null> = writable(null);
