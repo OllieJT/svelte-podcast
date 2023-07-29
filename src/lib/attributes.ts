@@ -7,15 +7,16 @@ import { format_seconds } from './utility/format-seconds';
 /**
  * An object representing the attributes of an audio element.
  */
-export interface AudioAttributes {
-	is_loaded: boolean;
-	is_paused: boolean;
+export type AudioAttributes = {
 	current_time: number;
 	duration: number;
+	is_loaded: boolean;
+	is_paused: boolean;
+	metadata: AudioMetadata | null;
+	src: string | null;
 	timestamp_current: string;
 	timestamp_end: string;
-	metadata: AudioMetadata | null;
-}
+};
 
 /** A readable Svelte store containing the audio attributes. */
 export const audio_attributes: Readable<AudioAttributes> = derived(
@@ -23,6 +24,7 @@ export const audio_attributes: Readable<AudioAttributes> = derived(
 	([$el, $meta], set) => {
 		if (!$el) {
 			return set({
+				src: null,
 				is_loaded: false,
 				is_paused: true,
 				current_time: 0,
@@ -34,6 +36,7 @@ export const audio_attributes: Readable<AudioAttributes> = derived(
 		}
 
 		set({
+			src: $el.src,
 			is_loaded: Boolean($el.src),
 			is_paused: $el.paused,
 			current_time: $el.currentTime,

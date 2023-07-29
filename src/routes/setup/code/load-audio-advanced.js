@@ -10,7 +10,4 @@ audio.src.load(
 		artwork: '/artwork.png',
 		guest_name: 'OllieJT',
 	},
-
-	// Autoplay once loaded
-	false,
 );

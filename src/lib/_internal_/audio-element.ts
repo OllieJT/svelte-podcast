@@ -35,7 +35,6 @@ export const audio_element: Readable<HTMLAudioElement | null> = derived(
 			el.currentTime = $audio_state.start_at;
 			el.playbackRate = $audio_state.playback_rate || 1;
 			el.volume = $audio_state.volume || 1;
-			el.autoplay = $audio_state.autoplay || false;
 		}
 
 		// If a new HTMLAudioElement was created, append it to the body.
@@ -44,11 +43,10 @@ export const audio_element: Readable<HTMLAudioElement | null> = derived(
 		// Define a function to set the HTMLAudioElement and call it.
 		const handle_update = () => {
 			set(el);
-			$audio_state?.autoplay && el.play();
-			announce.info('Updating audio element');
 		};
 
 		handle_update();
+		announce.info('Setting audio element');
 
 		// Add event listeners to the HTMLAudioElement to update the store when it changes.
 		el.addEventListener('loadeddata', handle_update);
