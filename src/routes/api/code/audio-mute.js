@@ -1,9 +1,10 @@
 import { audio } from 'svelte-podcast';
 
 // mute the current audio source
-// do nothing if it's already muted
-audio.mute('set');
+audio.mute(true);
 
-// mute the current audio if it's unmuted
-// unmute the current audio if it's muted
+// unmute the current audio source
+audio.mute(false);
+
+// invert the mute state of the current audio source
 audio.mute('toggle');

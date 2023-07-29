@@ -5,12 +5,14 @@
 <!-- load the episode on click -->
 <button
 	on:click={() =>
-		audio.load('/episode-audio.mp3', {
-			/* optional metadata */
+		audio.src.load('/episode-audio.mp3', {
+			/* your metadata */
+			title: 'Episode Title',
+			artwork: '/artwork.png',
 		})}
 >
 	Load Episode
 </button>
 
 <!-- unload the episode on click -->
-<button on:click={() => audio.unload()}>Unload Episode</button>
+<button on:click={() => audio.src.unload()}>Unload Episode</button>

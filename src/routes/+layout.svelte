@@ -51,12 +51,9 @@
 				{ label: 'audio', anchor: 'audio' },
 				{ label: 'audio_data', anchor: 'audio_data' },
 				{ label: 'audio.subscribe', anchor: 'audio.subscribe' },
-				{ label: 'audio.load', anchor: 'audio.load' },
-				{ label: 'audio.unload', anchor: 'audio.unload' },
+				{ label: 'audio.src', anchor: 'audio.src' },
 				{ label: 'audio.play', anchor: 'audio.play' },
-				{ label: 'audio.pause', anchor: 'audio.pause' },
 				{ label: 'audio.mute', anchor: 'audio.mute' },
-				{ label: 'audio.unmute', anchor: 'audio.unmute' },
 				{ label: 'audio.seek', anchor: 'audio.seek' },
 				{ label: 'audio.skip', anchor: 'audio.skip' },
 				{ label: 'user_preferences', anchor: 'user_preferences' },
@@ -114,6 +111,11 @@
 			label: 'Syntax',
 			href: 'https://syntax.fm/',
 			src: '/syntax.png',
+		},
+		{
+			label: 'PodStack',
+			href: 'https://podstack.club/',
+			src: '/podstack.png',
 		},
 	]);
 

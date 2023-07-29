@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import {
 		LoadingSpinner,
 		Pause,
@@ -8,14 +8,8 @@
 	} from '$src/components/icon';
 	import { AudioPlayer, user_preferences } from 'svelte-podcast';
 
-	/** @type {string | undefined} */
-	export let src;
 	export let skip_back = 30;
 	export let skip_forward = 10;
-
-	/** @type {import('svelte-podcast/audio').AudioMetadata} */
-	export let metadata = {};
-
 	export let playback_rate_values = [1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4];
 </script>
 
@@ -37,14 +31,20 @@
 	</style>
 </svelte:head>
 
-<AudioPlayer {src} {metadata} let:Player let:action let:attributes>
+<AudioPlayer
+	let:PlayerProgress
+	let:skip_by
+	let:play
+	let:preference
+	let:attributes
+>
 	<div
 		class="svpod-container {$$restProps.class}"
 		data-loaded={attributes.is_loaded ? 'true' : 'false'}
 	>
 		<!-- Player Action: Skip back -->
 		<button
-			on:click={() => action.skip_back(skip_back)}
+			on:click={() => skip_by(skip_back, 'backward')}
 			class="svpod-skip"
 			type="button"
 			aria-label="Skip back {skip_back} seconds"
@@ -62,7 +62,7 @@
 		<!-- Player Action: Toggle play / pause -->
 		{#if attributes.is_loaded}
 			<button
-				on:click={() => action.toggle()}
+				on:click={() => play('toggle')}
 				class="svpod-toggle"
 				type="button"
 				aria-label={attributes.is_paused ? 'Play' : 'Pause'}
@@ -70,7 +70,7 @@
 				<svelte:component this={attributes.is_paused ? Play : Pause} />
 			</button>
 		{:else}
-			<div class="svpod-toggle">
+			<div class="svpod-toggle text-white">
 				<LoadingSpinner />
 				<span class="svpod--a11y">Waiting for audio...</span>
 			</div>
@@ -78,7 +78,7 @@
 
 		<!-- Player Action: Skip forward -->
 		<button
-			on:click={() => action.skip_forward(skip_forward)}
+			on:click={() => skip_by(skip_forward, 'forward')}
 			class="svpod-skip"
 			type="button"
 			aria-label="Skip forward {skip_forward} seconds"
@@ -102,7 +102,7 @@
 
 		<!-- Player Component: Timeline -->
 		<div class="svpod--timeline">
-			<Player.Progress />
+			<PlayerProgress />
 		</div>
 
 		<!-- Player Data: Total duration timestamp -->
@@ -119,7 +119,7 @@
 			value={$user_preferences.playback_rate}
 			on:change={(e) => {
 				const value = parseFloat(e.currentTarget.value);
-				action.set_playback_rate(value);
+				preference.set_playback_rate(value);
 			}}
 		>
 			{#each playback_rate_values as value}

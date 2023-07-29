@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
 	import clamp from 'just-clamp';
-	import { announce } from '../internal';
-	import { audio_attributes, audio_element } from './audio-element';
-
+	import { announce } from './_internal_/announce';
+	import { audio_element } from './_internal_/audio-element';
+	import { audio_attributes } from './attributes';
 	export let step = 10;
 
 	let was_paused = true;
@@ -10,7 +10,7 @@
 	/**
 	 * @param {string} t - The type of event that triggered the drag end.
 	 */
-	function handle_drag_start(t) {
+	function handle_drag_start(t: string) {
 		announce.info('drag_start :: ', t);
 		was_paused = $audio_attributes.is_paused;
 		$audio_element?.pause();
@@ -19,7 +19,7 @@
 	/**
 	 * @param {string} t - The type of event that triggered the drag end.
 	 */
-	function handle_drag_end(t) {
+	function handle_drag_end(t: string) {
 		announce.info('drag_end :: ', t);
 		if (was_paused) return;
 		else $audio_element?.play();
@@ -30,7 +30,7 @@
 	 * @param {number} seconds - Seconds to seek
 	 * @returns {void}
 	 */
-	const handle_seek_to = (seconds) => {
+	const handle_seek_to = (seconds: number) => {
 		const el = $audio_element;
 		if (!el) return;
 

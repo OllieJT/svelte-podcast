@@ -3,9 +3,12 @@
 	import { PlayerWidget } from '$src/components/player';
 	import { episodes } from '$src/content/episodes';
 	import { DocsPage } from '$src/layout/page';
+	import { audio } from '../lib/actions';
 
-	/** @type { string | undefined} */
-	let audio_src = episodes.knomii.src;
+	audio.src.load(episodes.syntax.src, {
+		title: episodes.syntax.title,
+		artwork: episodes.syntax.artwork,
+	});
 </script>
 
 <DocsPage title="Docs" let:Section>
@@ -87,7 +90,6 @@
 							class="-m-2 grid grid-cols-1 grid-rows-1 rounded-xl border border-mono-100 bg-white p-1 shadow-2xl shadow-mono-200 sm:p-2 lg:-m-4 lg:rounded-2xl lg:p-4"
 						>
 							<PlayerWidget
-								src={audio_src}
 								class="w-full border border-mono-100"
 								options={{
 									duration: true,
