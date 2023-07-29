@@ -1,10 +1,12 @@
 // include this in your /src/app.d.ts file
 
 declare module 'svelte-podcast' {
-	interface EpisodeDetails {
+	interface AudioMetadata {
+		id: number;
 		title: string;
-		artwork: string;
-		guest_name: string;
+		href: string;
+		author: string;
+		artwork: string | null;
 	}
 }
 

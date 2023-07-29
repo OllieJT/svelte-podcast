@@ -18,7 +18,7 @@
 </script>
 
 <slot
-	Player={{ Progress: AudioProgress }}
+	PlayerProgress={AudioProgress}
 	attributes={$audio_attributes}
 	preference={{
 		set_playback_rate: user_preferences.set_playback_rate,

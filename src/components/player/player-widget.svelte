@@ -8,13 +8,8 @@
 	} from '$src/components/icon';
 	import { AudioPlayer, user_preferences } from 'svelte-podcast';
 
-	export let src: string | undefined;
 	export let skip_back = 30;
 	export let skip_forward = 10;
-
-	/** @type {import('svelte-podcast/core').AudioMetadata} */
-	export let metadata = {};
-
 	export let playback_rate_values = [1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4];
 </script>
 
@@ -37,9 +32,7 @@
 </svelte:head>
 
 <AudioPlayer
-	{src}
-	{metadata}
-	let:Player
+	let:PlayerProgress
 	let:skip_by
 	let:play
 	let:preference
@@ -77,7 +70,7 @@
 				<svelte:component this={attributes.is_paused ? Play : Pause} />
 			</button>
 		{:else}
-			<div class="svpod-toggle">
+			<div class="svpod-toggle text-white">
 				<LoadingSpinner />
 				<span class="svpod--a11y">Waiting for audio...</span>
 			</div>
@@ -109,7 +102,7 @@
 
 		<!-- Player Component: Timeline -->
 		<div class="svpod--timeline">
-			<Player.Progress />
+			<PlayerProgress />
 		</div>
 
 		<!-- Player Data: Total duration timestamp -->

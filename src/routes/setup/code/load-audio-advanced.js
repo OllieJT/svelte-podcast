@@ -1,14 +1,16 @@
 import { audio } from 'svelte-podcast';
 
-audio.src.load('/episode-audio.mp3');
-
 audio.src.load(
-	'https://media.transistor.fm/27a058c9/27b595e2.mp3',
+	// Audio file
+	'/episode-audio.mp3',
+
+	// Your custom metadata
 	{
-		title: 'SvelteKit-superforms with Andreas Söderlund',
-		artwork:
-			'https://images.transistor.fm/file/transistor/images/show/12899/medium_1597678946-artwork.jpg',
-		guest_name: 'Andreas Söderlund',
+		title: 'A deep dive into Svelte Podcast',
+		artwork: '/artwork.png',
+		guest_name: 'OllieJT',
 	},
+
+	// Autoplay once loaded
 	false,
 );

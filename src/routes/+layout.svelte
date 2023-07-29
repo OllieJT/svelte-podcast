@@ -115,6 +115,11 @@
 			href: 'https://syntax.fm/',
 			src: '/syntax.png',
 		},
+		{
+			label: 'PodStack',
+			href: 'https://podstack.club/',
+			src: '/podstack.png',
+		},
 	]);
 
 	let is_menu_open = false;
