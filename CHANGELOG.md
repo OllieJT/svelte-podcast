@@ -1,5 +1,17 @@
 # svelte-podcast
 
+## 0.9.0
+
+### Minor Changes
+
+-  528457f: Restructures package exports
+-  528457f: - improved export structure
+   -  simplify audio methods
+   -  improve typescript types
+-  bba2421: Improve example components
+-  bba2421: improve progress component style overrides
+-  f42a00f: removes autoplay as it doesn't behave as users would expect
+
 ## 0.8.0
 
 ### Minor Changes
