@@ -5,13 +5,10 @@
 	import {
 		audio_load,
 		audio_mute,
-		audio_pause,
 		audio_play,
 		audio_seek,
 		audio_skip,
 		audio_subscribe,
-		audio_unload,
-		audio_unmute,
 		seconds_to_timestamp,
 		user_preferences_clear,
 		user_preferences_set_playback_rate,
@@ -87,23 +84,17 @@
 			</div>
 		</SectionArticle>
 
-		<SectionArticle title="audio.load">
+		<SectionArticle title="audio.src">
 			<p>
 				Load a new audio source. This will stop the current audio source and
 				replace it with the new one.
 			</p>
-			<div class="not-prose codeblock">
-				<Highlight code={audio_load} language={lang_ts} />
-			</div>
-		</SectionArticle>
-
-		<SectionArticle title="audio.unload">
 			<p>
-				Unload the current audio source. This will stop the current audio
-				source and remove it from the audio state.
+				Alternatively, unload the current audio source. This will stop the
+				current audio source and remove it from the audio state.
 			</p>
 			<div class="not-prose codeblock">
-				<Highlight code={audio_unload} language={lang_ts} />
+				<Highlight code={audio_load} language={lang_ts} />
 			</div>
 		</SectionArticle>
 
@@ -114,24 +105,10 @@
 			</div>
 		</SectionArticle>
 
-		<SectionArticle title="audio.pause">
-			<p>Set or toggle the pause state.</p>
-			<div class="not-prose codeblock">
-				<Highlight code={audio_pause} language={lang_ts} />
-			</div>
-		</SectionArticle>
-
 		<SectionArticle title="audio.mute">
 			<p>Set or toggle the mute state.</p>
 			<div class="not-prose codeblock">
 				<Highlight code={audio_mute} language={lang_ts} />
-			</div>
-		</SectionArticle>
-
-		<SectionArticle title="audio.unmute">
-			<p>Set or toggle the unmute state.</p>
-			<div class="not-prose codeblock">
-				<Highlight code={audio_unmute} language={lang_ts} />
 			</div>
 		</SectionArticle>
 
