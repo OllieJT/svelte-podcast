@@ -1,18 +1,20 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { AudioProgress, type AudioMetadata } from '.';
+	import { createEventDispatcher, onMount } from 'svelte';
+	import { AudioProgress } from '.';
 	import { use_audio_element } from './_internal_/audio-element';
 	import { audio } from './actions';
 	import { audio_attributes } from './attributes';
 	import { user_preferences } from './user-preferences';
 	import { user_progress } from './user-progress';
 
-	onMount(() => use_audio_element('initialise'));
+	const dispatch = createEventDispatcher();
 
-	export let src: string | undefined;
-	export let metadata: AudioMetadata = {};
+	onMount(() => {
+		use_audio_element('initialise');
+		dispatch('ready');
+	});
 
-	$: src && audio.src.load(src, metadata || {});
+	$: $audio;
 </script>
 
 <slot
