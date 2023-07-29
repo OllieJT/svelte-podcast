@@ -2,10 +2,11 @@ import { BROWSER } from 'esm-env';
 import clamp from 'just-clamp';
 
 import { get } from 'svelte/store';
+import { use_audio_element } from './_internal_/audio-element';
+import { audio_metadata } from './_internal_/audio-metadata';
+import { audio_state } from './_internal_/audio-state';
 import { audio_attributes } from './attributes';
-import { use_audio_element } from './core/audio-element';
-import { audio_metadata, type AudioMetadata } from './core/audio-metadata';
-import { audio_state } from './core/audio-state';
+import type { AudioMetadata } from './metadata';
 import { user_preferences } from './user-preferences';
 import { user_progress } from './user-progress';
 
@@ -71,7 +72,6 @@ const play = (t: HANDLE_TYPE = 'set') => {
 /**
  * Pause audio
  * @param  t - Handle type
- * @returns {void}
  */
 const pause = (t: HANDLE_TYPE = 'set') => {
 	user_progress.save();
@@ -87,7 +87,6 @@ const pause = (t: HANDLE_TYPE = 'set') => {
 /**
  * Mute audio
  * @param  t - Handle type
- * @returns {void}
  */
 const mute = (t: HANDLE_TYPE = 'set') => {
 	const el = use_audio_element('mute');
@@ -102,7 +101,6 @@ const mute = (t: HANDLE_TYPE = 'set') => {
 /**
  * Unmute audio
  * @param  t - Handle type
- * @returns {void}
  */
 const unmute = (t: HANDLE_TYPE = 'set') => {
 	const el = use_audio_element('unmute');
@@ -116,9 +114,8 @@ const unmute = (t: HANDLE_TYPE = 'set') => {
 
 /**
  * Seek to time audio
- * @param {number} seconds - Seconds to seek
- * @param {'from-start' | 'from-end'} [from="from-start"] - Seek from start or end
- * @returns {void}
+ * @param seconds - Seconds to seek
+ * @param from- Seek from start or end
  */
 const seek = (
 	seconds: number,

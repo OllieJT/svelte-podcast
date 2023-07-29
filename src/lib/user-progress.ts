@@ -1,7 +1,8 @@
 import { persisted } from 'svelte-local-storage-store';
 import { get } from 'svelte/store';
-import { audio_element } from './core/audio-element';
-import { announce, use_url } from './internal';
+import { announce } from './_internal_/announce';
+import { audio_element } from './_internal_/audio-element';
+import { use_url } from './_internal_/safe-use-url';
 
 export interface UserProgress {
 	[key: string]: number;
@@ -36,7 +37,6 @@ const save_user_progress = () => {
 
 /**
  * Gets user progress for a given audio source
- * @function
  * @param  src - Audio source
  */
 const get_user_progress = (src: string) => {
@@ -44,7 +44,6 @@ const get_user_progress = (src: string) => {
 
 	const store: UserProgress = get(USER_PROGRESS_STORE);
 
-	/**@type {number|undefined} */
 	const value = store[pathname];
 
 	return value;

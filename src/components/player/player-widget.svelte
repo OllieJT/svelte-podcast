@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import {
 		LoadingSpinner,
 		Pause,
@@ -8,8 +8,7 @@
 	} from '$src/components/icon';
 	import { AudioPlayer, user_preferences } from 'svelte-podcast';
 
-	/** @type {string | undefined} */
-	export let src;
+	export let src: string | undefined;
 	export let skip_back = 30;
 	export let skip_forward = 10;
 

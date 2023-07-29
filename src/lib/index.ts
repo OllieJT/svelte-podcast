@@ -1,8 +1,10 @@
+export { default as AudioPlayer, default as default } from './Player.svelte';
+export { default as AudioProgress } from './Progress.svelte';
 export * from './actions';
 export * from './attributes';
-export { default as AudioPlayer, default as default } from './player.svelte';
-export { default as AudioProgress } from './progress.svelte';
+export * from './metadata';
 export * from './user-preferences';
 export * from './user-progress';
+export * from './utility/format-seconds';
 
-// export type { AudioMetadata } from './core/audio-metadata';
+// export type { AudioMetadata } from './audio-metadata';

@@ -52,26 +52,8 @@ const clear_store = () => USER_PREFERENCES_STORE.set(DEFAULT_USER_PREFERENCES);
  * The user preferences object
  */
 export const user_preferences = {
-	/**
-	 * Subscribes to user preferences store
-	 */
 	subscribe: USER_PREFERENCES_STORE.subscribe,
-
-	/**
-	 * Sets the playback rate for the user
-	 * @type {typeof set_playback_rate}
-	 */
 	set_playback_rate,
-
-	/**
-	 * Sets the volume for the user
-	 * @type {typeof set_volume}
-	 */
 	set_volume,
-
-	/**
-	 * Clears user preferences store
-	 * @type {typeof clear_store}
-	 */
 	clear: clear_store,
 };

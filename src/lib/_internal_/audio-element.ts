@@ -1,20 +1,18 @@
 import { BROWSER } from 'esm-env';
-import { derived, get } from 'svelte/store';
-import { announce } from '../internal';
+import { derived, get, type Readable } from 'svelte/store';
+import { announce } from './announce';
 import { audio_state } from './audio-state';
 
 const ELEMENT_ID = 'svpod--generated-audio-element';
-const ssr_element = new Audio();
-ssr_element.id = ELEMENT_ID;
 
 /** A derived Svelte store containing an HTMLAudioElement or undefined. */
-export const audio_element = derived(
+export const audio_element: Readable<HTMLAudioElement | null> = derived(
 	[audio_state],
 
 	([$audio_state], set) => {
 		// If not in a browser environment, return early.
 		if (!BROWSER) {
-			set(ssr_element);
+			set(null);
 			return () => null;
 		}
 
@@ -70,14 +68,12 @@ export const audio_element = derived(
 			el ? el.remove() : null;
 		};
 	},
-	ssr_element,
+	null as HTMLAudioElement | null,
 );
 
 /**
  * Use audio element
- * @param {string} action - Action being performed
- * @returns {HTMLAudioElement} - Audio element
- * @throws {string} - Error message if no audio element exists
+ * @param  action - Action being performed
  */
 export const use_audio_element = (action: string): HTMLAudioElement => {
 	const el = get(audio_element);

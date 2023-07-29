@@ -1,4 +1,4 @@
-import { seconds_to_timestamp } from 'svelte-podcast/utility';
+import { seconds_to_timestamp } from 'svelte-podcast/utility/format-seconds';
 
 // Example
 seconds_to_timestamp(5173); // 01:26:13
