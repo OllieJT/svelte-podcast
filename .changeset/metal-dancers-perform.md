@@ -2,4 +2,6 @@
 'svelte-podcast': minor
 ---
 
-improved exports and typings
+-  improved export structure
+-  simplify audio methods
+-  improve typescript types
