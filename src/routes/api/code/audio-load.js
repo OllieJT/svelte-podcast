@@ -13,9 +13,6 @@ audio.src.load(
 		guests: ['Rich Harris'],
 		hosts: ['Wes Bos', 'Scott Tolinski'],
 	},
-
-	// autoplay
-	false,
 );
 
 // unload the current audio source

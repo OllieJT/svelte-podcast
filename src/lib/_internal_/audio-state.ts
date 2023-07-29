@@ -1,7 +1,5 @@
 import { writable, type Writable } from 'svelte/store';
 
-// TODO: implement autoplay
-
 /**
  * An object representing the state of an audio player.
  */
@@ -10,7 +8,6 @@ interface AudioState {
 	start_at: number;
 	playback_rate?: number;
 	volume?: number;
-	autoplay?: boolean;
 }
 
 /** A writable Svelte store containing the audio state. */

@@ -15,7 +15,7 @@ import { user_progress } from './user-progress';
  * @param  src - Audio source
  * @param  metadata - Audio metadata
  */
-const load_src = (src: string, metadata: AudioMetadata, autoplay = false) => {
+const load_src = (src: string, metadata: AudioMetadata) => {
 	if (!BROWSER) return;
 
 	// Save the current progress if audio is already loaded
@@ -30,7 +30,6 @@ const load_src = (src: string, metadata: AudioMetadata, autoplay = false) => {
 		start_at: user_progress.get(src) || 0,
 		playback_rate: preferences.playback_rate,
 		volume: preferences.volume,
-		autoplay: autoplay,
 	});
 
 	// Set metadata for current audio
@@ -59,12 +58,11 @@ const unload_src = () => {
  */
 const play = (playing: boolean | 'toggle' = 'toggle') => {
 	const el = use_audio_element('play');
+	console.log(el, el.paused);
 
 	if (typeof playing === 'boolean') {
 		playing ? el.play() : el.pause();
-	}
-
-	if (playing === 'toggle') {
+	} else {
 		el.paused ? el.play() : el.pause();
 	}
 };
@@ -78,9 +76,7 @@ const mute = (muted: boolean | 'toggle' = 'toggle') => {
 
 	if (typeof muted === 'boolean') {
 		el.muted = muted;
-	}
-
-	if (muted === 'toggle') {
+	} else {
 		el.muted = !el.muted;
 	}
 };
